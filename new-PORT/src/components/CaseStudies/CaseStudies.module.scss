@@ -1,0 +1,48 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+  padding-top: 24px;
+  box-sizing: border-box;
+  background: var(--bg-page);
+  scroll-margin-top: 0;
+}
+
+.highlights {
+  flex-shrink: 0;
+  margin: 0 0 0.35rem;
+  padding: 0 var(--grid-margin);
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 2.9vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--text);
+
+  em {
+    font-family: var(--script);
+    font-style: normal;
+    font-size: clamp(2.6rem, 7vw, 8.75rem);
+    letter-spacing: 0.03em;
+    text-transform: none;
+    color: var(--gold);
+  }
+}
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.scroller {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior-y: auto;
+  scroll-behavior: auto;
+}

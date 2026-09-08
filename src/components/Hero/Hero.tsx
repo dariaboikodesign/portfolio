@@ -2,12 +2,17 @@ import cityMoscow from '../../assets/hero/city-moscow.png'
 import portrait from '../../assets/hero/portrait.png'
 import cityDubai from '../../assets/hero/city-dubai.png'
 import arrows from '../../assets/hero/arrows.svg'
+import bgTop from '../../assets/hero/bg-top.svg'
+import bgCurve from '../../assets/hero/bg-curve.svg'
 import FadeIn from '../FadeIn'
 import styles from './Hero.module.scss'
 
 export default function Hero() {
   return (
     <section className={styles.hero} aria-label="Introduction">
+      <img className={styles.bgCurve} src={bgCurve} alt="" />
+      <img className={styles.bgTop} src={bgTop} alt="" />
+
       <nav className={styles.nav}>
         <a className={styles.navLink} href="#cases">
           Case studies
@@ -19,13 +24,11 @@ export default function Hero() {
 
       <FadeIn className={styles.titleBlock} delay={40}>
         <h1 className={styles.senior}>Senior Product</h1>
-        <div className={styles.nameRow}>
-          <p className={styles.name}>Daria Boiko</p>
-          <p className={styles.script} aria-hidden="true">
-            <span className={styles.scriptD}>D</span>
-            <span className={styles.scriptRest}>esigner</span>
-          </p>
-        </div>
+        <p className={styles.script} aria-hidden="true">
+          <span className={styles.scriptD}>D</span>
+          <span className={styles.scriptRest}>esigner</span>
+        </p>
+        <p className={styles.name}>Daria Boiko</p>
       </FadeIn>
 
       <FadeIn className={styles.leads} delay={180}>
@@ -35,7 +38,7 @@ export default function Hero() {
 
       <div className={styles.photos}>
         <figure className={styles.photo}>
-          <img src={cityMoscow} alt="Moscow City skyline" width={277} height={276} />
+          <img src={cityMoscow} alt="Moscow skyline" width={277} height={276} />
         </figure>
         <figure className={styles.photo}>
           <img src={portrait} alt="Daria Boiko" width={277} height={276} />

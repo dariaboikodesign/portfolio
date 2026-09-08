@@ -73,6 +73,7 @@
 .colWide {
   grid-column: 6 / 10;
   grid-row: 3;
+  padding-right: calc(48px - var(--grid-gutter));
 
   img {
     aspect-ratio: 276 / 320;
@@ -146,13 +147,39 @@
   opacity: 0.6;
 }
 
+@media (max-width: 1280px) {
+  .physics,
+  .colWide {
+    grid-column: 4 / 9;
+  }
+
+  .colWide {
+    padding-right: 0;
+  }
+
+  .col {
+    grid-column: 1 / 4;
+    grid-row: 2 / 4;
+  }
+
+  .timeline {
+    margin-left: 48px;
+  }
+}
+
 @media (max-width: 1100px) {
+  .col {
+    grid-column: 1 / 4;
+    grid-row: 3;
+  }
+
   .timeline {
     grid-column: 1 / -1;
     grid-row: auto;
     min-height: auto;
     gap: 1.75rem;
     margin-top: 1rem;
+    margin-left: 0;
   }
 }
 
@@ -162,6 +189,7 @@
   .col,
   .colWide {
     grid-column: 1 / -1;
+    grid-row: auto;
   }
 
   .script {

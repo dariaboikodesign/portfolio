@@ -1,0 +1,351 @@
+.page {
+  container-type: inline-size;
+}
+
+.hero {
+  position: relative;
+  isolation: isolate;
+}
+
+.heroPhoto {
+  margin: 0 24px;
+  width: calc(100% - 48px);
+  aspect-ratio: 1872 / 800;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+  background: #2a2422;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+}
+
+.heroCopy {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+  align-items: start;
+  padding-inline: var(--grid-margin);
+  margin-top: calc((48px - 100cqw) * 334 / 1872);
+}
+
+.intro {
+  grid-column: 1 / 4;
+}
+
+.title {
+  font-size: clamp(1.85rem, 2.92vw, 3.5rem);
+  line-height: 1.286;
+}
+
+.heroRight {
+  grid-column: 5 / -1;
+  display: grid;
+  gap: 20px;
+  padding-top: clamp(6.5rem, 11.77vw, 14.125rem);
+}
+
+.contrib {
+  max-width: 26.56rem;
+}
+
+.uiRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--grid-gutter);
+  padding-inline: var(--grid-margin);
+  margin-top: clamp(2.4rem, 2.92vw, 3.5rem);
+
+  img {
+    width: 100%;
+    aspect-ratio: 574 / 340;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 4px;
+    background: #2a2422;
+  }
+}
+
+.how {
+  max-width: 45.06rem;
+  padding-inline: var(--grid-margin);
+  margin-top: clamp(3.6rem, 4.58vw, 5.5rem);
+  display: grid;
+  gap: 16px;
+}
+
+.sunset {
+  position: relative;
+  margin-top: clamp(4rem, 6.25vw, 7.5rem);
+  padding-bottom: clamp(2rem, 4vw, 3.5rem);
+  overflow: hidden;
+}
+
+.sunsetBg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  pointer-events: none;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.sunsetWashGold,
+.sunsetWashAmber {
+  position: absolute;
+  left: -31%;
+  top: -21%;
+  width: 139%;
+  height: 126%;
+  pointer-events: none;
+}
+
+.sunsetWashGold {
+  background: linear-gradient(180deg, #fff0a8 0%, #dba54d 100%);
+  mix-blend-mode: lighten;
+  opacity: 0.5;
+}
+
+.sunsetWashAmber {
+  left: -35%;
+  background: linear-gradient(180deg, #8f552d 0%, #c78d2e 90.385%);
+  opacity: 0.4;
+}
+
+.sunsetCopy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+  padding: clamp(2.4rem, 3.18vw, 3.8rem) var(--grid-margin) 0;
+}
+
+.sunsetTitle {
+  grid-column: 1 / 6;
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2.1rem, 3.75vw, 4.5rem);
+  line-height: 1.11;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #fff;
+  opacity: 0.9;
+  text-shadow: 0 0 12px rgb(0 0 0 / 0.12);
+}
+
+.sunsetCopy .sunsetBody {
+  grid-column: 6 / 11;
+  align-self: end;
+  margin: 0 0 clamp(0.5rem, 1.5vw, 1.2rem);
+  color: #322c2a;
+  opacity: 1;
+}
+
+.sunsetPhotos {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+  align-items: end;
+  padding-inline: var(--grid-margin);
+  margin-top: clamp(1.6rem, 3.2vw, 2.9rem);
+}
+
+.classroom {
+  grid-column: 3 / 6;
+  overflow: hidden;
+  border-radius: 8.6px;
+  aspect-ratio: 413 / 478;
+  background: #f0f1f3;
+
+  img {
+    display: block;
+    width: 133%;
+    height: 115%;
+    margin: -13.2% 0 0 -4.9%;
+    object-fit: cover;
+  }
+}
+
+.dashboard {
+  grid-column: 6 / -1;
+  overflow: hidden;
+  border-radius: 10.9px;
+  aspect-ratio: 1022 / 606;
+  background: #f5f5f7;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.lower {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 3.33vw, 4rem);
+  margin-top: clamp(2rem, 3.33vw, 4rem);
+}
+
+.uiTrio,
+.decisionShots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--grid-gutter);
+  padding-inline: var(--grid-margin);
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #4e423f 0%, #1d1d1d 100%);
+  }
+}
+
+.homepage {
+  display: grid;
+  grid-template-columns: minmax(0, 935fr) minmax(0, 805fr);
+  gap: var(--grid-gutter);
+  margin-inline: var(--grid-margin);
+  min-height: clamp(32rem, 46.15vw, 55.375rem);
+}
+
+.homepageCopy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: clamp(2.5rem, 4.17vw, 5rem) clamp(1.5rem, 3.33vw, 4rem);
+  border: 1px solid #aa793a;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+
+  span {
+    background: #aa793a;
+    color: #fff;
+    padding: 6px 14px;
+    font-size: clamp(0.95rem, 1.25vw, 1.5rem);
+    line-height: 1.167;
+    white-space: nowrap;
+  }
+}
+
+.homepageMain {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  gap: 24px;
+}
+
+.homepageTitle {
+  width: 100%;
+}
+
+.homepageText {
+  display: grid;
+  gap: 16px;
+  width: min(100%, 40.5rem);
+  text-align: left;
+}
+
+.homepageShot {
+  overflow: hidden;
+  background: #e8eaee;
+  min-height: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+}
+
+.decisions {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 2.08vw, 2.5rem);
+  padding-inline: var(--grid-margin);
+}
+
+.decisionCols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--grid-gutter);
+}
+
+.decisionShots {
+  padding-inline: 0;
+}
+
+@media (max-width: 1100px) {
+  .hero {
+    min-height: 0;
+  }
+
+  .intro,
+  .heroRight,
+  .sunsetTitle,
+  .sunsetCopy .sunsetBody {
+    grid-column: 1 / -1;
+  }
+
+  .heroCopy {
+    margin-top: 1.5rem;
+  }
+
+  .heroRight {
+    padding-top: 0;
+  }
+
+  .uiRow,
+  .uiTrio,
+  .decisionCols,
+  .decisionShots {
+    grid-template-columns: 1fr;
+  }
+
+  .homepage {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .homepageShot {
+    min-height: 28rem;
+  }
+
+  .sunsetPhotos {
+    grid-template-columns: 1fr;
+  }
+
+  .classroom,
+  .dashboard {
+    grid-column: 1 / -1;
+  }
+}

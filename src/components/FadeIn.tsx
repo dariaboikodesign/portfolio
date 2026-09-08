@@ -4,7 +4,7 @@ import styles from './FadeIn.module.scss'
 type Props = {
   as?: ElementType
   delay?: number
-  from?: 'none' | 'top'
+  from?: 'none' | 'top' | 'up'
   className?: string
   style?: CSSProperties
   children?: ReactNode
@@ -36,6 +36,7 @@ export default function FadeIn({
       return
     }
 
+    const scrollRoot = node.closest('[data-case-scroller]')
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -43,7 +44,7 @@ export default function FadeIn({
           io.disconnect()
         }
       },
-      { threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
+      { threshold: 0.14, root: scrollRoot, rootMargin: '0px 0px -8% 0px' },
     )
     io.observe(node)
     return () => io.disconnect()
@@ -52,7 +53,13 @@ export default function FadeIn({
   return (
     <Tag
       ref={ref}
-      className={[styles.fade, from === 'top' ? styles.fromTop : '', visible ? styles.in : '', className]
+      className={[
+        styles.fade,
+        from === 'top' ? styles.fromTop : '',
+        from === 'up' ? styles.fromUp : '',
+        visible ? styles.in : '',
+        className,
+      ]
         .filter(Boolean)
         .join(' ')}
       style={{ transitionDelay: `${delay}ms`, ...style }}

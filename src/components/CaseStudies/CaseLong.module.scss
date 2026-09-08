@@ -1,0 +1,136 @@
+.page {
+  background: var(--bg-panel);
+  padding: 24px 0 clamp(4.5rem, 9vw, 8rem);
+}
+
+.band {
+  padding-inline: var(--grid-margin);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+  row-gap: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.displayGold,
+.title {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.85rem, 2.92vw, 3.5rem);
+  line-height: 1.28;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.displayGold {
+  background: linear-gradient(180deg, var(--gold) 0%, var(--gold-mid) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.title {
+  color: var(--gold-soft);
+}
+
+.kicker {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(1.05rem, 1.15vw, 1.375rem);
+  line-height: 1.36;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+}
+
+.body {
+  margin: 0;
+  font-size: clamp(1.05rem, 1.25vw, 1.5rem);
+  line-height: 1.17;
+  letter-spacing: 0.01em;
+  color: #fff;
+  opacity: 0.8;
+
+  u {
+    text-underline-offset: 0.18em;
+  }
+}
+
+.list,
+.alpha {
+  margin: 0;
+  padding: 0 0 0 1.35rem;
+  font-size: clamp(1.05rem, 1.25vw, 1.5rem);
+  line-height: 1.17;
+  color: #fff;
+  opacity: 0.8;
+
+  li + li {
+    margin-top: 0.35rem;
+  }
+}
+
+.alpha {
+  list-style: lower-alpha;
+  padding-left: 1.6rem;
+}
+
+.stack {
+  display: grid;
+  gap: 6px;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--grid-gutter);
+  padding-inline: var(--grid-margin);
+  margin-top: clamp(3rem, 6vw, 5rem);
+}
+
+.metricValue {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 6.25vw, 7.5rem);
+  line-height: 1.03;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.metricLabel {
+  margin: 10px 0 0;
+  font-size: clamp(1.05rem, 1.25vw, 1.5rem);
+  line-height: 1.17;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.shot {
+  overflow: hidden;
+  border-radius: 4px;
+  background: #2a2422;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 1100px) {
+  .metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+}

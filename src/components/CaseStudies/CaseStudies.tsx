@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { caseTabs, cases, type CaseId } from '../../data/cases'
+import { caseTabs, type CaseId } from '../../data/cases'
 import CaseTabs from './CaseTabs'
-import CaseSlide from './CaseSlide'
+import CareerCase from './CareerCase'
 import EduCase from './EduCase'
+import FarmersCase from './FarmersCase'
 import GameCase from './GameCase'
 import FadeIn from '../FadeIn'
 import styles from './CaseStudies.module.scss'
@@ -24,7 +25,7 @@ export default function CaseStudies() {
     typeof window === 'undefined' ? 'edu' : caseFromHash(),
   )
   const scrollerRef = useRef<HTMLDivElement>(null)
-  const isLong = active === 'edu' || active === 'gamedev'
+  const isLong = active === 'edu' || active === 'gamedev' || active === 'farmers' || active === 'career'
 
   useEffect(() => {
     const sync = () => setActive(caseFromHash())
@@ -52,11 +53,8 @@ export default function CaseStudies() {
         >
           {active === 'edu' ? <EduCase /> : null}
           {active === 'gamedev' ? <GameCase /> : null}
-          {active === 'farmers' || active === 'career'
-            ? cases[active].map((slide, index) => (
-                <CaseSlide key={`${active}-${slide.id}`} slide={slide} index={index} />
-              ))
-            : null}
+          {active === 'farmers' ? <FarmersCase /> : null}
+          {active === 'career' ? <CareerCase /> : null}
         </div>
       </div>
     </section>

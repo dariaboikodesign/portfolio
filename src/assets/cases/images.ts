@@ -55,10 +55,23 @@ import gdCardNews from './gd-card-news.png'
 import gdCardHome from './gd-card-home.png'
 import phones from './c3-phones.png'
 import field from './c3-field.png'
+import ggHero from './gg-hero.png'
+import ggPhoneMap from './gg-phone-map.png'
+import ggPhoneHand from './gg-phone-hand.png'
+import ggFieldPhoto from './gg-field-photo.png'
+import ggPhonesDuo from './gg-phones-duo.png'
 import careerHero from './c4-hero.png'
 import careerProto from './c4-proto.png'
 import careerDecisions from './c4-decisions.png'
 import careerOutcome from './c4-outcome.png'
+import careerInterview1 from './c4-interview-1.png'
+import careerInterview2 from './c4-interview-2.png'
+import careerResults1 from './c4-results-1.png'
+import careerResults2 from './c4-results-2.png'
+import careerResults3 from './c4-results-3.png'
+import careerFinal1 from './c4-final-1.png'
+import careerFinal2 from './c4-final-2.png'
+import careerFinal3 from './c4-final-3.png'
 
 export const caseImages: Record<string, string> = {
   wood,
@@ -123,11 +136,24 @@ export const caseImages: Record<string, string> = {
   'gd-card-home': gdCardHome,
   'c3-phones': phones,
   'c3-field': field,
+  'gg-hero': ggHero,
+  'gg-phone-map': ggPhoneMap,
+  'gg-phone-hand': ggPhoneHand,
+  'gg-field-photo': ggFieldPhoto,
+  'gg-phones-duo': ggPhonesDuo,
   'c4-hero': careerHero,
   'c4-proto': careerProto,
-  'c4-interviews-1': screen2,
-  'c4-interviews-2': screen3,
+  'c4-interviews-1': careerInterview1,
+  'c4-interviews-2': careerInterview2,
+  'c4-interview-1': careerInterview1,
+  'c4-interview-2': careerInterview2,
   'c4-decisions': careerDecisions,
+  'c4-results-1': careerResults1,
+  'c4-results-2': careerResults2,
+  'c4-results-3': careerResults3,
+  'c4-final-1': careerFinal1,
+  'c4-final-2': careerFinal2,
+  'c4-final-3': careerFinal3,
   'c4-outcome-1': careerOutcome,
   'c4-outcome-2': phones,
   'c4-outcome-3': field,

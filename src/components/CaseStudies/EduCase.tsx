@@ -6,14 +6,14 @@ import styles from './EduCase.module.scss'
 const IMPACT = [
   { value: '150K+', label: 'users' },
   { value: '60+', label: 'regions of Russia' },
-  { value: '63k', label: 'MAU' },
+  { value: '63K', label: 'MAU' },
   { value: '78,9%', label: 'enter the main flow via the redesigned main page' },
 ]
 
 export default function EduCase() {
   return (
-    <article className={`${long.page} ${styles.page}`}>
-      <section className={styles.hero}>
+    <article className={styles.page}>
+      <section className={styles.intro}>
         <div className={styles.heroPhoto}>
           <img
             src={caseImage('edu-hero')}
@@ -22,18 +22,17 @@ export default function EduCase() {
         </div>
 
         <div className={styles.heroCopy}>
-          <FadeIn as="p" from="up" delay={80} className={`${long.body} ${styles.intro}`}>
+          <FadeIn as="p" from="up" delay={80} className={`${long.body} ${styles.lead}`}>
             Many educational platforms still rely on static learning experiences, while students
-            already use AI tools like ChatGPT outside the learning environment.
-            <br />
-            Students already use AI to learn — just <u>outside the learning experience.</u>
+            already use AI tools like ChatGPT outside the learning environment. Students already
+            use AI to learn — just <u>outside the learning experience.</u>
             <br />
             <br />
             I work across several learning scenarios, but one of the most interesting was goal
             setting and personalized learning trajectories.
           </FadeIn>
 
-          <div className={styles.heroRight}>
+          <div className={styles.summary}>
             <FadeIn as="h3" from="up" delay={120} className={`${long.displayGold} ${styles.title}`}>
               Case 1: AI-driven
               <br />
@@ -50,7 +49,7 @@ export default function EduCase() {
                 </li>
               </ul>
             </FadeIn>
-            <FadeIn from="up" delay={240} className={`${long.stack} ${styles.contrib}`}>
+            <FadeIn from="up" delay={240} className={long.stack}>
               <p className={long.kicker}>My contribution:</p>
               <p className={long.body}>
                 End-to-end Product Designer
@@ -66,39 +65,39 @@ export default function EduCase() {
             </FadeIn>
           </div>
         </div>
-      </section>
 
-      <FadeIn from="up" className={long.metrics}>
-        {IMPACT.map((item) => (
-          <div key={item.value}>
-            <p className={long.metricValue}>{item.value}</p>
-            <p className={long.metricLabel}>{item.label}</p>
-          </div>
-        ))}
-      </FadeIn>
+        <FadeIn from="up" className={`${long.metrics} ${styles.metrics}`}>
+          {IMPACT.map((item) => (
+            <div key={item.value}>
+              <p className={long.metricValue}>{item.value}</p>
+              <p className={long.metricLabel}>{item.label}</p>
+            </div>
+          ))}
+        </FadeIn>
 
-      <FadeIn from="up" delay={80} className={styles.uiRow}>
-        <img src={caseImage('c1-screen-1')} alt="Goal-setting exercise with AI tutor" />
-        <img src={caseImage('c1-screen-2')} alt="Python lesson with AI assistant" />
-        <img src={caseImage('edu-p1-ui-3')} alt="Achievements and goal-setting landing" />
-      </FadeIn>
+        <FadeIn from="up" delay={80} className={styles.uiRow}>
+          <img src={caseImage('c1-screen-1')} alt="Goal-setting exercise with AI tutor" />
+          <img src={caseImage('c1-screen-2')} alt="Python lesson with AI assistant" />
+          <img src={caseImage('edu-p1-ui-3')} alt="Achievements and goal-setting landing" />
+        </FadeIn>
 
-      <section className={styles.how}>
-        <FadeIn as="p" from="up" className={long.kicker}>
-          How it works
-        </FadeIn>
-        <FadeIn as="p" from="up" delay={60} className={long.body}>
-          The experience connects AI directly to the learning journey:
-        </FadeIn>
-        <FadeIn as="ol" from="up" delay={100} className={long.alpha}>
-          <li>AI helps students formulate a SMART goal directly within the product</li>
-          <li>A personalized learning trajectory is generated based on that goal</li>
-          <li>The system automatically populates the trajectory with relevant activities</li>
-          <li>
-            An AI tutor supports students inside each activity — guiding them through the task
-            without simply giving away the answer
-          </li>
-        </FadeIn>
+        <section className={styles.how}>
+          <FadeIn as="p" from="up" className={long.kicker}>
+            How it works
+          </FadeIn>
+          <FadeIn as="p" from="up" delay={60} className={long.body}>
+            The experience connects AI directly to the learning journey:
+          </FadeIn>
+          <FadeIn as="ol" from="up" delay={100} className={long.alpha}>
+            <li>AI helps students formulate a SMART goal directly within the product</li>
+            <li>A personalized learning trajectory is generated based on that goal</li>
+            <li>The system automatically populates the trajectory with relevant activities</li>
+            <li>
+              An AI tutor supports students inside each activity — guiding them through the task
+              without simply giving away the answer
+            </li>
+          </FadeIn>
+        </section>
       </section>
 
       <section className={styles.sunset}>
@@ -121,19 +120,22 @@ export default function EduCase() {
             <img src={caseImage('edu-p1-classroom')} alt="Students working on laptops in class" />
           </FadeIn>
           <FadeIn from="up" delay={160} className={styles.dashboard}>
-            <img
-              src={caseImage('edu-p1-laptop')}
-              alt="Laptop showing the student dashboard"
-            />
+            <img src={caseImage('edu-p1-laptop')} alt="Laptop showing the student dashboard" />
           </FadeIn>
         </div>
       </section>
 
       <section className={styles.lower}>
         <FadeIn from="up" className={styles.uiTrio}>
-          <img src={caseImage('edu-p2-ui-1')} alt="Goal-setting flow in the product" />
-          <img src={caseImage('edu-p2-ui-2')} alt="Teacher dashboard widgets" />
-          <img src={caseImage('edu-p2-ui-3')} alt="Personalized homepage workspace" />
+          <div className={styles.browser}>
+            <img src={caseImage('edu-p2-ui-1')} alt="Goal-setting flow in the product" />
+          </div>
+          <div className={styles.browser}>
+            <img src={caseImage('edu-p2-ui-2')} alt="Teacher dashboard widgets" />
+          </div>
+          <div className={styles.browser}>
+            <img src={caseImage('edu-p2-ui-3')} alt="Personalized homepage workspace" />
+          </div>
         </FadeIn>
 
         <div className={styles.homepage}>
@@ -143,24 +145,22 @@ export default function EduCase() {
               <span>Engage</span>
               <span>Personalize</span>
             </div>
-            <div className={styles.homepageMain}>
-              <h3 className={`${long.displayGold} ${styles.homepageTitle}`}>
-                + most recent task: Homepage
-              </h3>
-              <div className={styles.homepageText}>
-                <p className={long.body}>
-                  2 months after launch, users were struggling to understand what they could do on
-                  the platform – on the click maps and analysing scroll behavior I’ve noticed
-                  crusial loss of users
-                </p>
-                <p className={long.body}>
-                  The homepage was trying to serve everyone with the same hierarchy
-                </p>
-                <p className={long.body}>
-                  My contribution: Trying to make the homepage adapted to each teacher&apos;s
-                  workflow
-                </p>
-              </div>
+            <h3 className={`${long.displayGold} ${styles.homepageTitle}`}>
+              + most recent task: Homepage
+            </h3>
+            <div className={styles.homepageText}>
+              <p className={long.body}>
+                2 months after launch, users were struggling to understand what they could do on
+                the platform – on the click maps and analysing scroll behavior I’ve noticed
+                crusial loss of users
+              </p>
+              <p className={long.body}>
+                The homepage was trying to serve everyone with the same hierarchy
+              </p>
+              <p className={long.body}>
+                My contribution: Trying to make the homepage adapted to each teacher&apos;s
+                workflow
+              </p>
             </div>
           </FadeIn>
           <FadeIn from="up" delay={80} className={styles.homepageShot}>
@@ -193,9 +193,15 @@ export default function EduCase() {
             </p>
           </FadeIn>
           <FadeIn from="up" delay={100} className={styles.decisionShots}>
-            <img src={caseImage('edu-p2-dec-1')} alt="Widgets that increase engagement" />
-            <img src={caseImage('edu-p2-dec-2')} alt="Sber ecosystem integrations" />
-            <img src={caseImage('edu-p2-dec-3')} alt="Adaptable personalized workspace" />
+            <div className={styles.browser}>
+              <img src={caseImage('edu-p2-dec-1')} alt="Widgets that increase engagement" />
+            </div>
+            <div className={styles.browser}>
+              <img src={caseImage('edu-p2-dec-2')} alt="Sber ecosystem integrations" />
+            </div>
+            <div className={styles.browser}>
+              <img src={caseImage('edu-p2-dec-3')} alt="Adaptable personalized workspace" />
+            </div>
           </FadeIn>
         </div>
       </section>

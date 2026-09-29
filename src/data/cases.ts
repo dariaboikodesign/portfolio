@@ -1,8 +1,15 @@
 export type CaseId = 'edu' | 'gamedev' | 'farmers' | 'career'
+export type MenuId = CaseId | 'medical'
 
 export type CaseTab = {
   id: CaseId
   label: string
+}
+
+export type CaseMenuItem = {
+  id: MenuId
+  lines: string[]
+  hasPage: boolean
 }
 
 export type SlideBlock =
@@ -28,6 +35,14 @@ export const caseTabs: CaseTab[] = [
   { id: 'gamedev', label: 'Gamedev in edtech' },
   { id: 'farmers', label: 'APP FOR FARMERS' },
   { id: 'career', label: 'career guidance' },
+]
+
+export const caseMenu: CaseMenuItem[] = [
+  { id: 'edu', lines: ['Case 1: AI-driven educational platform'], hasPage: true },
+  { id: 'gamedev', lines: ['Case 2:', 'gamified platform'], hasPage: true },
+  { id: 'farmers', lines: ['Case 3:', 'FROM FIELD TO SCREEN'], hasPage: true },
+  { id: 'career', lines: ['Case 4: Career', 'guidance for teens'], hasPage: true },
+  { id: 'medical', lines: ['Case 5: Medical presentations'], hasPage: false },
 ]
 
 export const cases: Record<CaseId, CaseSlide[]> = {

@@ -55,8 +55,8 @@ export default function CareerCase() {
 
           <div className={styles.heroGrid}>
             <FadeIn from="up" delay={120} className={styles.heroLeft}>
-              <p className={long.kicker}>Tasks:</p>
-              <p className={long.body}>
+              <p className={`${long.kicker} ${styles.lead}`}>Tasks:</p>
+              <p className={`${long.body} ${styles.copy}`}>
                 On the old platform, we tested a &quot;Big Challenges&quot; format — 6 courses in
                 different fields where students could pick and complete one or several as a mix of
                 soft skills and subject knowledge, plus a connected metaverse. However, we faced
@@ -70,8 +70,8 @@ export default function CareerCase() {
             </FadeIn>
 
             <FadeIn from="up" delay={180} className={styles.heroRight}>
-              <p className={long.kicker}>My contribution:</p>
-              <p className={long.body}>
+              <p className={`${long.kicker} ${styles.lead}`}>My contribution:</p>
+              <p className={`${long.body} ${styles.copy}`}>
                 Competitor research, user problem mapping, job stories, hypothesis building, user
                 interviews, UX flows, visual concepts, component design, and delivery supervision
               </p>
@@ -81,10 +81,10 @@ export default function CareerCase() {
       </section>
 
       <section className={styles.section}>
-        <FadeIn as="p" from="up" className={long.kicker}>
+        <FadeIn as="p" from="up" className={`${long.kicker} ${styles.lead}`}>
           Our initial hypothesis:
         </FadeIn>
-        <FadeIn as="p" from="up" delay={60} className={`${long.body} ${styles.hypothesis}`}>
+        <FadeIn as="p" from="up" delay={60} className={`${long.body} ${styles.copy} ${styles.hypothesis}`}>
           The more we learn about a student, the more accurate their career recommendations will be
         </FadeIn>
         <FadeIn from="up" delay={100} className={styles.protoShot}>
@@ -93,10 +93,10 @@ export default function CareerCase() {
       </section>
 
       <section className={styles.section}>
-        <FadeIn as="p" from="up" className={long.kicker}>
+        <FadeIn as="p" from="up" className={`${long.kicker} ${styles.lead}`}>
           Users didn&apos;t want another career test
         </FadeIn>
-        <FadeIn as="p" from="up" delay={60} className={long.body}>
+        <FadeIn as="p" from="up" delay={60} className={`${long.body} ${styles.copy}`}>
           Prototype interviews revealed three important things:
         </FadeIn>
 
@@ -104,7 +104,7 @@ export default function CareerCase() {
           {FINDINGS.map((item) => (
             <div key={item.num} className={styles.finding}>
               <p className={styles.findingNum}>{item.num}</p>
-              <p className={long.body}>
+              <p className={`${long.body} ${styles.copy}`}>
                 {item.title}
                 <br />
                 {item.text}
@@ -120,11 +120,11 @@ export default function CareerCase() {
       </section>
 
       <section className={styles.section}>
-        <FadeIn as="p" from="up" className={long.kicker}>
+        <FadeIn as="p" from="up" className={`${long.kicker} ${styles.lead}`}>
           KEY DESIGN DECISIONS:
         </FadeIn>
         <FadeIn from="up" delay={60} className={styles.decisionCols}>
-          <p className={long.body}>
+          <p className={`${long.body} ${styles.copy}`}>
             {DECISIONS_LEFT.map((line, index) => (
               <span key={`left-${index}`}>
                 {line}
@@ -132,7 +132,7 @@ export default function CareerCase() {
               </span>
             ))}
           </p>
-          <p className={long.body}>
+          <p className={`${long.body} ${styles.copy}`}>
             {DECISIONS_RIGHT.map((line, index) => (
               <span key={`right-${index}`}>
                 {line}
@@ -164,17 +164,17 @@ export default function CareerCase() {
 
       <section className={styles.closing}>
         <FadeIn from="up" className={styles.closingHead}>
-          <p className={long.kicker}>
+          <p className={`${long.kicker} ${styles.lead}`}>
             The product turned career uncertainty into a paid expert-guidance experience.
           </p>
           <div className={styles.closingText}>
-            <p className={long.body}>
+            <p className={`${long.body} ${styles.copy}`}>
               Don&apos;t be afraid to cut back on features for the MVP and refine them later—at
               first, the product seemed more interesting with a complex use case, but users needed
               a single, clear, and valuable result right here and now. Simplicity led to higher
               conversion rates and speed.
             </p>
-            <p className={long.body}>
+            <p className={`${long.body} ${styles.copy}`}>
               Live interviews with users and experts are essential both before and after launch—they
               helped us weed out unworkable hypotheses, refine the visuals before launch, and
               quickly adjust the user flow.

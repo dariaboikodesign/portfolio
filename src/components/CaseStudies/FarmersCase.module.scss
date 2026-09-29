@@ -1,24 +1,30 @@
 .page {
   background: #322c2a;
+  padding-top: clamp(2rem, 3.33vw, 4rem);
 }
 
 .hero {
-  padding: clamp(2rem, 3.33vw, 4rem) var(--grid-margin) 0;
+  padding-inline: var(--grid-margin);
 }
 
-.heroMain {
+.heroTop {
   display: grid;
   grid-template-columns: minmax(0, 573fr) minmax(0, 1018fr);
-  gap: clamp(1.5rem, 4.17vw, 5rem);
+  gap: clamp(1.25rem, 4.17vw, 5rem);
   align-items: stretch;
 }
 
-.heroCopy {
+.heroLeft {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: clamp(1.5rem, 3vw, 3.875rem);
-  min-height: clamp(28rem, 42.08vw, 50.5rem);
+  gap: clamp(1.5rem, 3vw, 3.375rem);
+  min-height: clamp(20rem, 42.08vw, 50.5rem);
+}
+
+.heroHead {
+  display: grid;
+  gap: 24px;
 }
 
 .title {
@@ -42,8 +48,14 @@
   }
 }
 
+.heroTasks {
+  display: grid;
+  gap: 6px;
+  max-width: 35.625rem;
+}
+
 .note {
-  max-width: 35.5rem;
+  margin-top: 8px;
 }
 
 .heroShot {
@@ -60,13 +72,20 @@
   }
 }
 
+.model {
+  display: grid;
+  gap: clamp(2rem, 4.79vw, 5rem);
+  padding-inline: var(--grid-margin);
+  margin-top: clamp(2rem, 4.17vw, 5rem);
+}
+
 .scriptHeading {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: center;
   gap: 16px;
-  padding: clamp(2rem, 4.79vw, 5.75rem) var(--grid-margin);
+  padding-block: clamp(2rem, 4.79vw, 5.75rem);
   text-align: center;
 
   span {
@@ -90,21 +109,16 @@
   }
 }
 
-.model {
-  position: relative;
+.modelBody {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--grid-gutter);
-  padding-inline: var(--grid-margin);
-  min-height: clamp(28rem, 40vw, 40rem);
+  grid-template-columns: minmax(0, 421px) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4.17vw, 5rem);
+  align-items: start;
 }
 
 .flows {
-  grid-column: 1 / 5;
   display: flex;
   gap: clamp(2rem, 11.46vw, 13.75rem);
-  align-self: start;
-  padding-top: clamp(1rem, 2vw, 2rem);
 }
 
 .flowCol {
@@ -149,33 +163,31 @@
 }
 
 .phoneMap {
-  grid-column: 7 / -1;
   justify-self: end;
-  width: min(100%, 35.8rem);
+  width: min(100%, 35.8125rem);
   overflow: hidden;
   border-radius: 12px;
   background: #d9d9d9;
+  aspect-ratio: 573 / 640;
 
   img {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
   }
 }
 
-.mockups {
-  position: relative;
+.gallery {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--grid-gutter);
+  grid-template-columns: minmax(0, 722fr) minmax(0, 1018fr);
+  gap: clamp(1.25rem, 4.17vw, 5rem);
+  align-items: end;
   padding-inline: var(--grid-margin);
   margin-top: clamp(2rem, 4.17vw, 5rem);
-  min-height: clamp(32rem, 45vw, 51rem);
 }
 
 .fieldPhoto {
-  grid-column: 1 / 6;
-  align-self: end;
   overflow: hidden;
   border-radius: 12px;
   aspect-ratio: 1;
@@ -190,25 +202,9 @@
   }
 }
 
-.phoneHand {
-  grid-column: 7 / 11;
-  align-self: start;
-  overflow: hidden;
-  border-radius: 12px;
-  aspect-ratio: 573 / 640;
-  background: #d9d9d9;
-
-  img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
 .phonesDuo {
-  grid-column: 7 / -1;
-  align-self: end;
+  justify-self: end;
+  width: min(100%, 63.625rem);
   overflow: hidden;
   border-radius: 12px;
   aspect-ratio: 1018 / 819;
@@ -238,64 +234,131 @@
 
 .stats {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
 }
 
-.statWide {
-  grid-column: 1 / -1;
+.statValue {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(3rem, 6.25vw, 7.5rem);
+  line-height: 1.03;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #fff;
+  opacity: 0.8;
 }
 
-@media (max-width: 1100px) {
-  .heroMain {
-    grid-template-columns: 1fr;
+@media (max-width: 1280px) {
+  .heroTop {
+    grid-template-columns: minmax(0, 460fr) minmax(0, 640fr);
   }
 
-  .heroCopy {
-    min-height: 0;
-  }
-
-  .heroShot {
-    min-height: clamp(16rem, 50vw, 24rem);
-  }
-
-  .model {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .flows {
-    padding-top: 0;
-  }
-
-  .phoneMap {
-    width: 100%;
-  }
-
-  .mockups {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    min-height: 0;
-  }
-
-  .fieldPhoto,
-  .phoneHand,
-  .phonesDuo {
-    max-width: none;
+  .gallery {
+    grid-template-columns: minmax(0, 547fr) minmax(0, 550fr);
   }
 
   .stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .statWide {
-    grid-column: auto;
+  .statFeatured {
+    grid-column: 1 / -1;
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 1024px) {
+  .heroTop {
+    grid-template-columns: minmax(0, 460fr) minmax(0, 384fr);
+    grid-template-areas:
+      'head shot'
+      'tasks tasks';
+    gap: 20px 20px;
+    align-items: start;
+  }
+
+  .heroLeft {
+    display: contents;
+  }
+
+  .heroHead {
+    grid-area: head;
+  }
+
+  .heroTasks {
+    grid-area: tasks;
+    max-width: none;
+    gap: 32px;
+  }
+
+  .heroShot {
+    grid-area: shot;
+    min-height: 0;
+    aspect-ratio: 384 / 328;
+  }
+
+  .model {
+    gap: 40px;
+    margin-top: 80px;
+  }
+
+  .scriptHeading {
+    padding-block: 46px;
+  }
+
+  .modelBody {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .phoneMap {
+    justify-self: end;
+    width: min(100%, 26.375rem);
+  }
+
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .fieldPhoto {
+    max-width: 27.625rem;
+  }
+
+  .phonesDuo {
+    justify-self: end;
+    width: min(100%, 26.375rem);
+    aspect-ratio: 422 / 387;
+  }
+
+  .statValue {
+    font-size: clamp(3rem, 7.81vw, 5rem);
+    line-height: 1.55;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroTop {
+    grid-template-columns: 1fr;
+  }
+
+  .heroShot {
+    aspect-ratio: 16 / 11;
+  }
+
+  .heroLeft {
+    gap: 20px;
+  }
+
+  .scriptHeading {
+    gap: 8px;
+    padding-block: 32px;
+
+    em {
+      font-size: clamp(2.5rem, 12vw, 3.5rem);
+    }
+  }
+
   .flows {
     flex-direction: column;
     gap: 2rem;
@@ -303,5 +366,21 @@
 
   .flowStep p {
     white-space: normal;
+  }
+
+  .phoneMap,
+  .fieldPhoto,
+  .phonesDuo {
+    justify-self: stretch;
+    width: 100%;
+    max-width: none;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .statFeatured {
+    grid-column: auto;
   }
 }

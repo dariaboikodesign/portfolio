@@ -30,13 +30,15 @@ export default function FadeIn({
       return
     }
 
-    const rect = node.getBoundingClientRect()
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      requestAnimationFrame(() => setVisible(true))
-      return
-    }
-
     const scrollRoot = node.closest('[data-case-scroller]')
+
+    if (!scrollRoot) {
+      const rect = node.getBoundingClientRect()
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        requestAnimationFrame(() => setVisible(true))
+        return
+      }
+    }
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

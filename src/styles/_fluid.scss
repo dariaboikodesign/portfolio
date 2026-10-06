@@ -1,0 +1,15 @@
+@use 'sass:math';
+
+// Linear interpolation between two px values across a viewport range,
+// clamped at both ends. Defaults to the 1440 → 1920 Figma frames.
+@function fluid($from-px, $to-px, $min-vw: 1440, $max-vw: 1920) {
+  $lo: math.min($from-px, $to-px);
+  $hi: math.max($from-px, $to-px);
+  $delta: $to-px - $from-px;
+  $range: $max-vw - $min-vw;
+  @return clamp(
+    #{$lo}px,
+    calc(#{$from-px}px + #{$delta} * (100vw - #{$min-vw}px) / #{$range}),
+    #{$hi}px
+  );
+}

@@ -1,3 +1,5 @@
+@use '../../styles/fluid' as *;
+
 .hero {
   --hero-panel-radius: 120px;
   --hero-panel-pt: 64px;
@@ -167,10 +169,11 @@
   display: grid;
   grid-column: 1 / 9;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--grid-gutter);
+  --photos-gap: var(--grid-gutter);
+  gap: var(--photos-gap);
   width: 100%;
   margin-top: var(--hero-photo-mt);
-  padding-bottom: clamp(28px, 6vw, 52px);
+  margin-bottom: clamp(28px, 6vw, 52px);
   z-index: 3;
 }
 
@@ -190,12 +193,15 @@
   }
 }
 
-.photo:nth-child(2) {
-  z-index: 4;
-}
-
+// Figma: the arrow starts on the Moscow photo, slips under its corner,
+// passes under the portrait and lands on the Dubai photo.
+.photo:nth-child(1),
 .photo:nth-child(3) {
   z-index: 1;
+}
+
+.photo:nth-child(2) {
+  z-index: 4;
 }
 
 .photoPortrait img {
@@ -204,12 +210,33 @@
 
 .arrows {
   position: absolute;
-  left: 16%;
-  top: 58%;
+  left: 28.16%;
+  top: 63.7%;
   z-index: 2;
-  width: 56%;
+  width: 43.69%;
   height: auto;
   pointer-events: none;
+}
+
+.moscowCorner {
+  position: absolute;
+  z-index: 3;
+  left: calc((100% - 2 * var(--photos-gap)) / 3 * 0.9185);
+  top: 92.33%;
+  width: calc((100% - 2 * var(--photos-gap)) / 3 * 0.0537);
+  aspect-ratio: 1;
+  border-radius: 1px;
+  overflow: hidden;
+  pointer-events: none;
+
+  img {
+    position: absolute;
+    left: -1711%;
+    top: -1714%;
+    width: 1863%;
+    max-width: none;
+    height: auto;
+  }
 }
 
 .arrowsMobile {
@@ -219,26 +246,126 @@
 }
 
 @media (min-width: 1025px) {
+  .hero {
+    --hero-photo-mt: 72px;
+  }
+
+  .nav {
+    align-items: flex-start;
+  }
+
+  .titleBlock {
+    // Figma 1440: summary starts 287px below the title top
+    min-height: 19.93vw;
+  }
+
   .senior {
-    font-size: 4.5rem;
+    font-size: 5vw;
     line-height: 1.22;
     letter-spacing: 0.03em;
   }
 
   .name {
-    font-size: 3rem;
+    font-size: 3.333vw;
     line-height: 1.17;
     letter-spacing: 0.03em;
   }
 
+  .script {
+    left: 23.19vw;
+    top: 5.42vw;
+  }
+
   .scriptD {
-    font-size: 12.45rem;
+    font-size: 13.83vw;
     line-height: 1.05;
   }
 
   .scriptRest {
-    font-size: 9.1rem;
+    font-size: 10.12vw;
     line-height: 1.17;
+  }
+
+  .leads {
+    grid-column: 1 / 9;
+    max-width: none;
+    margin: 0 0 0 22.71vw;
+
+    p {
+      max-width: 472px;
+    }
+  }
+
+  .photos {
+    --photos-gap: 22px;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(3, minmax(0, 277px));
+    width: 60.76vw;
+    max-width: 878px;
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 1441px) {
+  .hero {
+    --hero-panel-radius: #{fluid(120, 160)};
+    --hero-panel-pt: #{fluid(64, 106)};
+    --hero-panel-pb: #{fluid(64, 74)};
+    --hero-photo-mt: #{fluid(72, 58)};
+    padding-bottom: fluid(64, 190);
+  }
+
+  .nav {
+    gap: 12px;
+    margin-top: fluid(0, 12);
+    padding-right: fluid(0, 33);
+  }
+
+  .navLink {
+    font-size: fluid(18, 28);
+    line-height: fluid(24, 36);
+  }
+
+  .titleBlock {
+    min-height: fluid(287, 356);
+  }
+
+  .senior {
+    font-size: fluid(72, 110.66);
+    line-height: fluid(88, 121.73);
+  }
+
+  .name {
+    font-size: fluid(48, 56);
+    line-height: fluid(56, 58.1);
+  }
+
+  .script {
+    left: fluid(334, 296);
+    top: fluid(78, 80);
+  }
+
+  .scriptD {
+    font-size: fluid(199.21, 285.95);
+  }
+
+  .scriptRest {
+    font-size: fluid(145.77, 209.23);
+  }
+
+  .leads {
+    margin-left: fluid(327, 297);
+    font-size: fluid(18, 24);
+    line-height: fluid(24, 32);
+
+    p:first-child {
+      max-width: fluid(472, 398);
+    }
+  }
+
+  .photos {
+    --photos-gap: #{fluid(22, 23)};
+    width: fluid(875, 878);
   }
 }
 
@@ -248,19 +375,27 @@
     --hero-photo-mt: 32px;
   }
 
+  // Figma 1024/768: name sits under the title, "Designer" overlaps it from below.
   .titleBlock {
     grid-column: 1 / 10;
-    min-height: calc(70px + clamp(10rem, 17.8vw, 11.5rem));
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .name {
+    order: 1;
   }
 
   .script {
+    order: 2;
     position: relative;
     left: 0;
-    top: -64px;
+    top: 0;
     display: block;
     width: 100%;
     height: auto;
-    margin: 0 0 -64px;
+    margin: -64px 0 0;
     text-align: right;
   }
 
@@ -312,7 +447,6 @@
 
   .titleBlock {
     grid-column: 1 / 10;
-    min-height: calc(48px + clamp(7.5rem, 18vw, 8.7rem));
   }
 
   .senior {
@@ -329,8 +463,7 @@
   }
 
   .script {
-    top: -64px;
-    margin-bottom: -64px;
+    margin-top: -48px;
   }
 
   .scriptD {
@@ -466,7 +599,11 @@
     height: 409px;
     max-width: none;
     padding-inline: 32px;
-    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  .moscowCorner {
+    display: none;
   }
 
   .photo {
@@ -505,9 +642,11 @@
   .arrowsMobile {
     display: block;
     z-index: 2;
-    left: calc(50% - 137px);
-    top: 122px;
-    width: 204px;
+    // Figma box (203.7×200.3 at -70.5, 122) is the rotated bounds; the
+    // unrotated 199×86.7 vector sits centred inside it.
+    left: calc(50% - 134.6px);
+    top: 178.8px;
+    width: 199px;
     height: auto;
     transform: rotate(43.76deg);
     transform-origin: center center;

@@ -1,22 +1,22 @@
+@use '../../styles/fluid' as *;
+
+// Figma "Адаптивы третий блок": menu on the left of the laptop on desktop,
+// a 4-column row above it on tablet, and a column next to a cropped laptop on mobile.
 .board {
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--grid-gutter);
   width: 100%;
   min-height: 0;
-  padding-inline: var(--grid-margin);
 }
 
 .menu {
   position: absolute;
   z-index: 3;
-  top: 8%;
-  left: var(--grid-margin);
+  top: 0;
+  left: 80px;
   display: flex;
   flex-direction: column;
   gap: 24px;
-  width: 10.5625rem;
+  width: 169px;
 }
 
 .menuItem,
@@ -34,9 +34,14 @@
   color: var(--ink);
   opacity: 0.6;
   cursor: pointer;
+  transition: opacity 0.2s ease;
 
   span {
     display: block;
+  }
+
+  &:hover {
+    opacity: 0.85;
   }
 }
 
@@ -45,14 +50,17 @@
   line-height: 1.11;
   letter-spacing: 0.08em;
   opacity: 1;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .laptop {
   position: relative;
-  grid-column: 1 / -1;
-  width: 70%;
+  width: min(1053px, calc(100vw - 387px));
   min-width: 0;
-  justify-self: center;
+  margin: 25px auto 0;
 }
 
 .frame {
@@ -131,8 +139,8 @@
 .viewCase,
 .viewSoon {
   position: absolute;
-  right: var(--grid-margin);
-  bottom: 14%;
+  right: 80px;
+  bottom: 62px;
   z-index: 3;
 }
 
@@ -163,14 +171,41 @@
   opacity: 0.5;
 }
 
+.viewCase img {
+  transition: transform 0.2s ease;
+}
+
+.viewCase:hover img {
+  transform: translateX(4px);
+}
+
+@media (min-width: 1441px) {
+  .menu {
+    top: fluid(0, 37);
+    left: fluid(80, 205);
+  }
+
+  .laptop {
+    width: fluid(1053, 1254);
+    margin-top: fluid(25, 30);
+  }
+
+  .viewCase,
+  .viewSoon {
+    right: fluid(80, 206);
+    bottom: fluid(62, 73);
+  }
+}
+
 @media (max-width: 1024px) {
   .board {
-    row-gap: 48px;
+    display: flex;
+    flex-direction: column;
+    padding-inline: fluid(40, 80, 768, 1024);
   }
 
   .menu {
     position: static;
-    grid-column: 1 / -1;
     flex-direction: row;
     align-items: flex-start;
     width: auto;
@@ -184,46 +219,59 @@
   }
 
   .laptop {
-    width: 100%;
+    width: 73.8vw;
+    margin: 64px auto 0;
   }
 
   .viewCase,
   .viewSoon {
     position: static;
-    grid-column: 1 / -1;
-    justify-self: center;
-    margin-top: 0;
+    align-self: center;
+    margin-top: 27px;
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 768px) {
   .board {
-    --grid-margin: 16px;
-    row-gap: 32px;
+    display: grid;
+    grid-template-columns: fluid(126, 209, 360, 768) minmax(0, 1fr);
+    align-items: start;
+    padding-inline: fluid(16, 40, 360, 768);
   }
 
   .menu {
-    gap: 8px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    grid-column: 1;
+    grid-row: 1;
+    flex-direction: column;
+    gap: fluid(8, 20, 360, 768);
   }
 
   .menuItem,
   .menuActive {
-    flex: 0 0 7.875rem;
-    width: 7.875rem;
-    font-size: 0.75rem;
-    line-height: 1.1667;
+    flex: none;
+    font-size: fluid(12, 16, 360, 768);
+    line-height: fluid(14, 18, 360, 768);
   }
 
   .menuActive {
-    font-size: 0.875rem;
-    line-height: 1.14;
+    font-size: fluid(14, 18, 360, 768);
+    line-height: fluid(16, 20, 360, 768);
+  }
+
+  .laptop {
+    grid-column: 2;
+    grid-row: 1;
+    width: fluid(392, 577, 360, 768);
+    max-width: none;
+    margin: fluid(9, 14, 360, 768) 0 0 -16px;
+  }
+
+  .viewCase,
+  .viewSoon {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-self: start;
+    margin: fluid(15, 44, 360, 768) 0 0 fluid(150, 253, 360, 768);
   }
 
   .viewCase {

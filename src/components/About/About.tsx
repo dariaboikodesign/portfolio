@@ -11,7 +11,7 @@ import { timeline } from '../../data/timeline'
 import FadeIn from '../FadeIn'
 import styles from './About.module.scss'
 
-const TIMELINE_MQ = '(max-width: 1024px)'
+const TIMELINE_MQ = '(max-width: 1279px)'
 
 type TimelineAxis = {
   start: number
@@ -361,7 +361,7 @@ export default function About() {
                       key={item.title}
                       className={`${styles.item} ${horizontal ? styles.itemHorizontal : ''} ${
                         revealed ? styles.itemIn : ''
-                      }`}
+                      } ${index === timeline.length - 1 ? styles.itemFeatured : ''}`}
                       style={{
                         transitionDelay: revealed
                           ? `${Math.round((revealAt ?? 0) * 70)}ms`

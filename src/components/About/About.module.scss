@@ -1,3 +1,5 @@
+@use '../../styles/fluid' as *;
+
 .about {
   --about-script-size: clamp(5rem, 7.29vw, 8.75rem);
   position: relative;
@@ -236,25 +238,7 @@
   opacity: 0.6;
 }
 
-@media (min-width: 1025px) {
-  .col,
-  .colWide {
-    flex: 0 0 325px;
-  }
-}
-
-@media (max-width: 1280px) and (min-width: 1025px) {
-  .col,
-  .colWide {
-    flex: 0 0 clamp(250px, 28vw, 325px);
-  }
-
-  .profileGrid {
-    gap: clamp(32px, 4.5vw, 72px);
-  }
-}
-
-@media (max-width: 1024px) {
+@media (max-width: 1279px) {
   .about {
     --about-script-size: clamp(4.5rem, 9.8vw, 6.25rem);
     padding-bottom: 64px;
@@ -426,9 +410,91 @@
   }
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 1280px) {
   .timelineSpacer {
     display: none;
+  }
+
+  // Figma 1920: text + photos on the left, career timeline as a column on the right.
+  .about {
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: fluid(40, 84, 1280, 1920);
+    padding: 70px fluid(80, 85, 1280, 1920) fluid(96, 160, 1280, 1920) var(--grid-margin);
+  }
+
+  .title {
+    display: block;
+    grid-column: 1;
+  }
+
+  .titleMain {
+    font-size: fluid(44, 56, 1280, 1920);
+    line-height: 1.2857;
+  }
+
+  .script {
+    margin-left: 0.04em;
+    font-size: fluid(104, 140, 1280, 1920);
+    line-height: 0;
+  }
+
+  .physics {
+    grid-column: 1;
+    max-width: 389px;
+    margin: fluid(48, 63, 1280, 1920) 0 0 36%;
+    font-size: fluid(18, 24, 1280, 1920);
+  }
+
+  .content {
+    display: contents;
+  }
+
+  .profileGrid {
+    grid-column: 1;
+    grid-row: 3;
+    display: grid;
+    grid-template-columns: minmax(0, 425px) minmax(0, 493px);
+    justify-content: space-between;
+    column-gap: 40px;
+    width: 100%;
+    margin-top: 48px;
+  }
+
+  .col,
+  .colWide {
+    p {
+      font-size: fluid(18, 24, 1280, 1920);
+    }
+  }
+
+  .timelinePin {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    align-self: start;
+    margin-top: 9px;
+  }
+
+  .timeline {
+    width: 436px;
+
+    &::after {
+      top: calc(var(--timeline-axis-start, 0px) - 0.2 * var(--timeline-axis-length, 0px));
+      height: calc(1.4 * var(--timeline-axis-length, 100%));
+    }
+  }
+
+  .event {
+    gap: 0;
+  }
+
+  .itemFeatured {
+    .role {
+      font-size: 1.375rem;
+    }
+
+    .dates {
+      font-size: 2rem;
+    }
   }
 }
 

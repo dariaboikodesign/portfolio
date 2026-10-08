@@ -51,6 +51,9 @@ export default function Hero() {
           <img src={cityDubai} alt="Dubai skyline with Burj Khalifa" width={277} height={276} />
         </FadeIn>
         <img className={styles.arrows} src={arrows} alt="" width={384} height={129} />
+        <span className={styles.moscowCorner} aria-hidden="true">
+          <img src={cityMoscow} alt="" />
+        </span>
         <img className={styles.arrowsMobile} src={arrowsMobile} alt="" width={204} height={200} />
       </div>
     </section>

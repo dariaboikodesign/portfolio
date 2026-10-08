@@ -2,6 +2,7 @@
 
 .hero {
   --hero-panel-radius: 120px;
+  --hero-panel-shadow: 0 40px 72px 8px #1f1816, 0 96px 200px 48px #1f1816;
   --hero-panel-pt: 64px;
   --hero-panel-pb: 64px;
   --hero-photo-mt: 64px;
@@ -32,24 +33,14 @@
   padding: var(--hero-panel-pt) var(--grid-margin) var(--hero-panel-pb);
   background: #3b302c;
   border-radius: 0 0 0 var(--hero-panel-radius);
+  // Drop shadow under the text panel, falling onto the hero background.
+  box-shadow: var(--hero-panel-shadow);
 }
 
 .topContent {
   display: contents;
 }
 
-.bgCurve {
-  position: absolute;
-  left: 50%;
-  top: calc(100% - 24px);
-  z-index: 0;
-  width: 165%;
-  min-width: 100%;
-  height: clamp(220px, 26vw, 375px);
-  object-fit: fill;
-  pointer-events: none;
-  transform: translateX(-50%);
-}
 
 .nav {
   grid-column: 11 / 13;
@@ -431,14 +422,11 @@
     grid-column: 1 / -1;
   }
 
-  .bgCurve {
-    width: 180%;
-    height: clamp(200px, 36vw, 375px);
-  }
 }
 
 @media (max-width: 768px) {
   .hero {
+    --hero-panel-shadow: 0 28px 56px 6px #1f1816, 0 64px 140px 32px #1f1816;
     --grid-margin: 40px;
     --hero-panel-radius: 80px;
     --hero-panel-pb: 32px;
@@ -487,14 +475,11 @@
     grid-column: 10 / 13;
   }
 
-  .bgCurve {
-    width: 190%;
-    height: clamp(180px, 37vw, 284px);
-  }
 }
 
 @media (max-width: 480px) {
   .hero {
+    --hero-panel-shadow: 0 16px 32px 4px #1f1816, 0 40px 88px 16px #1f1816;
     --grid-margin: 16px;
     --hero-panel-radius: 32px;
     --hero-panel-pt: 24px;
@@ -588,10 +573,6 @@
     text-align: left;
   }
 
-  .bgCurve {
-    width: 200%;
-    height: clamp(160px, 45vw, 220px);
-  }
 
   .photos {
     grid-column: 1 / -1;

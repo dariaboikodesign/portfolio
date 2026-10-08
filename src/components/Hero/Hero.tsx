@@ -3,7 +3,6 @@ import portrait from '../../assets/hero/portrait.png'
 import cityDubai from '../../assets/hero/city-dubai.png'
 import arrows from '../../assets/hero/arrows.svg'
 import arrowsMobile from '../../assets/hero/arrows-mobile.svg'
-import bgCurve from '../../assets/hero/bg-curve.svg'
 import FadeIn from '../FadeIn'
 import styles from './Hero.module.scss'
 
@@ -11,7 +10,6 @@ export default function Hero() {
   return (
     <section className={styles.hero} aria-label="Introduction">
       <div className={styles.topWrap}>
-        <img className={styles.bgCurve} src={bgCurve} alt="" aria-hidden="true" />
         <div className={styles.topPanel}>
           <div className={styles.topContent}>
             <FadeIn className={styles.titleBlock} delay={40}>

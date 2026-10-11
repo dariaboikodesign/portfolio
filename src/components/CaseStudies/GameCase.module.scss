@@ -1,305 +1,951 @@
-.page {
-  padding-top: clamp(2rem, 3.33vw, 4rem);
+// Case 2 — Figma "Адаптивы кейса 2".
+// Base styles follow the 1280 frame. Container queries on the page width add
+// the 1920 frame (≥1440, scaled with the page via u()), the 1024 frame
+// (≤1099) and the 360 frame (≤700). The laptop preview renders this page at
+// 1920px, so it always gets the desktop layout.
+
+@function u($px) {
+  @return calc(#{$px} / 1920 * 100cqw);
 }
 
-.hero {
+$panel: #322c2a;
+$gold: #fff0a8;
+$ghost: #5d5454;
+$soft-text: #d8d3d0;
+$panel-bg:
+  linear-gradient(180deg, #3c312e 0%, #1d1d1d 100%),
+  linear-gradient(-49.7deg, rgb(65 54 49 / 0.4) 5.7%, rgb(95 78 71 / 0.4) 98.9%);
+
+.page {
+  container: gamedev / inline-size;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding-bottom: 64px;
+  background: $panel;
+  color: #fff;
+}
+
+// ---- Type ----------------------------------------------------------------
+
+.body {
+  margin: 0;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 28px;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.kicker {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 30px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $gold;
+}
+
+.list {
+  padding-left: 36px;
+  list-style: disc;
+}
+
+// Line breaks that only exist in the 1920 frame.
+.titleBreak {
+  display: none;
+}
+
+// ---- Introduction --------------------------------------------------------
+
+.intro {
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--grid-gutter);
-  min-height: clamp(36rem, 48.85vw, 58.65rem);
-  padding-inline: var(--grid-margin);
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  width: 100%;
+  padding: 24px 80px 64px;
+  overflow: hidden;
+}
+
+.heroComp {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.title,
+.subtitle {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  text-transform: uppercase;
+  color: $gold;
 }
 
 .title {
-  grid-column: 1 / 11;
-  grid-row: 1;
-  z-index: 2;
+  font-size: 56px;
+  line-height: 72px;
+  letter-spacing: 0.03em;
 }
 
 .subtitle {
-  grid-column: 5 / -1;
-  grid-row: 1;
-  margin-top: 4.55em;
-  z-index: 2;
+  font-size: 48px;
+  line-height: 60px;
+  letter-spacing: 0.03em;
+  text-align: right;
 }
 
 .stage {
-  position: absolute;
-  left: 10.9%;
-  top: 15.4%;
-  width: 74%;
-  height: 84%;
+  position: relative;
+  height: 690px;
   pointer-events: none;
 }
 
 .glow,
 .glowSoft {
   position: absolute;
-  inset: 0 4% auto;
-  width: 92%;
-  height: 82%;
-  object-fit: contain;
-  opacity: 0.9;
-  mix-blend-mode: screen;
+  left: 50%;
+  top: 50%;
+  max-width: none;
+  transform: translate(-50%, -50%) rotate(-90.19deg);
+}
+
+.glow {
+  width: 1302px;
+  height: 787px;
 }
 
 .glowSoft {
-  inset: 4% -8% auto;
-  width: 108%;
-  opacity: 0.7;
+  width: 1029px;
+  height: 787px;
 }
 
-.map {
+.heroComposite {
   position: absolute;
-  left: 24%;
-  top: 0;
-  width: 61%;
-  border-radius: 16px;
-  overflow: hidden;
-  transform: rotate(5.32deg);
-  box-shadow: 0 28px 70px rgb(0 0 0 / 0.4);
-
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
+  left: 50%;
+  top: 50%;
+  width: 935px;
+  max-width: none;
+  height: auto;
+  transform: translate(-50%, -50%);
 }
 
+// The separately tilted laptop and phone are only used at 1920.
+.laptop,
 .phone {
-  position: absolute;
-  left: 8%;
-  top: 7%;
-  width: min(20%, 15.8rem);
-  transform: rotate(-7.26deg);
-  filter: drop-shadow(0 22px 40px rgb(0 0 0 / 0.45));
-
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
+  display: none;
 }
 
-.lead {
-  grid-column: 1 / 5;
-  align-self: end;
-  display: grid;
-  gap: 1.1rem;
-  z-index: 2;
-  padding-bottom: 0.4rem;
+.summary {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.overview,
+.tasks {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.overview {
+  gap: 24px;
 }
 
 .tasks {
-  grid-column: 10 / 13;
-  align-self: center;
-  z-index: 2;
-  display: grid;
+  gap: 8px;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
   gap: 6px;
 }
 
+.overview .body,
 .constraint {
-  margin: 1rem 0 0;
-  font-weight: 500;
+  color: $soft-text;
+  opacity: 0.84;
 }
 
-.concept {
-  display: grid;
-  grid-template-columns: minmax(0, 870fr) minmax(0, 722fr);
-  column-gap: var(--grid-gutter);
-  padding-inline: var(--grid-margin);
-  margin-top: clamp(3.5rem, 4.17vw, 5rem);
+// ---- Concept -------------------------------------------------------------
+
+.concept,
+.benchmarks,
+.journey {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: min(100%, 1120px);
 }
 
-.conceptLead,
 .conceptNotes {
-  display: grid;
+  display: flex;
+  gap: 40px;
+}
+
+.noteCol {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
 }
 
-.conceptNotes {
-  gap: 12px;
+ul.noteCol {
+  gap: 16px;
 }
 
-.boards,
-.devices,
-.galleryRow {
-  padding-inline: var(--grid-margin);
-  margin-top: clamp(2.2rem, 3.07vw, 3.7rem);
+.research {
+  display: flex;
+  gap: 16px;
+}
+
+.panel {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 432px;
+  padding: 16px;
+  border-radius: 4px;
+  background: $panel-bg;
+  overflow: hidden;
 
   img {
     display: block;
-    width: 100%;
-    height: auto;
     border-radius: 4px;
   }
 }
 
-.devices {
-  margin-top: clamp(3.5rem, 5.2vw, 6.25rem);
-
-  img {
-    border-radius: 16px;
-  }
+// Miro board with the flow diagram overlapping it (positions from the 1920 frame).
+.miro,
+.flow {
+  position: absolute;
+  height: auto;
 }
 
-.stats {
-  display: grid;
-  gap: clamp(2rem, 2.92vw, 3.5rem);
-  padding-inline: var(--grid-margin);
-  margin-top: clamp(3.5rem, 5.2vw, 6.25rem);
+.miro {
+  left: 10.1%;
+  top: 9.9%;
+  width: 54.8%;
 }
+
+.flow {
+  left: 47.5%;
+  top: 18.4%;
+  width: 49.1%;
+}
+
+.panelStates {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.states {
+  width: 89.9%;
+  height: auto;
+}
+
+// ---- Benchmarks ----------------------------------------------------------
 
 .compare {
   margin: 0;
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(1.05rem, 1.15vw, 1.375rem);
-  line-height: 1.5;
+  font-size: 22px;
+  line-height: 30px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--gold-soft);
-
-  em,
-  span {
-    font-style: normal;
-    font-size: clamp(1.5rem, 1.67vw, 2rem);
-    letter-spacing: 0.03em;
-  }
-
-  em {
-    color: #fff;
-  }
-
-  span {
-    color: #5d5454;
-  }
+  color: $gold;
 }
 
 .statRow {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  justify-items: start;
+  display: flex;
+  gap: 20px;
 }
 
 .stat {
-  position: relative;
-  padding-top: clamp(2.5rem, 3.33vw, 4rem);
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.ghost {
-  position: absolute;
-  left: 0;
-  top: -0.25rem;
-  margin: 0;
-  font-family: var(--serif);
-  font-size: clamp(2.5rem, 4.17vw, 5rem);
-  line-height: 1.55;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: #5d5454;
-}
-
+.ghost,
 .statValue {
   margin: 0;
   font-family: var(--serif);
-  font-size: clamp(3.2rem, 6.25vw, 7.5rem);
-  line-height: 1.03;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: #fff;
-  opacity: 0.8;
+  line-height: 1.21;
+  white-space: nowrap;
 }
 
+.ghost {
+  margin-bottom: -40px;
+  font-size: 62px;
+  color: $ghost;
+}
+
+.statValue {
+  position: relative;
+  font-size: 76px;
+  color: #fff;
+  opacity: 0.82;
+}
+
+.statLabel {
+  opacity: 0.84;
+}
+
+.launch {
+  display: flex;
+  gap: 20px;
+  height: 423px;
+
+  img {
+    display: block;
+    min-width: 0;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 11px;
+  }
+}
+
+.launchTablet {
+  flex: 0 0 52%;
+}
+
+.launchStack {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  img {
+    width: 100%;
+    height: auto;
+    flex: 1 1 0;
+    min-height: 0;
+  }
+}
+
+.launchImac {
+  flex: 1 1 0;
+  object-position: left center;
+}
+
+// ---- Interactive journey -------------------------------------------------
+
 .journey {
-  display: grid;
-  gap: 16px;
-  justify-items: center;
-  text-align: center;
-  padding-inline: var(--grid-margin);
-  margin-top: clamp(3.5rem, 5.2vw, 6.25rem);
+  align-items: center;
+  gap: 32px;
 }
 
 .journeyTitle,
 .journeyBody {
-  max-width: 72rem;
+  width: 100%;
+  text-align: center;
 }
 
-.journeyBody {
-  display: grid;
-  gap: 0;
-
-  p {
-    margin: 0;
-  }
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
 }
 
-.mosaic {
-  display: grid;
-  gap: 24px;
-  margin-top: clamp(2.2rem, 2.92vw, 3.5rem);
-}
-
+.galleryTop,
 .galleryBottom {
-  display: grid;
-  grid-template-columns: minmax(0, 722fr) minmax(0, 527fr) minmax(0, 240fr);
-  gap: var(--grid-gutter);
-  align-items: start;
-  padding-inline: var(--grid-margin);
+  display: flex;
+  gap: 16px;
 
   img {
     display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
+    flex: 1 1 0;
+    min-width: 0;
+    object-fit: cover;
+    border-radius: 12px;
   }
 }
 
-.cards {
-  display: grid;
-  gap: clamp(1.25rem, 2.92vw, 3.5rem);
-
-  img {
-    border-radius: 16px;
-    background: #e8eef8;
-  }
+.galleryTop img {
+  height: 400px;
 }
 
-@media (max-width: 1100px) {
-  .hero {
-    min-height: 0;
-    row-gap: 1.5rem;
+.galleryBottom img {
+  height: 302px;
+}
+
+// The location cards column only appears in the 1920 frame.
+.galleryBottom .cards {
+  display: none;
+}
+
+// ==== 1920 frame (scaled with the page) ====================================
+
+@container gamedev (min-width: 1440px) {
+  .page {
+    gap: u(24);
+    padding-bottom: u(64);
   }
 
-  .title,
-  .subtitle,
-  .lead,
-  .tasks,
-  .conceptLead,
-  .conceptNotes {
-    grid-column: 1 / -1;
-    margin-top: 0;
+  .body {
+    font-size: u(24);
+    line-height: u(28);
+  }
+
+  .kicker {
+    font-size: u(22);
+    line-height: u(30);
+  }
+
+  .list {
+    padding-left: u(36);
+  }
+
+  .titleBreak {
+    display: inline;
+  }
+
+  .intro {
+    display: block;
+    padding: u(64) u(80) 0;
+    overflow: visible;
+  }
+
+  // Hero is one composed canvas: title, tilted devices, copy around them.
+  .heroComp {
+    position: relative;
+    display: block;
+    height: u(938);
+  }
+
+  .title {
+    font-size: u(56);
+    line-height: u(72);
+  }
+
+  .subtitle {
+    position: absolute;
+    left: u(593);
+    top: u(154);
+    font-size: u(56);
+    line-height: u(72);
+    text-align: left;
   }
 
   .stage {
-    position: relative;
+    position: absolute;
+    inset: 0;
+    height: auto;
+  }
+
+  .glow {
+    left: u(843);
+    top: u(543);
+    width: u(1302);
+    height: u(787);
+  }
+
+  .glowSoft {
+    left: u(823);
+    top: u(543);
+    width: u(1029);
+    height: u(787);
+  }
+
+  .heroComposite {
+    display: none;
+  }
+
+  .laptop,
+  .phone {
+    display: block;
+    position: absolute;
+    max-width: none;
+    height: auto;
+  }
+
+  .laptop {
+    left: u(560);
+    top: u(145);
+    width: u(787);
+  }
+
+  .phone {
+    left: u(410);
+    top: u(182);
+    width: u(253);
+  }
+
+  // Overview bottom-left, tasks on the right, both inside the hero canvas.
+  .summary {
+    position: absolute;
+    left: u(80);
+    right: u(80);
+    top: u(64 + 355);
+    display: block;
+    pointer-events: none;
+
+    > * {
+      pointer-events: auto;
+    }
+  }
+
+  .overview {
+    position: absolute;
     left: 0;
+    top: u(304);
+    gap: u(32);
+    width: u(568);
+  }
+
+  .overview .block {
+    width: u(425);
+  }
+
+  .overview .body,
+  .constraint {
+    color: #fff;
+    opacity: 0.8;
+  }
+
+  .tasks {
+    position: absolute;
+    right: 0;
     top: 0;
-    width: 100%;
-    height: clamp(22rem, 70vw, 34rem);
-    grid-column: 1 / -1;
+    width: u(425);
+    gap: u(6);
+  }
+
+  .tasks li + li {
+    margin-top: u(28);
+  }
+
+  .constraint {
+    padding-top: u(16);
+    font-weight: 500;
+    line-height: u(32);
   }
 
   .concept,
-  .statRow,
-  .galleryBottom {
-    grid-template-columns: 1fr;
+  .benchmarks,
+  .journey {
+    width: 100%;
+    padding-inline: u(80);
+  }
+
+  .concept {
+    gap: u(59);
+    margin-top: u(56);
+  }
+
+  .conceptNotes {
+    gap: u(20);
+  }
+
+  .noteCol:first-child {
+    flex: 0 0 u(870);
+  }
+
+  .noteCol + .noteCol {
+    flex: 0 0 u(722);
+    gap: u(12);
+  }
+
+  .research {
+    gap: u(20);
+  }
+
+  .panel {
+    height: u(646);
+    padding: u(16);
+  }
+
+  .benchmarks {
+    gap: u(100);
+    margin-top: u(56);
+  }
+
+  .compare {
+    font-size: u(22);
+    line-height: u(48);
+  }
+
+  .statRow {
+    justify-content: space-between;
+    gap: 0;
+    margin-top: u(-44);
+  }
+
+  .stat {
+    position: relative;
+    flex: none;
+    gap: u(16);
+    padding-top: u(64);
+  }
+
+  .ghost {
+    position: absolute;
+    left: 0;
+    top: u(-8);
+    margin: 0;
+    font-size: u(80);
+    line-height: u(124);
+    letter-spacing: 0.03em;
+  }
+
+  .statValue {
+    font-size: u(120);
+    line-height: u(124);
+    letter-spacing: 0.03em;
+    opacity: 0.8;
+  }
+
+  .launch {
+    gap: u(20);
+    height: u(624);
+  }
+
+  .launchTablet {
+    flex: 0 0 u(870);
+  }
+
+  .launchStack {
+    flex: 0 0 u(422);
+    gap: u(20);
+  }
+
+  .launchImac {
+    flex: 0 0 u(430);
   }
 
   .journey {
-    text-align: left;
-    justify-items: start;
+    gap: u(56);
+    margin-top: u(56);
+  }
+
+  .journeyTitle,
+  .journeyBody {
+    width: u(1152);
+  }
+
+  .journeyBody {
+    margin-top: u(-40);
+  }
+
+  .gallery {
+    gap: u(24);
+  }
+
+  .galleryTop {
+    gap: u(20);
+
+    img {
+      flex: 0 0 auto;
+      height: u(405);
+    }
+
+    img:nth-child(1) {
+      width: u(722);
+    }
+
+    img:nth-child(2) {
+      width: u(425);
+    }
+
+    img:nth-child(3) {
+      flex: 1 1 0;
+    }
+  }
+
+  .galleryBottom {
+    gap: u(22);
+    align-items: flex-start;
+
+    img {
+      flex: 0 0 auto;
+      height: u(394);
+    }
+
+    img:nth-child(1) {
+      width: u(722);
+    }
+
+    img:nth-child(2) {
+      width: u(527);
+    }
+  }
+
+  .galleryBottom .cards {
+    display: block;
+    width: u(240);
+    height: auto;
+    object-fit: contain;
+    border-radius: 0;
+  }
+}
+
+// ==== 1024 frame ===========================================================
+
+@container gamedev (max-width: 1099px) {
+  .intro {
+    padding-inline: 48px;
+  }
+
+  .stage {
+    height: 569px;
+  }
+
+  .heroComposite {
+    width: 771px;
+  }
+
+  .concept,
+  .benchmarks,
+  .journey {
+    width: 100%;
+    padding-inline: 48px;
+  }
+
+  .panel {
+    height: 330px;
+    padding: 0;
+    background: none;
+  }
+
+  .miro {
+    position: static;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .flow {
+    display: none;
+  }
+
+  .states {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .statRow {
+    gap: 12px;
+  }
+
+  .stat {
+    gap: 0;
+  }
+
+  // Tablet frame: tablet photo + stacked desktop/phone; the iMac is dropped.
+  .launch {
+    gap: 16px;
+    height: 420px;
+  }
+
+  .launchTablet {
+    flex: 1 1 0;
+    border-radius: 12px;
+  }
+
+  .launchStack {
+    gap: 16px;
+
+    img {
+      object-fit: cover;
+      border-radius: 12px;
+    }
+  }
+
+  .launch .launchImac {
+    display: none;
+  }
+
+  .galleryTop img,
+  .galleryBottom img {
+    height: 330px;
+  }
+}
+
+// Between the tablet and phone frames the big benchmark numbers need room.
+@container gamedev (max-width: 900px) {
+  .ghost {
+    font-size: 48px;
+    margin-bottom: -30px;
+  }
+
+  .statValue {
+    font-size: 56px;
+  }
+}
+
+// ==== 360 frame ============================================================
+
+@container gamedev (max-width: 700px) {
+  .body {
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.02em;
+    color: $soft-text;
+    opacity: 0.84;
+  }
+
+  .kicker {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .list {
+    padding-left: 21px;
+  }
+
+  .intro {
+    gap: 32px;
+    padding: 16px 16px 40px;
+  }
+
+  .heroComp {
+    gap: 20px;
+  }
+
+  .title {
+    font-size: 36px;
+    line-height: 42px;
+  }
+
+  .subtitle {
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  .stage {
+    height: 320px;
+  }
+
+  .glow {
+    width: 621px;
+    height: 376px;
+  }
+
+  .glowSoft {
+    width: 491px;
+    height: 376px;
+  }
+
+  .heroComposite {
+    width: 368px;
+    margin-left: 16px;
+  }
+
+  .summary,
+  .conceptNotes {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .overview,
+  .tasks,
+  .noteCol {
+    flex: none;
+    width: 100%;
+  }
+
+  .concept,
+  .benchmarks,
+  .journey {
+    padding-inline: 16px;
+  }
+
+  .research {
+    flex-direction: column;
+  }
+
+  .panel {
+    flex: none;
+    height: 185px;
+  }
+
+  .compare {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .statRow {
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .stat {
+    gap: 4px;
+  }
+
+  .ghost {
+    margin-bottom: -24px;
+    font-size: 38px;
+  }
+
+  .statValue {
+    font-size: 48px;
+  }
+
+  .statLabel {
+    color: #fff;
+  }
+
+  .launch {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .launchTablet {
+    flex: none;
+    width: 100%;
+    height: 250px !important;
+  }
+
+  .launchStack img {
+    flex: none;
+    height: 190px;
+  }
+
+  .journeyTitle {
+    font-size: 24px;
+  }
+
+  .galleryTop,
+  .galleryBottom {
+    flex-direction: column;
+
+    img {
+      flex: none;
+      width: 100%;
+      height: 185px;
+    }
+  }
+
+  .galleryTop {
+    gap: 8px;
+
+    img {
+      border-radius: 4px;
+    }
+
+    img:nth-child(2) {
+      height: 98px;
+    }
   }
 }

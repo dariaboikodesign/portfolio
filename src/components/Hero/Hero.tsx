@@ -3,7 +3,6 @@ import portrait from '../../assets/hero/portrait.png'
 import cityDubai from '../../assets/hero/city-dubai.png'
 import arrows from '../../assets/hero/arrows.svg'
 import arrowsMobile from '../../assets/hero/arrows-mobile.svg'
-import bgCurve from '../../assets/hero/bg-curve.svg'
 import FadeIn from '../FadeIn'
 import styles from './Hero.module.scss'
 
@@ -11,7 +10,6 @@ export default function Hero() {
   return (
     <section className={styles.hero} aria-label="Introduction">
       <div className={styles.topWrap}>
-        <img className={styles.bgCurve} src={bgCurve} alt="" aria-hidden="true" />
         <div className={styles.topPanel}>
           <div className={styles.topContent}>
             <FadeIn className={styles.titleBlock} delay={40}>
@@ -51,9 +49,6 @@ export default function Hero() {
           <img src={cityDubai} alt="Dubai skyline with Burj Khalifa" width={277} height={276} />
         </FadeIn>
         <img className={styles.arrows} src={arrows} alt="" width={384} height={129} />
-        <span className={styles.moscowCorner} aria-hidden="true">
-          <img src={cityMoscow} alt="" />
-        </span>
         <img className={styles.arrowsMobile} src={arrowsMobile} alt="" width={204} height={200} />
       </div>
     </section>

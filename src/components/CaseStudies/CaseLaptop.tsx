@@ -74,7 +74,24 @@ export default function CaseLaptop({ active, onSelect, onView }: Props) {
         })}
       </nav>
 
-      <div className={styles.laptop}>
+      {/* The whole laptop opens the case, like the "View case" button. */}
+      <div
+        className={`${styles.laptop} ${item?.hasPage ? styles.laptopLink : ''}`}
+        role={item?.hasPage ? 'link' : undefined}
+        tabIndex={item?.hasPage ? 0 : undefined}
+        aria-label={item?.hasPage ? `Open ${item.lines.join(' ')}` : undefined}
+        onClick={item?.hasPage ? () => onView(active as CaseId) : undefined}
+        onKeyDown={
+          item?.hasPage
+            ? (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault()
+                  onView(active as CaseId)
+                }
+              }
+            : undefined
+        }
+      >
         <img className={styles.frame} src={laptopFrame} alt="" />
         <div className={styles.screen} aria-hidden>
           <div ref={scrollRef} className={styles.screenScroll} data-case-scroller>

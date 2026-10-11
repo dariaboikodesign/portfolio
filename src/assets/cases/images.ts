@@ -19,6 +19,11 @@ import gd3Laptop from './gd3-laptop.png'
 import gd3Phone from './gd3-phone.png'
 import gd3Auth from './gd3-auth.png'
 import gd2CardsCol from './gd2-cards-col.png'
+import c4bHero from './c4b-hero.png'
+import c4bProto from './c4b-proto.png'
+import c4bFinal1 from './c4b-final-1.png'
+import c4bFinal2 from './c4b-final-2.png'
+import c4bFinal3 from './c4b-final-3.png'
 import eduP2Dec1 from './edu-p2-dec-1.png'
 import eduP2Dec2 from './edu-p2-dec-2.png'
 import eduP2Dec3 from './edu-p2-dec-3.png'
@@ -105,6 +110,11 @@ export const caseImages: Record<string, string> = {
   'gd3-phone': gd3Phone,
   'gd3-auth': gd3Auth,
   'gd2-cards-col': gd2CardsCol,
+  'c4b-hero': c4bHero,
+  'c4b-proto': c4bProto,
+  'c4b-final-1': c4bFinal1,
+  'c4b-final-2': c4bFinal2,
+  'c4b-final-3': c4bFinal3,
   'edu-p2-dec-1': eduP2Dec1,
   'edu-p2-dec-2': eduP2Dec2,
   'edu-p2-dec-3': eduP2Dec3,

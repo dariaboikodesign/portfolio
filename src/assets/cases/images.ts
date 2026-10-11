@@ -10,6 +10,15 @@ import eduP2Ui2 from './edu-p2-ui-2.png'
 import eduP2Ui3 from './edu-p2-ui-3.png'
 import eduP2Homepage from './edu-p2-homepage.png'
 import eduIpad from './edu-ipad.png'
+import gd3Hero from './gd3-hero.png'
+import gd3Tablet from './gd3-tablet.png'
+import gd3Desktop from './gd3-desktop.png'
+import gd3Mobile from './gd3-mobile.png'
+import gd3Imac from './gd3-imac.png'
+import gd3Laptop from './gd3-laptop.png'
+import gd3Phone from './gd3-phone.png'
+import gd3Auth from './gd3-auth.png'
+import gd2CardsCol from './gd2-cards-col.png'
 import eduP2Dec1 from './edu-p2-dec-1.png'
 import eduP2Dec2 from './edu-p2-dec-2.png'
 import eduP2Dec3 from './edu-p2-dec-3.png'
@@ -87,6 +96,15 @@ export const caseImages: Record<string, string> = {
   'edu-p2-ui-3': eduP2Ui3,
   'edu-p2-homepage': eduP2Homepage,
   'edu-ipad': eduIpad,
+  'gd3-hero': gd3Hero,
+  'gd3-tablet': gd3Tablet,
+  'gd3-desktop': gd3Desktop,
+  'gd3-mobile': gd3Mobile,
+  'gd3-imac': gd3Imac,
+  'gd3-laptop': gd3Laptop,
+  'gd3-phone': gd3Phone,
+  'gd3-auth': gd3Auth,
+  'gd2-cards-col': gd2CardsCol,
   'edu-p2-dec-1': eduP2Dec1,
   'edu-p2-dec-2': eduP2Dec2,
   'edu-p2-dec-3': eduP2Dec3,

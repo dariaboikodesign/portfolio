@@ -1,21 +1,93 @@
-.page {
-  background: var(--bg-page);
-  padding-bottom: 64px;
+// Case 1 — Figma "Адаптивы кейса 1".
+// Base styles follow the 1280 frame. Container queries on the page width add
+// the 1920 frame (≥1440, scaled with the page via u()), the 1024 frame
+// (≤1099) and the 360 frame (≤700). The laptop preview renders this page at
+// 1920px, so it always gets the desktop layout.
+
+// px in the 1920 frame → share of the page width.
+@function u($px) {
+  @return calc(#{$px} / 1920 * 100cqw);
 }
+
+$panel: #322c2a;
+$page: #1d1d1d;
+$gold: #fff0a8;
+$soft-text: #d8d3d0;
+$gold-gradient: linear-gradient(180deg, #ffea7e 0%, #c39f7a 122.22%);
+
+.page {
+  container: edu / inline-size;
+  background: $page;
+  padding-bottom: 64px;
+  color: #fff;
+}
+
+// ---- Type ----------------------------------------------------------------
+
+.body {
+  margin: 0;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 28px;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.kicker {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 30px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $gold;
+}
+
+.list {
+  padding-left: 36px;
+
+  li + li {
+    margin-top: 0;
+  }
+}
+
+ul.list {
+  list-style: disc;
+}
+
+ol.list {
+  list-style: decimal;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 72px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: $gold;
+}
+
+// ---- Introduction panel --------------------------------------------------
 
 .intro {
   position: relative;
-  isolation: isolate;
-  background: var(--bg-panel);
-  padding: 24px 0 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  padding: 24px 24px 64px;
+  background: $panel;
+  overflow: hidden;
 }
 
-.heroPhoto {
-  margin: 0 24px;
-  width: calc(100% - 48px);
-  aspect-ratio: 1872 / 800;
+.hero {
+  position: relative;
+  height: 520px;
+  border-radius: 12px;
   overflow: hidden;
-  border-radius: 12px 12px 0 0;
   background: #2a2422;
 
   img {
@@ -23,55 +95,87 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 18%;
+    object-position: center 30%;
+  }
+
+  // Figma "Overblur": the photo fades into the panel at the bottom.
+  &::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgb(50 44 42 / 0) 0%, rgb(50 44 42 / 0.85) 100%);
+    pointer-events: none;
   }
 }
 
-.heroCopy {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--grid-gutter);
-  align-items: start;
-  padding-inline: var(--grid-margin);
-  margin-top: calc((48px - 100cqw) * 334 / 1872);
-}
-
-.page {
-  container-type: inline-size;
+.introBody {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+  padding-inline: 56px;
 }
 
 .lead {
-  grid-column: 1 / 4;
+  flex: 0 0 360px;
 }
 
 .summary {
-  grid-column: 5 / -1;
-  display: grid;
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
   gap: 32px;
-  padding-top: clamp(6.5rem, 11.77vw, 14.125rem);
 }
 
-.title {
-  font-size: clamp(1.85rem, 2.92vw, 3.5rem);
-  line-height: 1.286;
+.challenge {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 409px;
+  max-width: 100%;
 }
 
-.metrics {
-  margin-top: 80px;
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.uiRow {
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  padding-inline: 56px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.statValue {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 88px;
+  line-height: 1.35;
+  color: #fff;
+  opacity: 0.82;
+  white-space: nowrap;
+}
+
+.screens {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--grid-gutter);
-  padding-inline: var(--grid-margin);
-  margin-top: 80px;
+  gap: 12px;
+  padding-inline: 56px;
 
   img {
+    display: block;
     width: 100%;
-    aspect-ratio: 574 / 340;
+    height: 216px;
     object-fit: cover;
     object-position: top;
     border-radius: 4px;
@@ -80,123 +184,69 @@
 }
 
 .how {
-  max-width: 45.06rem;
-  padding-inline: var(--grid-margin);
-  margin-top: 80px;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
-
-  ol {
-    list-style: decimal;
-  }
+  max-width: 799px;
+  padding-left: 56px;
 }
 
-.sunset {
+// ---- Supporting statement ------------------------------------------------
+
+.statement {
   position: relative;
-  margin-top: 0;
-  padding-bottom: clamp(2rem, 4vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 64px 80px;
+  background: linear-gradient(180deg, #8f552d 0%, #c78d2e 100%);
   overflow: hidden;
 }
 
-.sunsetBg {
-  position: absolute;
-  inset: 0 auto auto 0;
-  width: 100%;
-  overflow: hidden;
-  pointer-events: none;
-
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
+// The sunset photo band only exists in the 1920 frame.
+.statementBg {
+  display: none;
 }
 
-.sunsetWashGold,
-.sunsetWashAmber {
-  position: absolute;
-  left: -31%;
-  top: -21%;
-  width: 139%;
-  height: 126%;
-  pointer-events: none;
-}
-
-.sunsetWashGold {
-  background: linear-gradient(180deg, #fff0a8 0%, #dba54d 100%);
-  mix-blend-mode: lighten;
-  opacity: 0.5;
-}
-
-.sunsetWashAmber {
-  left: -35%;
-  background: linear-gradient(180deg, #8f552d 0%, #c78d2e 90.385%);
-  opacity: 0.4;
-}
-
-.sunsetCopy {
+.statementCopy {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--grid-gutter);
-  padding: clamp(2.4rem, 3.18vw, 3.8rem) var(--grid-margin) 0;
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
 }
 
-.sunsetTitle {
-  grid-column: 1 / 6;
+.statementTitle {
+  flex: 1 1 0;
+  min-width: 0;
   margin: 0;
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(2.1rem, 3.75vw, 4.5rem);
-  line-height: 1.11;
-  letter-spacing: 0.03em;
+  font-size: 56px;
+  line-height: 64px;
   text-transform: uppercase;
   color: #fff;
-  opacity: 0.9;
-  text-shadow: 0 0 12px rgb(0 0 0 / 0.12);
 }
 
-.sunsetCopy .sunsetBody {
-  grid-column: 6 / 11;
-  align-self: end;
-  margin: 0 0 clamp(0.5rem, 1.5vw, 1.2rem);
-  color: #322c2a;
+.statementBody {
+  flex: 1 1 0;
+  min-width: 0;
+  color: $soft-text;
+  opacity: 0.82;
 }
 
-.sunsetPhotos {
+.statementImages {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--grid-gutter);
-  align-items: end;
-  padding-inline: var(--grid-margin);
-  margin-top: clamp(1.6rem, 3.2vw, 2.9rem);
+  display: flex;
+  gap: 16px;
 }
 
-.classroom {
-  grid-column: 3 / 6;
+.classroom,
+.platform {
+  height: 320px;
   overflow: hidden;
-  border-radius: 8.6px;
-  aspect-ratio: 413 / 478;
-  background: #f0f1f3;
-
-  img {
-    display: block;
-    width: 133%;
-    height: 115%;
-    margin: -13.2% 0 0 -4.9%;
-    object-fit: cover;
-  }
-}
-
-.dashboard {
-  grid-column: 6 / -1;
-  overflow: hidden;
-  border-radius: 10.9px;
-  aspect-ratio: 1022 / 606;
-  background: #f5f5f7;
+  border-radius: 12px;
 
   img {
     display: block;
@@ -206,375 +256,543 @@
   }
 }
 
-.lower {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 64px;
-  margin-top: 64px;
+.classroom {
+  flex: 0 0 277px;
 }
 
-.uiTrio,
-.decisionShots {
+.platform {
+  flex: 1 1 0;
+  min-width: 0;
+  background: #f5f5f7;
+}
+
+// ---- Browser screens -----------------------------------------------------
+
+.browsers {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-  width: 100%;
-  padding-inline: var(--grid-margin);
-}
-
-.browser {
-  overflow: hidden;
-  padding: 28px;
-  border-radius: 12px;
-  background: #231f1e;
+  gap: 20px;
+  padding: 64px 80px;
 
   img {
     display: block;
     width: 100%;
     height: auto;
     border-radius: 12px;
-    background: #2a2422;
   }
 }
 
+// ---- Most recent task: homepage -------------------------------------------
+
 .homepage {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 20px;
-  width: min(100% - 2 * var(--grid-margin), 1120px);
+  position: relative;
+  padding: 64px 80px;
+  background: $page;
+  // The tablet hangs off the right edge; let it run down into the next block.
+  overflow-x: clip;
 }
 
-.homepageCopy {
+.ipad {
+  position: absolute;
+  z-index: 0;
+  left: 34.375%;
+  top: 128px;
+  width: 78.67%;
+  max-width: none;
+  height: auto;
+  pointer-events: none;
+}
+
+.homeInner {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   gap: 32px;
-  min-height: 620px;
-  padding: 48px;
-  border: 1px solid #aa793a;
+  height: 886px;
+  padding-block: 24px;
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 8px;
 
   span {
     padding: 6px 20px;
     border-radius: 24px;
     background: rgb(255 255 255 / 0.16);
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 28px;
     color: #fff;
-    font-size: 1.5rem;
-    line-height: 1.167;
     white-space: nowrap;
   }
 }
 
-.homepageTitle {
-  width: 100%;
-  text-align: center;
-}
-
-.homepageText {
-  display: grid;
-  gap: 16px;
-  width: 100%;
-  text-align: center;
-}
-
-.homepageShot {
-  overflow: hidden;
-  min-height: 100%;
-  background: #e8eaee;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-  }
-}
-
-.decisions {
+.homeDetails {
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  width: min(100% - 2 * var(--grid-margin), 1120px);
+  justify-content: space-between;
+  min-height: 0;
 }
 
-.decisionCols {
+.homeTitle {
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.homeLead,
+.homeScript {
+  background: $gold-gradient;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.homeLead {
+  font-family: var(--serif);
+  font-size: 56px;
+  line-height: 72px;
+}
+
+.homeScript {
+  font-family: var(--script);
+  font-size: 220px;
+  line-height: 120px;
+  text-transform: lowercase;
+}
+
+.homeText {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 474px;
+  max-width: 100%;
+}
+
+// ---- Key product decisions -------------------------------------------------
+
+.decisions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 64px 80px;
+}
+
+.decisionGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  column-gap: 20px;
+  row-gap: 40px;
+  align-items: start;
+
+  // Texts on the first row, their screens on the second.
+  @for $i from 1 through 3 {
+    > :nth-child(#{2 * $i - 1}) {
+      grid-column: $i;
+      grid-row: 1;
+    }
+
+    > :nth-child(#{2 * $i}) {
+      grid-column: $i;
+      grid-row: 2;
+    }
+  }
 }
 
-.decisionShots {
-  padding-inline: 0;
-  gap: 16px;
+.decisionImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
 }
 
-@media (max-width: 1280px) {
+// ==== 1920 frame (scaled with the page) ====================================
+
+@container edu (min-width: 1440px) {
+  .page {
+    padding-bottom: u(64);
+  }
+
+  .body {
+    font-size: u(24);
+    line-height: u(28);
+  }
+
+  .kicker {
+    font-size: u(22);
+    line-height: u(30);
+  }
+
+  .list {
+    padding-left: u(36);
+  }
+
+  .title {
+    font-size: u(56);
+    line-height: u(72);
+    background: $gold-gradient;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
   .intro {
-    padding: 24px 80px 64px;
+    display: block;
+    padding: u(24) u(24) u(120);
   }
 
-  .heroPhoto {
-    margin: 0;
-    width: 100%;
-    aspect-ratio: auto;
-    height: 520px;
-    border-radius: 12px;
+  .hero {
+    height: u(800);
+    border-radius: u(20) u(20) 0 0;
+
+    img {
+      object-position: center 18%;
+    }
+
+    &::after {
+      display: none;
+    }
   }
 
-  .heroCopy {
-    display: flex;
-    gap: 48px;
-    margin-top: 56px;
-    padding-inline: 0;
+  // Intro copy sits on the lower part of the photo.
+  .introBody {
+    position: relative;
+    z-index: 1;
+    gap: 0;
+    margin-top: u(-334);
+    padding-inline: u(56) 0;
   }
 
   .lead {
-    flex: 0 0 360px;
-    width: 360px;
+    flex: 0 0 u(425);
   }
 
   .summary {
-    flex: 1;
-    padding-top: 0;
-    gap: 32px;
+    margin-left: u(167);
+    padding-top: u(226);
+    gap: u(80);
   }
 
-  .metrics {
-    margin-top: 56px;
-    padding-inline: 0;
+  .challenge {
+    gap: u(20);
+    width: u(575);
   }
 
-  .uiRow {
-    margin-top: 56px;
-    padding-inline: 0;
-    gap: 12px;
+  .block {
+    gap: u(6);
+  }
+
+  .stats {
+    gap: u(20);
+    margin-top: u(100);
+    padding-inline: u(56);
+  }
+
+  .stat {
+    gap: u(10);
+  }
+
+  .statValue {
+    font-size: u(120);
+    line-height: u(124);
+    letter-spacing: 0.03em;
+  }
+
+  .screens {
+    gap: u(20);
+    margin-top: u(56);
+    padding-inline: u(56);
 
     img {
-      height: 216px;
-      aspect-ratio: auto;
-      border-radius: 4px;
+      height: auto;
+      aspect-ratio: 574 / 340;
     }
   }
 
   .how {
-    margin-top: 56px;
-    padding-inline: 0;
-    max-width: 45rem;
+    gap: u(16);
+    max-width: none;
+    width: u(777);
+    margin-top: u(88);
+    padding-left: u(56);
   }
 
-  .sunset {
-    padding: 64px 80px;
-    background: linear-gradient(180deg, #8f552d 0%, #c78d2e 100%);
+  .statement {
+    display: block;
+    padding: 0 0 u(50);
+    background: $panel;
   }
 
-  .sunsetBg {
-    display: none;
-  }
-
-  .sunsetCopy {
-    display: flex;
-    gap: 32px;
-    padding: 0;
-  }
-
-  .sunsetTitle {
-    flex: 1;
-    font-size: 3.5rem;
-    line-height: 1.143;
-    color: #fff;
-    opacity: 1;
-    text-shadow: none;
-  }
-
-  .sunsetCopy .sunsetBody {
-    flex: 1;
-    align-self: start;
-    margin: 0;
-    color: #d8d3d0;
-  }
-
-  .sunsetPhotos {
-    display: flex;
-    gap: 16px;
-    margin-top: 32px;
-    padding-inline: 0;
-  }
-
-  .classroom,
-  .dashboard {
-    flex: 1;
-    grid-column: auto;
-    height: 320px;
-    aspect-ratio: auto;
-    border-radius: 12px;
+  .statementBg {
+    position: absolute;
+    inset: 0 0 auto;
+    display: block;
+    height: u(742);
+    overflow: hidden;
+    background: #989898;
 
     img {
+      display: block;
       width: 100%;
       height: 100%;
-      margin: 0;
       object-fit: cover;
     }
   }
 
-  .lower {
-    gap: 64px;
-    margin-top: 64px;
+  .washGold,
+  .washAmber {
+    position: absolute;
+    inset: -21% -18% -4% -31%;
+    pointer-events: none;
   }
 
-  .uiTrio {
-    padding-inline: 80px;
-    gap: 24px;
+  .washGold {
+    background: linear-gradient(180deg, #fff0a8 0%, #dba54d 100%);
+    mix-blend-mode: lighten;
+    opacity: 0.5;
   }
 
-  .browser {
-    padding: 28px;
+  .washAmber {
+    left: -35%;
+    background: linear-gradient(180deg, #8f552d 0%, #c78d2e 90.385%);
+    opacity: 0.8;
+  }
+
+  .statementCopy {
+    gap: u(22);
+    align-items: flex-start;
+    padding: u(61) u(80) 0;
+  }
+
+  .statementTitle {
+    flex: 0 0 u(721);
+    font-size: u(72);
+    line-height: u(80);
+    letter-spacing: 0.03em;
+    opacity: 0.9;
+    text-shadow: 0 0 12px rgb(0 0 0 / 0.12);
+  }
+
+  .statementBody {
+    flex: 0 0 u(675);
+    margin-top: u(156);
+    font-weight: 500;
+    color: #fff;
+    opacity: 0.8;
+  }
+
+  .statementImages {
+    align-items: flex-start;
+    gap: u(28.7);
+    margin: u(48) 0 0 u(380);
+  }
+
+  .classroom {
+    flex: 0 0 u(413);
+    height: u(478);
+    margin-top: u(64);
+    border-radius: u(12);
+  }
+
+  .platform {
+    flex: 0 0 u(1022);
+    height: u(606);
+    border-radius: u(11);
+  }
+
+  .browsers {
+    gap: u(20);
+    margin-top: u(24);
+    padding: u(64) u(80);
+  }
+
+  .homepage {
+    margin-top: u(24);
+    padding: u(64) u(80);
+  }
+
+  .ipad {
+    left: u(446);
+    top: u(164);
+    width: u(1259);
+  }
+
+  .homeInner {
+    gap: u(32);
+    height: u(886);
+    padding-block: u(24);
+  }
+
+  .tags {
+    gap: u(8);
+
+    span {
+      padding: u(6) u(20);
+      border-radius: u(24);
+      font-size: u(24);
+      line-height: u(28);
+    }
+  }
+
+  .homeLead {
+    font-size: u(56);
+    line-height: u(72);
+  }
+
+  .homeScript {
+    font-size: u(220);
+    line-height: u(120);
+  }
+
+  .homeText {
+    gap: u(16);
+    width: u(445);
+  }
+
+  .decisions {
+    gap: u(16);
+    margin-top: u(24);
+    padding: u(64) u(80);
+  }
+
+  .decisionGrid {
+    column-gap: u(20);
+    row-gap: u(40);
   }
 }
 
-@media (max-width: 1024px) {
+// ==== 1024 frame ===========================================================
+
+@container edu (max-width: 1099px) {
   .intro {
     padding: 24px 48px 64px;
   }
 
-  .heroPhoto {
+  .hero {
     height: 460px;
+  }
+
+  .introBody {
+    padding-inline: 0;
   }
 
   .lead {
     flex-basis: 300px;
-    width: 300px;
   }
 
-  .metrics :global(._metricValue_1qldk_94),
-  .metrics p:first-child {
-    font-size: 4rem;
+  .challenge {
+    width: 100%;
   }
 
-  .uiRow img {
+  .stats,
+  .screens {
+    padding-inline: 0;
+  }
+
+  .statValue {
+    font-size: 64px;
+  }
+
+  .screens img {
     height: 172px;
     border-radius: 12px;
   }
 
   .how {
     max-width: none;
+    padding-left: 0;
   }
 
-  .sunset {
+  .statement {
     padding: 64px 48px;
   }
 
-  .uiTrio {
-    padding-inline: 48px;
-    gap: 8px;
-  }
-
-  .browser {
-    padding: 16px;
+  .browsers {
+    padding: 64px;
   }
 
   .homepage {
-    width: min(100% - 96px, 864px);
+    padding: 64px;
   }
 
-  .homepageCopy {
-    min-height: 620px;
-    padding: 32px;
+  .ipad {
+    left: 30.18%;
+    top: 146px;
+    width: 91.55%;
   }
 
-  .homepageTitle {
-    font-size: 2rem;
-    line-height: 1.25;
+  .homeLead {
+    font-size: 40px;
+    line-height: 48px;
   }
 
-  .decisions {
-    width: min(100% - 96px, 864px);
-  }
-}
-
-@media (max-width: 720px) {
-  .metrics {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .heroCopy {
-    flex-direction: column;
-    gap: 32px;
+  .homeScript {
+    font-size: 180px;
+    line-height: 100px;
   }
 
-  .lead,
-  .summary {
-    flex-basis: auto;
-    width: 100%;
-  }
-
-  .metrics {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .uiRow,
-  .uiTrio,
-  .decisionCols,
-  .decisionShots {
-    grid-template-columns: 1fr;
-  }
-
-  .sunsetCopy,
-  .sunsetPhotos {
-    flex-direction: column;
-  }
-
-  .homepage {
-    grid-template-columns: 1fr;
-    width: calc(100% - 96px);
-  }
-
-  .homepageCopy {
-    min-height: 0;
-  }
-
-  .homepageShot {
-    min-height: 28rem;
+  .homeText {
+    width: 436px;
   }
 
   .decisions {
-    width: calc(100% - 96px);
-  }
-
-  .classroom,
-  .dashboard {
-    width: 100%;
-    height: 220px;
+    padding: 40px 64px;
   }
 }
 
-@media (max-width: 420px) {
-  .page {
-    padding-bottom: 64px;
+// Between the tablet and phone frames the four big numbers need two rows.
+@container edu (max-width: 860px) {
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 32px;
+  }
+}
+
+// ==== 360 frame ============================================================
+
+@container edu (max-width: 700px) {
+  .body {
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.02em;
+    color: $soft-text;
+    opacity: 0.82;
+  }
+
+  .kicker {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .list {
+    padding-left: 21px;
+  }
+
+  .title {
+    font-size: 36px;
+    line-height: 42px;
   }
 
   .intro {
+    gap: 32px;
     padding: 16px 16px 40px;
   }
 
-  .heroPhoto {
+  .hero {
     height: 220px;
   }
 
-  .heroCopy {
-    display: flex;
+  // Title first, then the overview, then challenge and contribution.
+  .introBody {
     flex-direction: column;
     gap: 32px;
-    margin-top: 32px;
   }
 
   .summary {
@@ -582,79 +800,134 @@
   }
 
   .title {
-    order: -1;
-    font-size: 2.25rem;
-    line-height: 1.167;
+    order: 1;
   }
 
-  .metrics {
-    margin-top: 32px;
+  .lead {
+    order: 2;
+    flex-basis: auto;
+  }
+
+  .challenge {
+    order: 3;
+  }
+
+  .stats {
     gap: 22px;
   }
 
-  .metrics p:first-child {
-    font-size: 3.25rem;
+  .stat {
+    gap: 6px;
   }
 
-  .uiRow {
-    margin-top: 32px;
-    gap: 12px;
+  .statValue {
+    font-size: 52px;
+    line-height: 1.35;
+  }
+
+  .screens {
+    grid-template-columns: minmax(0, 1fr);
 
     img {
       height: 190px;
     }
   }
 
-  .how {
-    margin-top: 32px;
-  }
-
-  .sunset {
+  .statement {
     padding: 40px 16px;
   }
 
-  .sunsetTitle {
-    font-size: 2rem;
-    line-height: 1.25;
+  .statementCopy {
+    flex-direction: column;
+    gap: 32px;
   }
 
-  .lower {
-    gap: 24px;
-    margin-top: 24px;
+  .statementTitle {
+    flex: none;
+    font-size: 32px;
+    line-height: 40px;
   }
 
-  .uiTrio {
-    padding-inline: 16px;
-    gap: 24px;
+  .statementBody {
+    flex: none;
   }
 
-  .browser {
-    padding: 8px;
+  .statementImages {
+    flex-direction: column;
   }
 
-  .homepage,
-  .decisions {
-    width: calc(100% - 32px);
+  .classroom,
+  .platform {
+    flex: none;
+    width: 100%;
+    height: 220px;
+    border-radius: 10px;
   }
 
-  .homepageCopy {
-    padding: 20px;
-    min-height: 420px;
-    justify-content: space-between;
+  .browsers {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    padding: 32px 16px;
+  }
+
+  .homepage {
+    padding: 64px 16px;
+  }
+
+  // Figma 360 tilts the tablet a little less (-11.4° instead of -16.2°).
+  .ipad {
+    left: auto;
+    right: -159px;
+    top: 264px;
+    width: 573px;
+    transform: rotate(4.8deg);
+  }
+
+  .homeInner {
+    height: auto;
   }
 
   .tags span {
-    padding: 4px 14px;
-    font-size: 0.75rem;
-    line-height: 1.25;
+    font-size: 14px;
+    line-height: 18px;
+    color: $soft-text;
   }
 
-  .homepageTitle {
-    font-size: 2rem;
-    line-height: 1.188;
+  .homeDetails {
+    flex: none;
+    height: 710px;
   }
 
-  .homepageShot {
-    min-height: 430px;
+  .homeTitle {
+    text-align: center;
+  }
+
+  .homeLead {
+    font-size: 32px;
+    line-height: 38px;
+  }
+
+  .homeScript {
+    font-size: 100px;
+    line-height: 64px;
+  }
+
+  .homeText {
+    width: 100%;
+  }
+
+  .decisions {
+    gap: 32px;
+    padding: 0 16px;
+  }
+
+  .decisionGrid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 20px;
+
+    > :nth-child(n) {
+      grid-column: 1;
+      grid-row: auto;
+    }
   }
 }

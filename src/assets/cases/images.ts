@@ -9,6 +9,7 @@ import eduP2Ui1 from './edu-p2-ui-1.png'
 import eduP2Ui2 from './edu-p2-ui-2.png'
 import eduP2Ui3 from './edu-p2-ui-3.png'
 import eduP2Homepage from './edu-p2-homepage.png'
+import eduIpad from './edu-ipad.png'
 import eduP2Dec1 from './edu-p2-dec-1.png'
 import eduP2Dec2 from './edu-p2-dec-2.png'
 import eduP2Dec3 from './edu-p2-dec-3.png'
@@ -85,6 +86,7 @@ export const caseImages: Record<string, string> = {
   'edu-p2-ui-2': eduP2Ui2,
   'edu-p2-ui-3': eduP2Ui3,
   'edu-p2-homepage': eduP2Homepage,
+  'edu-ipad': eduIpad,
   'edu-p2-dec-1': eduP2Dec1,
   'edu-p2-dec-2': eduP2Dec2,
   'edu-p2-dec-3': eduP2Dec3,

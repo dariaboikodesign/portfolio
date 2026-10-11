@@ -184,8 +184,7 @@
   }
 }
 
-// Figma: the arrow starts on the Moscow photo, slips under its corner,
-// passes under the portrait and lands on the Dubai photo.
+// The arrow runs over the Moscow and Dubai photos but always under the portrait.
 .photo:nth-child(1),
 .photo:nth-child(3) {
   z-index: 1;
@@ -199,6 +198,30 @@
   object-position: center 12%;
 }
 
+// The arrow "draws itself" like a pencil stroke: a 1s reveal along the
+// line, starting 1.5s after load (left → right; top → bottom on mobile,
+// where the same reveal runs along the rotated arrow).
+@keyframes arrowDraw {
+  from {
+    clip-path: inset(-10% 100% -10% -10%);
+  }
+  to {
+    clip-path: inset(-10% -10% -10% -10%);
+  }
+}
+
+.arrows,
+.arrowsMobile {
+  animation: arrowDraw 1s cubic-bezier(0.45, 0.05, 0.4, 1) 1.5s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrows,
+  .arrowsMobile {
+    animation: none;
+  }
+}
+
 .arrows {
   position: absolute;
   left: 28.16%;
@@ -209,26 +232,6 @@
   pointer-events: none;
 }
 
-.moscowCorner {
-  position: absolute;
-  z-index: 3;
-  left: calc((100% - 2 * var(--photos-gap)) / 3 * 0.9185);
-  top: 92.33%;
-  width: calc((100% - 2 * var(--photos-gap)) / 3 * 0.0537);
-  aspect-ratio: 1;
-  border-radius: 1px;
-  overflow: hidden;
-  pointer-events: none;
-
-  img {
-    position: absolute;
-    left: -1711%;
-    top: -1714%;
-    width: 1863%;
-    max-width: none;
-    height: auto;
-  }
-}
 
 .arrowsMobile {
   display: none;
@@ -583,9 +586,6 @@
     margin-bottom: 0;
   }
 
-  .moscowCorner {
-    display: none;
-  }
 
   .photo {
     position: absolute;

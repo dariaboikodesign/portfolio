@@ -24,6 +24,10 @@ import c4bProto from './c4b-proto.png'
 import c4bFinal1 from './c4b-final-1.png'
 import c4bFinal2 from './c4b-final-2.png'
 import c4bFinal3 from './c4b-final-3.png'
+import gg3Laptop from './gg3-laptop.png'
+import gg3Sensor from './gg3-sensor.png'
+import gg3Map from './gg3-map.png'
+import gg3Devices from './gg3-devices.png'
 import eduP2Dec1 from './edu-p2-dec-1.png'
 import eduP2Dec2 from './edu-p2-dec-2.png'
 import eduP2Dec3 from './edu-p2-dec-3.png'
@@ -115,6 +119,10 @@ export const caseImages: Record<string, string> = {
   'c4b-final-1': c4bFinal1,
   'c4b-final-2': c4bFinal2,
   'c4b-final-3': c4bFinal3,
+  'gg3-laptop': gg3Laptop,
+  'gg3-sensor': gg3Sensor,
+  'gg3-map': gg3Map,
+  'gg3-devices': gg3Devices,
   'edu-p2-dec-1': eduP2Dec1,
   'edu-p2-dec-2': eduP2Dec2,
   'edu-p2-dec-3': eduP2Dec3,

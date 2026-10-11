@@ -1,35 +1,92 @@
+// Case 3 — Figma "Адаптивы кейса 3: FROM FIELD TO SCREEN".
+// Base styles follow the 1280 frame. Container queries on the page width add
+// the 1920 frame (≥1440, scaled with the page via u()), the 1024 frame
+// (≤1099) and the 360 frame (≤700). The laptop preview renders this page at
+// 1920px, so it always gets the desktop layout.
+
+@function u($px) {
+  @return calc(#{$px} / 1920 * 100cqw);
+}
+
+$panel: #322c2a;
+$gold: #fff0a8;
+$script-gold: #ffea7e;
+$soft-text: #e5e5e2;
+
+// The query container has no padding, so u() and the breakpoints measure the
+// full page width; the padding lives on .inner.
 .page {
-  background: #322c2a;
-  padding-top: clamp(2rem, 3.33vw, 4rem);
+  container: farmers / inline-size;
+  background: $panel;
+  color: #fff;
 }
 
-.hero {
-  padding-inline: var(--grid-margin);
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  padding: 64px 80px 80px;
 }
 
-.heroTop {
-  display: grid;
-  grid-template-columns: minmax(0, 573fr) minmax(0, 1018fr);
-  gap: clamp(1.25rem, 4.17vw, 5rem);
+// ---- Type ----------------------------------------------------------------
+
+.body {
+  margin: 0;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 28px;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.kicker {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 30px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $gold;
+}
+
+.list {
+  padding-left: 36px;
+  list-style: disc;
+}
+
+// ---- Top: title, tags, tasks, laptop -------------------------------------
+
+.top {
+  display: flex;
+  gap: 20px;
   align-items: stretch;
 }
 
-.heroLeft {
+.topLeft {
+  flex: 0 0 460px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: clamp(1.5rem, 3vw, 3.375rem);
-  min-height: clamp(20rem, 42.08vw, 50.5rem);
+  gap: 40px;
 }
 
-.heroHead {
-  display: grid;
+.head {
+  display: flex;
+  flex-direction: column;
   gap: 24px;
 }
 
 .title {
   margin: 0;
-  line-height: 1.286;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 72px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: $gold;
 }
 
 .tags {
@@ -41,346 +98,613 @@
     padding: 6px 20px;
     border-radius: 24px;
     background: rgb(255 255 255 / 0.16);
-    font-size: clamp(1rem, 1.25vw, 1.5rem);
-    line-height: 1.17;
-    color: #fff;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 28px;
     white-space: nowrap;
   }
 }
 
-.heroTasks {
-  display: grid;
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 62px;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
   gap: 6px;
-  max-width: 35.625rem;
 }
 
-.note {
-  margin-top: 8px;
-}
-
-.heroShot {
-  overflow: hidden;
-  border-radius: 12px;
-  background: #2a2422;
-  min-height: clamp(20rem, 42.08vw, 50.5rem);
+.laptop {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 808px;
 
   img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 12px;
   }
 }
 
-.model {
-  display: grid;
-  gap: clamp(2rem, 4.79vw, 5rem);
-  padding-inline: var(--grid-margin);
-  margin-top: clamp(2rem, 4.17vw, 5rem);
-}
+// ---- "Changed the interaction model" --------------------------------------
 
-.scriptHeading {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: center;
-  gap: 16px;
-  padding-block: clamp(2rem, 4.79vw, 5.75rem);
+.heading {
+  margin: 0;
+  padding-block: 46px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 32px;
+  letter-spacing: 0.06em;
   text-align: center;
-
-  span {
-    font-family: var(--serif);
-    font-size: clamp(1.5rem, 2.08vw, 2.5rem);
-    line-height: 0.8;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--gold-soft);
-  }
+  text-transform: uppercase;
+  color: $gold;
+  white-space: nowrap;
 
   em {
     font-family: var(--script);
     font-style: normal;
-    font-weight: 300;
-    font-synthesis: none;
-    font-size: clamp(3rem, 5.31vw, 6.375rem);
-    line-height: 1;
+    font-size: 102px;
+    line-height: 40px;
     letter-spacing: 0.03em;
-    color: var(--gold);
+    text-transform: none;
+    color: $script-gold;
   }
 }
 
-.modelBody {
-  display: grid;
-  grid-template-columns: minmax(0, 421px) minmax(0, 1fr);
-  gap: clamp(1.5rem, 4.17vw, 5rem);
-  align-items: start;
+// ---- Before / after + phone collage ---------------------------------------
+// Image boxes are placed per frame: left/width as shares of the content width.
+
+.collage {
+  position: relative;
+  height: 1524px;
+
+  > img {
+    position: absolute;
+    display: block;
+    max-width: none;
+    object-fit: cover;
+    border-radius: 12px;
+  }
 }
 
 .flows {
   display: flex;
-  gap: clamp(2rem, 11.46vw, 13.75rem);
+  gap: 148px;
 }
 
 .flowCol {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 12px;
 }
 
 .flowLabel {
   margin: 0 0 12px;
-  padding-bottom: 12px;
   font-family: var(--serif);
-  font-size: clamp(1.25rem, 1.67vw, 2rem);
-  line-height: 1.25;
+  font-size: 32px;
+  line-height: 40px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #fff;
 }
 
-.flowStep {
-  p {
-    margin: 0;
-    font-size: clamp(1rem, 1.25vw, 1.5rem);
-    line-height: 1.17;
-    color: #fff;
-    opacity: 0.8;
-    white-space: nowrap;
-  }
-
-  span {
-    display: block;
-    margin: 4px 0;
-    font-size: clamp(1rem, 1.25vw, 1.5rem);
-    line-height: 1;
-    color: #fff;
-    opacity: 0.8;
-    transform: rotate(90deg);
-    transform-origin: left center;
-    width: 28px;
-    height: 24px;
-  }
+.flowStep,
+.flowArrow {
+  margin: 0;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 28px;
+  color: #fff;
+  opacity: 0.8;
+  white-space: nowrap;
 }
 
-.phoneMap {
-  justify-self: end;
-  width: min(100%, 35.8125rem);
-  overflow: hidden;
-  border-radius: 12px;
-  background: #d9d9d9;
-  aspect-ratio: 573 / 640;
-
-  img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+.flowArrow {
+  width: 28px;
+  line-height: 24px;
+  text-align: center;
 }
 
-.gallery {
-  display: grid;
-  grid-template-columns: minmax(0, 722fr) minmax(0, 1018fr);
-  gap: clamp(1.25rem, 4.17vw, 5rem);
-  align-items: end;
-  padding-inline: var(--grid-margin);
-  margin-top: clamp(2rem, 4.17vw, 5rem);
+.sensor {
+  left: 48.84%;
+  top: 0;
+  width: 51.16%;
+  height: 640px;
 }
 
-.fieldPhoto {
-  overflow: hidden;
-  border-radius: 12px;
-  aspect-ratio: 1;
-  max-width: 45.125rem;
-  background: #d9d9d9;
-
-  img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+.map {
+  left: 0;
+  top: 640px;
+  width: 48.84%;
+  height: 568px;
 }
 
-.phonesDuo {
-  justify-self: end;
-  width: min(100%, 63.625rem);
-  overflow: hidden;
-  border-radius: 12px;
-  aspect-ratio: 1018 / 819;
-  background: #b4afab;
-
-  img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+// The two phones rise out of a grey block; the PNG is transparent above it.
+.collage > .devices {
+  left: 50.89%;
+  top: 1084px;
+  width: 49.11%;
+  height: 440px;
+  object-fit: contain;
+  object-position: center bottom;
+  border-radius: 0;
 }
+
+// ---- Result --------------------------------------------------------------
 
 .results {
-  padding: clamp(3rem, 6.25vw, 7.5rem) var(--grid-margin) clamp(2rem, 4vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .resultsTitle {
-  margin: 0 0 clamp(1.5rem, 2.08vw, 2.5rem);
+  margin: 0;
   font-family: var(--serif);
-  font-size: clamp(1.5rem, 2.08vw, 2.5rem);
-  line-height: 1.2;
+  font-size: 40px;
+  line-height: 48px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--gold-soft);
+  color: $gold;
 }
 
 .stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 20px;
+}
+
+.statPair {
+  display: flex;
+  gap: 20px;
+
+  > .stat {
+    flex: 1 1 0;
+  }
+}
+
+.stat {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .statValue {
   margin: 0;
   font-family: var(--serif);
-  font-size: clamp(3rem, 6.25vw, 7.5rem);
-  line-height: 1.03;
+  font-size: 80px;
+  line-height: 124px;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: #fff;
   opacity: 0.8;
+  white-space: nowrap;
 }
 
-@media (max-width: 1280px) {
-  .heroTop {
-    grid-template-columns: minmax(0, 460fr) minmax(0, 640fr);
-  }
-
-  .gallery {
-    grid-template-columns: minmax(0, 547fr) minmax(0, 550fr);
-  }
-
-  .stats {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .statFeatured {
-    grid-column: 1 / -1;
-  }
+.statLabel {
+  margin: 0;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 28px;
+  color: #fff;
+  opacity: 0.8;
 }
 
-@media (max-width: 1024px) {
-  .heroTop {
-    grid-template-columns: minmax(0, 460fr) minmax(0, 384fr);
-    grid-template-areas:
-      'head shot'
-      'tasks tasks';
-    gap: 20px 20px;
-    align-items: start;
+// ==== 1920 frame (scaled with the page) ====================================
+
+@container farmers (min-width: 1440px) {
+  .inner {
+    gap: u(80);
+    padding: u(64) u(80) u(80);
   }
 
-  .heroLeft {
-    display: contents;
+  .body {
+    font-size: u(24);
+    line-height: u(28);
   }
 
-  .heroHead {
-    grid-area: head;
+  .kicker {
+    font-size: u(22);
+    line-height: u(30);
   }
 
-  .heroTasks {
-    grid-area: tasks;
-    max-width: none;
-    gap: 32px;
+  .list {
+    padding-left: u(36);
   }
 
-  .heroShot {
-    grid-area: shot;
-    min-height: 0;
-    aspect-ratio: 384 / 328;
+  .top {
+    gap: u(169);
   }
 
-  .model {
-    gap: 40px;
-    margin-top: 80px;
+  .topLeft {
+    flex-basis: u(573);
+    gap: u(40);
   }
 
-  .scriptHeading {
-    padding-block: 46px;
+  .head {
+    gap: u(24);
   }
 
-  .modelBody {
-    grid-template-columns: 1fr;
-    gap: 40px;
+  .title {
+    font-size: u(56);
+    line-height: u(72);
   }
 
-  .phoneMap {
-    justify-self: end;
-    width: min(100%, 26.375rem);
+  .tags {
+    gap: u(8);
+
+    span {
+      padding: u(6) u(20);
+      border-radius: u(24);
+      font-size: u(24);
+      line-height: u(28);
+    }
   }
 
-  .gallery {
-    grid-template-columns: 1fr;
-    gap: clamp(1.5rem, 4vw, 2.5rem);
+  .tasks {
+    gap: u(62);
   }
 
-  .fieldPhoto {
-    max-width: 27.625rem;
+  .tasks .block {
+    width: u(510);
   }
 
-  .phonesDuo {
-    justify-self: end;
-    width: min(100%, 26.375rem);
-    aspect-ratio: 422 / 387;
+  .laptop {
+    flex: 0 0 u(1018);
+    height: u(808);
+
+    img {
+      border-radius: u(12);
+    }
   }
 
-  .statValue {
-    font-size: clamp(3rem, 7.81vw, 5rem);
-    line-height: 1.55;
-  }
-}
-
-@media (max-width: 768px) {
-  .heroTop {
-    grid-template-columns: 1fr;
-  }
-
-  .heroShot {
-    aspect-ratio: 16 / 11;
-  }
-
-  .heroLeft {
-    gap: 20px;
-  }
-
-  .scriptHeading {
-    gap: 8px;
-    padding-block: 32px;
+  .heading {
+    padding-block: u(46);
+    font-size: u(40);
+    line-height: u(32);
 
     em {
-      font-size: clamp(2.5rem, 12vw, 3.5rem);
+      font-size: u(102);
+      line-height: u(40);
+    }
+  }
+
+  .collage {
+    height: u(1842);
+
+    > img {
+      border-radius: u(12);
     }
   }
 
   .flows {
-    flex-direction: column;
-    gap: 2rem;
+    gap: u(148);
   }
 
-  .flowStep p {
+  .flowCol {
+    gap: u(12);
+  }
+
+  .flowLabel {
+    margin-bottom: u(12);
+    font-size: u(32);
+    line-height: u(40);
+  }
+
+  .flowStep,
+  .flowArrow {
+    font-size: u(24);
+    line-height: u(28);
+  }
+
+  .flowArrow {
+    width: u(28);
+    line-height: u(24);
+  }
+
+  .sensor {
+    left: 42.16%;
+    width: 32.56%;
+    height: u(640);
+  }
+
+  .map {
+    top: u(640);
+    width: 41.02%;
+    height: u(722);
+  }
+
+  .collage > .devices {
+    left: 42.16%;
+    top: u(1023);
+    width: 57.84%;
+    height: u(819);
+  }
+
+  .results {
+    gap: u(40);
+    margin-top: u(44);
+  }
+
+  .resultsTitle {
+    font-size: u(40);
+    line-height: u(48);
+  }
+
+  // 1920: all three numbers on one row, the pair taking the first half.
+  .stats {
+    flex-direction: row;
+    gap: u(20);
+
+    > * {
+      flex: 1 1 0;
+    }
+  }
+
+  .statPair {
+    gap: u(20);
+  }
+
+  .stat {
+    gap: u(10);
+  }
+
+  .statValue {
+    font-size: u(120);
+    line-height: u(124);
+  }
+
+  .statLabel {
+    font-size: u(24);
+    line-height: u(28);
+  }
+}
+
+// ==== 1024 frame ===========================================================
+
+@container farmers (max-width: 1099px) {
+  .inner {
+    padding-inline: 48px;
+  }
+
+  // Title + tags beside a short laptop photo; tasks move below.
+  .top {
+    flex-wrap: wrap;
+    row-gap: 80px;
+    align-items: flex-start;
+  }
+
+  .topLeft {
+    display: contents;
+  }
+
+  .head {
+    flex: 0 0 460px;
+  }
+
+  .laptop {
+    height: 328px;
+  }
+
+  .tasks {
+    order: 1;
+    flex: 0 0 100%;
+    gap: 32px;
+  }
+
+  .heading {
+    font-size: 40px;
+  }
+
+  // The flow lists sit right under the heading here.
+  .collage {
+    height: 1212px;
+    margin-top: -40px;
+  }
+
+  .sensor {
+    left: 51.08%;
+    width: 45.47%;
+    height: 494px;
+  }
+
+  .map {
+    left: 3.45%;
+    top: 494px;
+    width: 47.63%;
+    height: 438px;
+  }
+
+  .collage > .devices {
+    left: 51.08%;
+    top: 825px;
+    width: 45.47%;
+    height: 387px;
+  }
+
+  .results {
+    padding-inline: 32px;
+    margin-top: -8px;
+  }
+}
+
+// Between the tablet and phone frames the heading needs to wrap.
+@container farmers (max-width: 900px) {
+  .heading {
     white-space: normal;
   }
 
-  .phoneMap,
-  .fieldPhoto,
-  .phonesDuo {
-    justify-self: stretch;
-    width: 100%;
-    max-width: none;
+  .head {
+    flex-basis: 100%;
   }
 
-  .stats {
-    grid-template-columns: 1fr;
+  .laptop {
+    flex-basis: 100%;
+    height: auto;
+    aspect-ratio: 1018 / 808;
+  }
+}
+
+// ==== 360 frame ============================================================
+
+@container farmers (max-width: 700px) {
+  .inner {
+    gap: 64px;
+    padding: 32px 16px 24px;
   }
 
-  .statFeatured {
-    grid-column: auto;
+  .body {
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.02em;
+    color: $soft-text;
+  }
+
+  .list {
+    padding-left: 21px;
+  }
+
+  .top {
+    row-gap: 64px;
+  }
+
+  .head {
+    gap: 12px;
+  }
+
+  .title {
+    font-size: 36px;
+    line-height: 42px;
+  }
+
+  .tags span {
+    padding: 4px 16px;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .laptop {
+    margin-top: -32px;
+    aspect-ratio: 1;
+  }
+
+  .tasks {
+    gap: 24px;
+  }
+
+  .tasks .kicker {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .heading {
+    padding: 0;
+    font-size: 28px;
+    line-height: 32px;
+    text-align: left;
+
+    > span:first-child {
+      display: block;
+    }
+
+    em {
+      font-size: 56px;
+      line-height: 56px;
+    }
+  }
+
+  .headingRow {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .collage {
+    height: 675px;
+    margin-top: -24px;
+  }
+
+  .flows {
+    gap: 8px;
+  }
+
+  .flowCol {
+    gap: 8px;
+  }
+
+  .flowCol:first-child {
+    flex: 0 0 126px;
+  }
+
+  .flowLabel {
+    margin-bottom: 8px;
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .flowStep {
+    font-size: 14px;
+    line-height: 18px;
+    color: $soft-text;
+  }
+
+  .sensor {
+    left: 40.85%;
+    top: 206px;
+    width: 59.15%;
+    height: 215px;
+    border-radius: 4px !important;
+  }
+
+  .map {
+    left: 0;
+    top: 421px;
+    width: 40.85%;
+    height: 132px;
+    border-radius: 4px !important;
+  }
+
+  .collage > .devices {
+    left: 40.85%;
+    top: 519px;
+    width: 59.15%;
+    height: 156px;
+  }
+
+  .results {
+    gap: 32px;
+    padding-inline: 6px 0;
+    margin-top: -17px;
+  }
+
+  .resultsTitle {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .statPair {
+    gap: 24px;
+  }
+
+  .stat {
+    gap: 0;
+  }
+
+  .statValue {
+    font-size: 48px;
+    line-height: 56px;
+  }
+
+  .statLabel {
+    font-size: 20px;
+    line-height: 24px;
   }
 }

@@ -36,7 +36,12 @@ export default function Hero() {
             >
               LinkedIn
             </a>
-            <a className={styles.navLink} href="/resume.pdf" download>
+            <a
+              className={styles.navLink}
+              href="/Daria_Boyko_resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Download Resume
             </a>
           </nav>

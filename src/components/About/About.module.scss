@@ -410,39 +410,40 @@
   }
 }
 
+// Figma "Адаптивы второй блок" 1440 / 1728 / 1920: text and photos on the
+// left, career timeline as a column on the right.
 @media (min-width: 1280px) {
   .timelineSpacer {
     display: none;
   }
 
-  // Figma 1920: text + photos on the left, career timeline as a column on the right.
   .about {
+    // 1280–1440: the 1440 title scaled with the viewport so the script
+    // stays clear of the timeline column.
+    --about-title-size: #{fluid(40, 48, 1280, 1440)};
+    --about-title-lh: #{fluid(48, 56, 1280, 1440)};
+    --about-script-size: #{fluid(96, 120, 1280, 1440)};
+    --about-text-size: 16px;
+    --about-text-lh: 22px;
+    --grid-margin: 80px;
     grid-template-columns: minmax(0, 1fr) auto;
-    column-gap: fluid(40, 84, 1280, 1920);
-    padding: 70px fluid(80, 85, 1280, 1920) fluid(96, 160, 1280, 1920) var(--grid-margin);
+    // The last flexible row absorbs the tall timeline column, so it doesn't
+    // stretch the title / text rows.
+    grid-template-rows: auto auto auto 1fr;
+    column-gap: 106px;
+    padding: 70px 80px 96px;
   }
 
   .title {
-    display: block;
     grid-column: 1;
-  }
-
-  .titleMain {
-    font-size: fluid(44, 56, 1280, 1920);
-    line-height: 1.2857;
-  }
-
-  .script {
-    margin-left: 0.04em;
-    font-size: fluid(104, 140, 1280, 1920);
-    line-height: 0;
   }
 
   .physics {
     grid-column: 1;
-    max-width: 389px;
-    margin: fluid(48, 63, 1280, 1920) 0 0 36%;
-    font-size: fluid(18, 24, 1280, 1920);
+    max-width: 413px;
+    // Figma: the photo row always starts 176px below the top of this text.
+    min-height: 176px;
+    margin: 95px 0 0 22.57vw;
   }
 
   .content {
@@ -453,28 +454,27 @@
     grid-column: 1;
     grid-row: 3;
     display: grid;
-    grid-template-columns: minmax(0, 425px) minmax(0, 493px);
+    grid-template-columns: minmax(0, 304px) minmax(0, 305px);
     justify-content: space-between;
-    column-gap: 40px;
+    column-gap: 24px;
     width: 100%;
-    margin-top: 48px;
+    margin: 0;
   }
 
   .col,
   .colWide {
-    p {
-      font-size: fluid(18, 24, 1280, 1920);
-    }
+    gap: 32px;
   }
 
   .timelinePin {
     grid-column: 2;
-    grid-row: 1 / span 3;
+    grid-row: 1 / -1;
     align-self: start;
-    margin-top: 9px;
+    margin-top: 41px;
   }
 
   .timeline {
+    gap: 141px;
     width: 436px;
 
     &::after {
@@ -486,14 +486,71 @@
   .event {
     gap: 0;
   }
+}
 
+@media (min-width: 1440px) {
+  .about {
+    min-height: 1160px;
+  }
+}
+
+@media (min-width: 1441px) {
+  .about {
+    --about-title-size: #{fluid(48, 56, 1440, 1728)};
+    --about-title-lh: #{fluid(56, 72, 1440, 1728)};
+    --about-script-size: #{fluid(120, 140, 1440, 1728)};
+    --about-text-size: #{fluid(16, 24, 1440, 1728)};
+    --about-text-lh: #{fluid(22, 32, 1440, 1728)};
+    column-gap: fluid(106, 92, 1440, 1728);
+    padding-right: fluid(80, 81, 1440, 1728);
+  }
+
+  .physics {
+    max-width: fluid(413, 377, 1440, 1728);
+    margin-top: fluid(95, 63, 1440, 1728);
+    margin-left: fluid(325, 397, 1440, 1728);
+  }
+
+  .profileGrid {
+    grid-template-columns:
+      minmax(0, fluid(304, 509, 1440, 1728))
+      minmax(0, fluid(305, 377, 1440, 1728));
+  }
+
+  .timelinePin {
+    margin-top: fluid(41, 6, 1440, 1728);
+  }
+}
+
+@media (min-width: 1729px) {
+  .about {
+    column-gap: fluid(92, 84, 1728, 1920);
+    padding-right: fluid(81, 85, 1728, 1920);
+  }
+
+  .physics {
+    max-width: fluid(377, 389, 1728, 1920);
+    margin-left: fluid(397, 445, 1728, 1920);
+  }
+
+  .profileGrid {
+    grid-template-columns:
+      minmax(0, fluid(509, 425, 1728, 1920))
+      minmax(0, fluid(377, 493, 1728, 1920));
+  }
+
+  .timelinePin {
+    margin-top: fluid(6, 9, 1728, 1920);
+  }
+
+  // Figma 1920: the current role is set a size up.
   .itemFeatured {
     .role {
-      font-size: 1.375rem;
+      font-size: fluid(18, 22, 1728, 1920);
     }
 
     .dates {
-      font-size: 2rem;
+      font-size: fluid(24, 32, 1728, 1920);
     }
   }
 }
@@ -657,6 +714,158 @@
 
   .content {
     margin-top: 80px;
+  }
+}
+
+// ---- Figma "Адаптивы второй блок": shared title/text rules and the
+// 1024 / 768 / 360 frames. Placed last so they override the older rules above.
+.title {
+  display: block;
+}
+
+.titleMain {
+  font-size: var(--about-title-size);
+  line-height: var(--about-title-lh);
+}
+
+.script {
+  margin-left: 0.04em;
+  font-size: var(--about-script-size);
+  line-height: 0;
+}
+
+.physics,
+.col p,
+.colWide p {
+  font-size: var(--about-text-size);
+  line-height: var(--about-text-lh);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 1279px) {
+  .about {
+    --grid-margin: #{fluid(40, 80, 768, 1024)};
+    --about-title-size: #{fluid(28, 40, 768, 1024)};
+    --about-title-lh: #{fluid(32, 48, 768, 1024)};
+    --about-script-size: #{fluid(80, 100, 768, 1024)};
+    --about-text-size: 16px;
+    --about-text-lh: 22px;
+  }
+
+  .title {
+    grid-column: 1 / -1;
+  }
+
+  .physics {
+    grid-column: 1 / -1;
+    max-width: 413px;
+    margin: fluid(56, 70, 768, 1024) 0 0 calc(25vw - 35px);
+  }
+
+  .content {
+    margin-top: fluid(46, 56, 768, 1024);
+  }
+
+  .profileGrid {
+    display: grid;
+    grid-template-columns:
+      minmax(0, fluid(284, 348, 768, 1024))
+      minmax(0, fluid(340, 420, 768, 1024));
+    justify-content: space-between;
+    column-gap: 24px;
+    width: 100%;
+  }
+
+  .col,
+  .colWide {
+    gap: fluid(20, 32, 768, 1024);
+
+    img {
+      width: min(100%, #{fluid(282, 277, 768, 1024)});
+      max-width: none;
+      aspect-ratio: auto;
+    }
+  }
+
+  .col img {
+    height: 211px;
+  }
+
+  .colWide img {
+    height: 320px;
+  }
+
+  // The line sits 67px into the pin; Figma puts it ~100px under the photos.
+  .timelinePin {
+    margin-top: fluid(33, 51, 768, 1024);
+  }
+}
+
+@media (max-width: 480px) {
+  .about {
+    --grid-margin: 16px;
+    --about-title-size: 28px;
+    --about-title-lh: 32px;
+    --about-script-size: 56px;
+    --about-text-size: 14px;
+    --about-text-lh: 18px;
+  }
+
+  .title {
+    display: flex;
+  }
+
+  // Figma 360: "Design rooted in" fits on one line.
+  .titleLine:first-child {
+    display: inline;
+  }
+
+  .script {
+    width: 100%;
+    margin: -4px 0 0;
+    line-height: 56px;
+    text-align: center;
+  }
+
+  .physics {
+    justify-self: end;
+    max-width: 193px;
+    margin: 32px 0 0;
+  }
+
+  .content {
+    margin-top: 20px;
+  }
+
+  .profileGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .col {
+    gap: 8px;
+
+    img {
+      width: min(100%, 261px);
+      height: 167px;
+    }
+  }
+
+  .colWide {
+    flex-direction: row;
+    gap: 16px;
+
+    img {
+      flex: 0 0 118px;
+      width: 118px;
+      height: 108px;
+    }
+  }
+
+  // Figma 360: the line runs ~58px under the last text block.
+  .timelinePin {
+    margin-top: -9px;
   }
 }
 

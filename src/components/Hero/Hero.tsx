@@ -28,8 +28,13 @@ export default function Hero() {
           </div>
 
           <nav className={styles.nav}>
-            <a className={styles.navLink} href="#cases">
-              Case studies
+            <a
+              className={styles.navLink}
+              href="https://www.linkedin.com/in/daria-boyko-08uxdesign"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn
             </a>
             <a className={styles.navLink} href="/resume.pdf" download>
               Download Resume

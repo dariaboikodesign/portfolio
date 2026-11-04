@@ -1,5 +1,7 @@
 import { caseImage } from '../../assets/cases/images'
 import FadeIn from '../FadeIn'
+import Shot from './Shot'
+import cap from './Shot.module.scss'
 import styles from './FarmersCase.module.scss'
 
 const TAGS = ['Green Growth', 'Mobile app', 'Spain', '2024']
@@ -64,8 +66,11 @@ export default function FarmersCase() {
             </FadeIn>
           </div>
 
-          <FadeIn from="up" delay={60} className={styles.laptop}>
+          <FadeIn as="figure" from="up" delay={60} className={styles.laptop}>
             <img src={caseImage('gg3-laptop')} alt="Green Growth web platform on a laptop in the grass" />
+            <figcaption className={cap.caption}>
+              The original web platform: fields and crops on the map
+            </figcaption>
           </FadeIn>
         </section>
 
@@ -81,20 +86,23 @@ export default function FarmersCase() {
             <Flow label="Before" steps={BEFORE} />
             <Flow label="After" steps={AFTER} />
           </FadeIn>
-          <img
+          <Shot
             className={styles.sensor}
             src={caseImage('gg3-sensor')}
             alt="Sensor screen of the mobile app in a hand"
+            caption="Sensor screen: tap a field and edit it right on the map"
           />
-          <img
+          <Shot
             className={styles.map}
             src={caseImage('gg3-map')}
             alt="Field map of the mobile app in a hand"
+            caption="Field map on mobile with large controls, usable in gloves"
           />
-          <img
+          <Shot
             className={styles.devices}
             src={caseImage('gg3-devices')}
             alt="New device and field data screens on two phones"
+            caption="Adding a harvester device and checking field data from the phone"
           />
         </section>
 

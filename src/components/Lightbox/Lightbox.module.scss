@@ -5,17 +5,41 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 64px 72px;
+  padding: 64px 72px 56px;
   background: rgb(20 16 15 / 0.97);
   animation: fadeIn 0.2s ease;
 }
 
-// Fill the screen (keeping proportions), smaller photos are scaled up.
-.image {
+// Photo on top, its caption under it; together they fill the screen.
+.figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
   width: 100%;
   height: 100%;
+  margin: 0;
+}
+
+// Fill the remaining space (keeping proportions), smaller photos scale up.
+.image {
+  flex: 1 1 0;
+  width: 100%;
+  min-height: 0;
   object-fit: contain;
   animation: zoomIn 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.caption {
+  max-width: 720px;
+  margin: 0;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.4;
+  text-align: center;
+  color: #fff;
+  opacity: 0.8;
 }
 
 .close,

@@ -209,10 +209,13 @@ ul.noteCol {
   gap: 16px;
 }
 
-.panel {
-  position: relative;
+.researchItem {
   flex: 1 1 0;
   min-width: 0;
+}
+
+.panel {
+  position: relative;
   height: 432px;
   padding: 16px;
   border-radius: 4px;
@@ -308,13 +311,12 @@ ul.noteCol {
 
 .launch {
   display: flex;
+  align-items: flex-start;
   gap: 20px;
-  height: 423px;
 
   img {
     display: block;
-    min-width: 0;
-    height: 100%;
+    width: 100%;
     object-fit: cover;
     border-radius: 11px;
   }
@@ -322,6 +324,10 @@ ul.noteCol {
 
 .launchTablet {
   flex: 0 0 52%;
+
+  img {
+    height: 423px;
+  }
 }
 
 .launchStack {
@@ -332,16 +338,17 @@ ul.noteCol {
   gap: 14px;
 
   img {
-    width: 100%;
-    height: auto;
-    flex: 1 1 0;
-    min-height: 0;
+    height: 204px;
   }
 }
 
 .launchImac {
   flex: 1 1 0;
-  object-position: left center;
+
+  img {
+    height: 423px;
+    object-position: left center;
+  }
 }
 
 // ---- Interactive journey -------------------------------------------------
@@ -367,12 +374,16 @@ ul.noteCol {
 .galleryTop,
 .galleryBottom {
   display: flex;
+  align-items: flex-start;
   gap: 16px;
+
+  > figure {
+    flex: 1 1 0;
+  }
 
   img {
     display: block;
-    flex: 1 1 0;
-    min-width: 0;
+    width: 100%;
     object-fit: cover;
     border-radius: 12px;
   }
@@ -614,20 +625,31 @@ ul.noteCol {
 
   .launch {
     gap: u(20);
-    height: u(624);
   }
 
   .launchTablet {
     flex: 0 0 u(870);
+
+    img {
+      height: u(624);
+    }
   }
 
   .launchStack {
     flex: 0 0 u(422);
     gap: u(20);
+
+    img {
+      height: u(302);
+    }
   }
 
   .launchImac {
     flex: 0 0 u(430);
+
+    img {
+      height: u(624);
+    }
   }
 
   .journey {
@@ -651,48 +673,56 @@ ul.noteCol {
   .galleryTop {
     gap: u(20);
 
-    img {
+    > figure {
       flex: 0 0 auto;
+    }
+
+    img {
       height: u(405);
     }
 
-    img:nth-child(1) {
+    > :nth-child(1) {
       width: u(722);
     }
 
-    img:nth-child(2) {
+    > :nth-child(2) {
       width: u(425);
     }
 
-    img:nth-child(3) {
+    > :nth-child(3) {
       flex: 1 1 0;
     }
   }
 
   .galleryBottom {
     gap: u(22);
-    align-items: flex-start;
+
+    > figure {
+      flex: 0 0 auto;
+    }
 
     img {
-      flex: 0 0 auto;
       height: u(394);
     }
 
-    img:nth-child(1) {
+    > :nth-child(1) {
       width: u(722);
     }
 
-    img:nth-child(2) {
+    > :nth-child(2) {
       width: u(527);
     }
   }
 
   .galleryBottom .cards {
-    display: block;
+    display: flex;
     width: u(240);
-    height: auto;
-    object-fit: contain;
-    border-radius: 0;
+
+    img {
+      height: auto;
+      object-fit: contain;
+      border-radius: 0;
+    }
   }
 }
 
@@ -754,20 +784,25 @@ ul.noteCol {
   // Tablet frame: tablet photo + stacked desktop/phone; the iMac is dropped.
   .launch {
     gap: 16px;
-    height: 420px;
+
+    img {
+      border-radius: 12px;
+    }
   }
 
   .launchTablet {
     flex: 1 1 0;
-    border-radius: 12px;
+
+    img {
+      height: 420px;
+    }
   }
 
   .launchStack {
     gap: 16px;
 
     img {
-      object-fit: cover;
-      border-radius: 12px;
+      height: 202px;
     }
   }
 
@@ -874,8 +909,11 @@ ul.noteCol {
     flex-direction: column;
   }
 
-  .panel {
+  .researchItem {
     flex: none;
+  }
+
+  .panel {
     height: 185px;
   }
 
@@ -908,17 +946,19 @@ ul.noteCol {
 
   .launch {
     flex-direction: column;
-    height: auto;
   }
 
-  .launchTablet {
+  .launchTablet,
+  .launchStack {
     flex: none;
     width: 100%;
-    height: 250px !important;
+  }
+
+  .launchTablet img {
+    height: 250px;
   }
 
   .launchStack img {
-    flex: none;
     height: 190px;
   }
 
@@ -930,21 +970,24 @@ ul.noteCol {
   .galleryBottom {
     flex-direction: column;
 
-    img {
+    > figure {
       flex: none;
       width: 100%;
+    }
+
+    img {
       height: 185px;
     }
   }
 
   .galleryTop {
-    gap: 8px;
+    gap: 16px;
 
     img {
       border-radius: 4px;
     }
 
-    img:nth-child(2) {
+    > :nth-child(2) img {
       height: 98px;
     }
   }

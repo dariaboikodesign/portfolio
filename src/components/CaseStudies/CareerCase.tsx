@@ -1,5 +1,7 @@
 import { caseImage } from '../../assets/cases/images'
 import FadeIn from '../FadeIn'
+import Shot from './Shot'
+import cap from './Shot.module.scss'
 import styles from './CareerCase.module.scss'
 
 const FINDINGS = [
@@ -40,9 +42,12 @@ export default function CareerCase() {
   return (
     <article className={styles.page}>
       <section className={styles.hero}>
-        <div className={styles.heroPhoto}>
+        <figure className={styles.heroPhoto}>
           <img src={caseImage('c4b-hero')} alt="Career guidance platform on a tablet" />
-        </div>
+          <figcaption className={cap.hidden}>
+            The career guidance service: discover your potential in 4 steps
+          </figcaption>
+        </figure>
 
         <div className={styles.heroOverlay}>
           <FadeIn as="h3" from="up" delay={80} className={styles.title}>
@@ -85,8 +90,13 @@ export default function CareerCase() {
         <FadeIn as="p" from="up" delay={60} className={`${styles.body} ${styles.copy} ${styles.hypothesis}`}>
           The more we learn about a student, the more accurate their career recommendations will be
         </FadeIn>
-        <FadeIn from="up" delay={100} className={styles.protoShot}>
-          <img src={caseImage('c4b-proto')} alt="Low-fidelity prototype screens" />
+        <FadeIn as="figure" from="up" delay={100} className={cap.figure}>
+          <div className={styles.protoShot}>
+            <img src={caseImage('c4b-proto')} alt="Low-fidelity prototype screens" />
+          </div>
+          <figcaption className={cap.caption}>
+            First low-fidelity prototype: interests → exams → careers → universities → programs
+          </figcaption>
         </FadeIn>
       </section>
 
@@ -112,8 +122,16 @@ export default function CareerCase() {
         </FadeIn>
 
         <FadeIn from="up" delay={140} className={styles.interviewShots}>
-          <img src={caseImage('c4-interview-1')} alt="Annotated prototype feedback" />
-          <img src={caseImage('c4-interview-2')} alt="Interview insights on sticky notes" />
+          <Shot
+            src={caseImage('c4-interview-1')}
+            alt="Annotated prototype feedback"
+            caption="Prototype interview notes: what parents noticed and doubted"
+          />
+          <Shot
+            src={caseImage('c4-interview-2')}
+            alt="Interview insights on sticky notes"
+            caption="Interview insights: assumptions next to parents' and teens' own words"
+          />
         </FadeIn>
       </section>
 
@@ -142,8 +160,10 @@ export default function CareerCase() {
       </section>
 
       <section className={styles.results}>
-        <FadeIn from="up" className={styles.resultsLeft}>
+        <FadeIn as="figure" from="up" className={styles.resultsLeft}>
           <img src={caseImage('c4-results-1')} alt="Consultation scheduling dashboard" />
+          {/* Shown in the full-screen viewer; the collage has no room for it. */}
+          <figcaption className={cap.hidden}>Counselor&apos;s calendar with booked consultations</figcaption>
         </FadeIn>
         <FadeIn from="up" delay={60} className={styles.resultsCopy}>
           <p>In 2 months:</p>
@@ -152,11 +172,15 @@ export default function CareerCase() {
           <p>58% request → payment conversion</p>
           <p>350 000 ₽ revenue</p>
         </FadeIn>
-        <FadeIn from="up" delay={80} className={styles.resultsRight}>
+        <FadeIn as="figure" from="up" delay={80} className={styles.resultsRight}>
           <img src={caseImage('c4-results-2')} alt="Consultation booking modal" />
+          {/* Shown in the full-screen viewer; the collage has no room for it. */}
+          <figcaption className={cap.hidden}>Booking a consultation: pick a date and time</figcaption>
         </FadeIn>
-        <FadeIn from="up" delay={100} className={styles.resultsBottom}>
+        <FadeIn as="figure" from="up" delay={100} className={styles.resultsBottom}>
           <img src={caseImage('c4-results-3')} alt="Career recommendation radar chart" />
+          {/* Shown in the full-screen viewer; the collage has no room for it. */}
+          <figcaption className={cap.hidden}>Counselor&apos;s view of the student&apos;s test results before the session</figcaption>
         </FadeIn>
       </section>
 
@@ -181,9 +205,21 @@ export default function CareerCase() {
         </FadeIn>
 
         <FadeIn from="up" delay={80} className={styles.finalShots}>
-          <img src={caseImage('c4b-final-1')} alt="Career guidance site on a phone" />
-          <img src={caseImage('c4b-final-2')} alt="How it works screen" />
-          <img src={caseImage('c4b-final-3')} alt="Career guidance site on a laptop outdoors" />
+          <Shot
+            src={caseImage('c4b-final-1')}
+            alt="Career guidance site on a phone"
+            caption="Mobile landing: choose who to become and where to study"
+          />
+          <Shot
+            src={caseImage('c4b-final-2')}
+            alt="How it works screen"
+            caption="How it works: booking, a short preparation task and the consultation"
+          />
+          <Shot
+            src={caseImage('c4b-final-3')}
+            alt="Career guidance site on a laptop outdoors"
+            caption="The same landing on desktop"
+          />
         </FadeIn>
       </section>
     </article>

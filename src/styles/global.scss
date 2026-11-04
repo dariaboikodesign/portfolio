@@ -47,3 +47,13 @@ h3,
 p {
   margin: 0;
 }
+
+// Photos on case pages open full screen on click (see Lightbox).
+[data-case-scroller] article img[alt]:not([alt='']) {
+  cursor: zoom-in;
+}
+
+[data-case-scroller] [aria-hidden='true'] img,
+[data-case-scroller] [data-no-zoom] img {
+  cursor: inherit;
+}

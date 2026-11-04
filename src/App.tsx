@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Hero from './components/Hero/Hero'
 import About from './components/About/About'
 import CaseStudies from './components/CaseStudies/CaseStudies'
+import Lightbox from './components/Lightbox/Lightbox'
 import { CasePage } from './components/CaseStudies/CaseLaptop'
 import caseStyles from './components/CaseStudies/CaseStudies.module.scss'
 import type { CaseId } from './data/cases'
@@ -79,6 +80,7 @@ export default function App() {
             <CasePage id={openId} />
           </div>
         </section>
+        <Lightbox />
       </main>
     )
   }

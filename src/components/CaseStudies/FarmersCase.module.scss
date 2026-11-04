@@ -120,12 +120,15 @@ $soft-text: #e5e5e2;
 .laptop {
   flex: 1 1 0;
   min-width: 0;
-  height: 808px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
 
   img {
     display: block;
     width: 100%;
-    height: 100%;
+    height: 808px;
     object-fit: cover;
     border-radius: 12px;
   }
@@ -163,13 +166,29 @@ $soft-text: #e5e5e2;
 .collage {
   position: relative;
   height: 1524px;
+  // Room for the caption under the bottom photo.
+  margin-bottom: 40px;
 
-  > img {
+  // Each photo box is placed per frame; its caption hangs below the photo.
+  > figure {
     position: absolute;
     display: block;
-    max-width: none;
-    object-fit: cover;
-    border-radius: 12px;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    figcaption {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      padding-top: 10px;
+    }
   }
 }
 
@@ -232,9 +251,12 @@ $soft-text: #e5e5e2;
   top: 1084px;
   width: 49.11%;
   height: 440px;
-  object-fit: contain;
-  object-position: center bottom;
-  border-radius: 0;
+
+  img {
+    object-fit: contain;
+    object-position: center bottom;
+    border-radius: 0;
+  }
 }
 
 // ---- Result --------------------------------------------------------------
@@ -359,9 +381,9 @@ $soft-text: #e5e5e2;
 
   .laptop {
     flex: 0 0 u(1018);
-    height: u(808);
 
     img {
+      height: u(808);
       border-radius: u(12);
     }
   }
@@ -379,9 +401,14 @@ $soft-text: #e5e5e2;
 
   .collage {
     height: u(1842);
+    margin-bottom: u(40);
 
-    > img {
+    > figure img {
       border-radius: u(12);
+    }
+
+    > .devices img {
+      border-radius: 0;
     }
   }
 
@@ -490,7 +517,7 @@ $soft-text: #e5e5e2;
     flex: 0 0 460px;
   }
 
-  .laptop {
+  .laptop img {
     height: 328px;
   }
 
@@ -532,7 +559,7 @@ $soft-text: #e5e5e2;
 
   .results {
     padding-inline: 32px;
-    margin-top: -8px;
+    margin-top: 0;
   }
 }
 
@@ -548,6 +575,9 @@ $soft-text: #e5e5e2;
 
   .laptop {
     flex-basis: 100%;
+  }
+
+  .laptop img {
     height: auto;
     aspect-ratio: 1018 / 808;
   }
@@ -593,6 +623,9 @@ $soft-text: #e5e5e2;
 
   .laptop {
     margin-top: -32px;
+  }
+
+  .laptop img {
     aspect-ratio: 1;
   }
 
@@ -661,7 +694,6 @@ $soft-text: #e5e5e2;
     top: 206px;
     width: 59.15%;
     height: 215px;
-    border-radius: 4px !important;
   }
 
   .map {
@@ -669,7 +701,11 @@ $soft-text: #e5e5e2;
     top: 421px;
     width: 40.85%;
     height: 132px;
-    border-radius: 4px !important;
+  }
+
+  .collage .sensor img,
+  .collage .map img {
+    border-radius: 4px;
   }
 
   .collage > .devices {
@@ -682,7 +718,7 @@ $soft-text: #e5e5e2;
   .results {
     gap: 32px;
     padding-inline: 6px 0;
-    margin-top: -17px;
+    margin-top: 0;
   }
 
   .resultsTitle {

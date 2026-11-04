@@ -1,5 +1,7 @@
 import { caseImage } from '../../assets/cases/images'
 import FadeIn from '../FadeIn'
+import Shot from './Shot'
+import cap from './Shot.module.scss'
 import styles from './GameCase.module.scss'
 
 const STATS = [
@@ -95,17 +97,27 @@ export default function GameCase() {
         </div>
 
         <FadeIn from="up" className={styles.research}>
-          <div className={`${styles.panel} ${styles.panelBoard}`}>
-            <img className={styles.miro} src={caseImage('gd-miro')} alt="Idea generation board" />
-            <img className={styles.flow} src={caseImage('gd-flow')} alt="User flow diagram" />
-          </div>
-          <div className={`${styles.panel} ${styles.panelStates}`}>
-            <img
-              className={styles.states}
-              src={caseImage('gd-map-ui')}
-              alt="3D world interface in different states"
-            />
-          </div>
+          <figure className={`${cap.figure} ${styles.researchItem}`}>
+            <div className={`${styles.panel} ${styles.panelBoard}`}>
+              <img className={styles.miro} src={caseImage('gd-miro')} alt="Idea generation board" />
+              <img className={styles.flow} src={caseImage('gd-flow')} alt="User flow diagram" />
+            </div>
+            <figcaption className={cap.caption}>
+              Research: idea generation in Miro and the user flow of the course
+            </figcaption>
+          </figure>
+          <figure className={`${cap.figure} ${styles.researchItem}`}>
+            <div className={`${styles.panel} ${styles.panelStates}`}>
+              <img
+                className={styles.states}
+                src={caseImage('gd-map-ui')}
+                alt="3D world interface in different states"
+              />
+            </div>
+            <figcaption className={cap.caption}>
+              The 3D city map with the side panel in its different states
+            </figcaption>
+          </figure>
         </FadeIn>
       </section>
 
@@ -126,19 +138,29 @@ export default function GameCase() {
         </FadeIn>
 
         <FadeIn from="up" className={styles.launch}>
-          <img
+          <Shot
             className={styles.launchTablet}
             src={caseImage('gd3-tablet')}
             alt="Course test on a tablet"
+            caption="A reading test inside a city location, on a tablet"
           />
           <div className={styles.launchStack}>
-            <img src={caseImage('gd3-desktop')} alt="Student progress on a desktop monitor" />
-            <img src={caseImage('gd3-mobile')} alt="Virtual city on a phone in the classroom" />
+            <Shot
+              src={caseImage('gd3-desktop')}
+              alt="Student progress on a desktop monitor"
+              caption="Student progress across topics, on desktop"
+            />
+            <Shot
+              src={caseImage('gd3-mobile')}
+              alt="Virtual city on a phone in the classroom"
+              caption="Teacher's mobile view: adding a class to the virtual city"
+            />
           </div>
-          <img
+          <Shot
             className={styles.launchImac}
             src={caseImage('gd3-imac')}
             alt="Olympiad preparation page on an iMac"
+            caption="Olympiad preparation page with plan options"
           />
         </FadeIn>
       </section>
@@ -155,17 +177,38 @@ export default function GameCase() {
 
         <div className={styles.gallery}>
           <FadeIn from="up" className={styles.galleryTop}>
-            <img src={caseImage('gd-landing')} alt="Marketing landing page on a laptop" />
-            <img src={caseImage('gd3-auth')} alt="Authentication and profile screens" />
-            <img src={caseImage('gd-dashboard')} alt="Teacher dashboard on a laptop" />
+            <Shot
+              src={caseImage('gd-landing')}
+              alt="Marketing landing page on a laptop"
+              caption="Marketing landing page of the Functional Literacy Marathon"
+            />
+            <Shot
+              src={caseImage('gd3-auth')}
+              alt="Authentication and profile screens"
+              caption="Sign-up and profile screens"
+            />
+            <Shot
+              src={caseImage('gd-dashboard')}
+              alt="Teacher dashboard on a laptop"
+              caption="Teacher dashboard with the class's results"
+            />
           </FadeIn>
           <FadeIn from="up" delay={80} className={styles.galleryBottom}>
-            <img src={caseImage('gd-funnels')} alt="Engagement funnels" />
-            <img src={caseImage('gd-tournament')} alt="Tournament table for schools and regions" />
-            <img
+            <Shot
+              src={caseImage('gd-funnels')}
+              alt="Engagement funnels"
+              caption="Engagement funnels: from registration to completing a location"
+            />
+            <Shot
+              src={caseImage('gd-tournament')}
+              alt="Tournament table for schools and regions"
+              caption="Tournament table where schools and regions compete"
+            />
+            <Shot
               className={styles.cards}
               src={caseImage('gd2-cards-col')}
               alt="Course locations: supermarket, newspaper editorial, smart home"
+              caption="City locations opening one by one"
             />
           </FadeIn>
         </div>

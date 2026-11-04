@@ -1,0 +1,31 @@
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  margin: 0;
+}
+
+// Sized from the case page width (each case page is a size container), so it
+// also scales inside the 1920px laptop preview: 16px at 1920, 14px on phones.
+.caption {
+  margin: 0;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: clamp(14px, 0.833cqw, 16px);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  color: #fff;
+  opacity: 0.62;
+  text-wrap: pretty;
+}
+
+// Caption kept for screen readers and the full-screen viewer only.
+.hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

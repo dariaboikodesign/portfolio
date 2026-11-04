@@ -1,5 +1,7 @@
 import { caseImage } from '../../assets/cases/images'
 import FadeIn from '../FadeIn'
+import Shot from './Shot'
+import cap from './Shot.module.scss'
 import styles from './EduCase.module.scss'
 
 const IMPACT = [
@@ -15,18 +17,21 @@ const DECISIONS = [
     text: 'I proposed adding lightweight widgets and adjacent content to give teachers more reasons to return to the platform and spend more time exploring it.',
     image: 'edu-p2-dec-1',
     alt: 'Widgets that increase engagement',
+    caption: 'Homepage widgets: start a lesson, run it online, a timer and a prompt library',
   },
   {
     title: '2. Connect the platform to the Sber ecosystem',
     text: 'I introduced integrations with relevant Sber products to expand the homepage beyond the core learning experience and create additional value for users.',
     image: 'edu-p2-dec-2',
     alt: 'Sber ecosystem integrations',
+    caption: 'Lesson analytics and student results right on the homepage',
   },
   {
     title: '3. Make the homepage adaptable',
     text: 'Instead of a fixed Bento Grid, I proposed a personalized workspace where teachers can add, hide and rearrange content blocks based on their workflow.',
     image: 'edu-p2-dec-3',
     alt: 'Adaptable personalized workspace',
+    caption: 'A configurable workspace: lesson materials, experiments and quizzes',
   },
 ]
 
@@ -37,12 +42,15 @@ export default function EduCase() {
   return (
     <article className={styles.page}>
       <section className={styles.intro}>
-        <div className={styles.hero}>
+        <figure className={styles.hero}>
           <img
             src={caseImage('edu-hero')}
             alt="Laptop on an outdoor table showing the educational platform"
           />
-        </div>
+          <figcaption className={cap.hidden}>
+            The AI-driven learning platform for schoolchildren
+          </figcaption>
+        </figure>
 
         <div className={styles.introBody}>
           <FadeIn as="p" from="up" delay={80} className={`${styles.body} ${styles.lead}`}>
@@ -101,9 +109,21 @@ export default function EduCase() {
         </FadeIn>
 
         <FadeIn from="up" delay={80} className={styles.screens}>
-          <img src={caseImage('c1-screen-1')} alt="Goal-setting exercise with AI tutor" />
-          <img src={caseImage('c1-screen-2')} alt="Python lesson with AI assistant" />
-          <img src={caseImage('edu-p1-ui-3')} alt="Achievements and goal-setting landing" />
+          <Shot
+            src={caseImage('c1-screen-1')}
+            alt="Coding task with the AI assistant panel"
+            caption="AI chat helping a student with the task — hints and simpler explanations instead of ready answers"
+          />
+          <Shot
+            src={caseImage('c1-screen-2')}
+            alt="Goal page with the list of courses"
+            caption="Course page: the personal learning trajectory built to reach the goal"
+          />
+          <Shot
+            src={caseImage('edu-p1-ui-3')}
+            alt="Goals page with other students' goals"
+            caption="Goals page with a board of all students' goals, so they compete on who reaches theirs faster"
+          />
         </FadeIn>
 
         <section className={styles.how}>
@@ -141,19 +161,35 @@ export default function EduCase() {
           </FadeIn>
         </div>
         <div className={styles.statementImages}>
-          <FadeIn from="up" delay={100} className={styles.classroom}>
+          <FadeIn as="figure" from="up" delay={100} className={styles.classroom}>
             <img src={caseImage('edu-p1-classroom')} alt="Students working on laptops in class" />
+            <figcaption className={cap.caption}>Students working with the platform in class</figcaption>
           </FadeIn>
-          <FadeIn from="up" delay={160} className={styles.platform}>
+          <FadeIn as="figure" from="up" delay={160} className={styles.platform}>
             <img src={caseImage('edu-p1-laptop')} alt="Laptop showing the student dashboard" />
+            <figcaption className={cap.caption}>
+              Teacher&apos;s view of the class: every student&apos;s progress in one list
+            </figcaption>
           </FadeIn>
         </div>
       </section>
 
       <FadeIn as="section" from="up" className={styles.browsers}>
-        <img src={caseImage('edu-p2-ui-1')} alt="Goal-setting flow in the product" />
-        <img src={caseImage('edu-p2-ui-2')} alt="Teacher dashboard widgets" />
-        <img src={caseImage('edu-p2-ui-3')} alt="Personalized homepage workspace" />
+        <Shot
+          src={caseImage('edu-p2-ui-1')}
+          alt="AI-suggested steps towards the goal"
+          caption="AI suggests 5+ steps towards the goal — the student keeps the ones that fit"
+        />
+        <Shot
+          src={caseImage('edu-p2-ui-2')}
+          alt="Student dashboard with progress by subject"
+          caption="Student dashboard: current topic, progress across subjects and top skills"
+        />
+        <Shot
+          src={caseImage('edu-p2-ui-3')}
+          alt="Goal-setting screen"
+          caption="Goal setting: the student describes a goal, AI checks it is specific, timed and measurable"
+        />
       </FadeIn>
 
       <section className={styles.homepage}>
@@ -202,11 +238,12 @@ export default function EduCase() {
               <br />
               {item.text}
             </p>,
-            <img
+            <Shot
               key={`${item.image}-img`}
-              className={styles.decisionImage}
+              imgClassName={styles.decisionImage}
               src={caseImage(item.image)}
               alt={item.alt}
+              caption={item.caption}
             />,
           ])}
         </FadeIn>

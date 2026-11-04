@@ -64,6 +64,7 @@ $card-bg: linear-gradient(180deg, #4e423f 0%, #1d1d1d 100%);
 }
 
 .heroPhoto {
+  margin: 0;
   height: 720px;
   border-radius: 24px 24px 0 0;
   overflow: hidden;
@@ -184,9 +185,13 @@ $card-bg: linear-gradient(180deg, #4e423f 0%, #1d1d1d 100%);
   max-width: 100%;
   margin-top: 32px;
 
-  img {
+  > figure {
     flex: 1 1 0;
-    min-width: 0;
+  }
+
+  img {
+    display: block;
+    width: 100%;
     height: auto;
     aspect-ratio: 400 / 307;
     object-fit: cover;
@@ -220,6 +225,12 @@ $card-bg: linear-gradient(180deg, #4e423f 0%, #1d1d1d 100%);
     object-fit: cover;
     border-radius: 6px;
   }
+}
+
+.resultsLeft,
+.resultsRight,
+.resultsBottom {
+  margin: 0;
 }
 
 .resultsLeft {
@@ -307,7 +318,7 @@ $card-bg: linear-gradient(180deg, #4e423f 0%, #1d1d1d 100%);
   }
 
   // The middle screen sits flush with the card's bottom edge.
-  img:nth-child(2) {
+  > :nth-child(2) img {
     padding: 32px 23px 0;
     object-position: top;
   }
@@ -474,7 +485,7 @@ $card-bg: linear-gradient(180deg, #4e423f 0%, #1d1d1d 100%);
       border-radius: u(12);
     }
 
-    img:nth-child(2) {
+    > :nth-child(2) img {
       padding: u(37) u(37) 0;
     }
   }
@@ -545,7 +556,7 @@ $card-bg: linear-gradient(180deg, #4e423f 0%, #1d1d1d 100%);
     padding: 20px;
   }
 
-  .finalShots img:nth-child(2) {
+  .finalShots > :nth-child(2) img {
     padding: 57px 38px 0;
   }
 }
@@ -722,7 +733,7 @@ $card-bg: linear-gradient(180deg, #4e423f 0%, #1d1d1d 100%);
       padding: 20px 20px 32px;
     }
 
-    img:nth-child(2) {
+    > :nth-child(2) img {
       padding: 57px 53px 0;
     }
   }

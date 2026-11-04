@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import styles from './Lightbox.module.scss'
 
-type Shot = { src: string; alt: string }
+type Shot = { src: string; alt: string; caption: string }
 
 // Photos that can be opened: content images (non-empty alt) on an open case
 // page, not decorative ones.
@@ -32,7 +32,14 @@ export default function Lightbox() {
       const at = images.indexOf(target)
       if (at < 0) return
       event.preventDefault()
-      setShots(images.map((img) => ({ src: img.currentSrc || img.src, alt: img.alt })))
+      setShots(
+        images.map((img) => ({
+          src: img.currentSrc || img.src,
+          alt: img.alt,
+          // The photo's caption on the page, if it has one.
+          caption: img.closest('figure')?.querySelector('figcaption')?.textContent ?? '',
+        })),
+      )
       setIndex(at)
     }
     document.addEventListener('click', onClick)
@@ -87,7 +94,10 @@ export default function Lightbox() {
         touchX.current = null
       }}
     >
-      <img key={shot.src} className={styles.image} src={shot.src} alt={shot.alt} />
+      <figure className={styles.figure}>
+        <img key={shot.src} className={styles.image} src={shot.src} alt={shot.alt} />
+        {shot.caption ? <figcaption className={styles.caption}>{shot.caption}</figcaption> : null}
+      </figure>
 
       <button ref={closeRef} type="button" className={styles.close} onClick={close} aria-label="Close">
         ×

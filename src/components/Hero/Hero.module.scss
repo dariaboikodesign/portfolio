@@ -74,32 +74,52 @@
 
 .name {
   width: max-content;
-  margin: 0.28em 0 0;
+  margin: -0.19em 0 0;
+  padding-top: 0.47em;
   color: var(--gold);
   font: 400 10.9cqw / 0.95 'Hero Signature', var(--script);
   letter-spacing: 0.03em;
   transform: rotate(-8.54deg);
-  transform-origin: left center;
+  transform-origin: left calc(50% + 0.235em);
 
   span { font-size: 1.367em; }
 
   @media (prefers-reduced-motion: no-preference) {
-    animation: write-signature 2.15s 220ms cubic-bezier(0.42, 0, 0.26, 1) both;
+    mask-image: url('#hero-signature-strokes');
+    mask-clip: no-clip;
   }
 }
 
-@keyframes write-signature {
-  0% {
-    clip-path: polygon(-20% -75%, -19% -75%, -26% 175%, -20% 175%);
-  }
+.signatureMask {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
 
-  55% {
-    clip-path: polygon(-20% -75%, 57% -75%, 49% 175%, -20% 175%);
-  }
+.signatureStroke {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
 
-  100% {
-    clip-path: polygon(-20% -75%, 128% -75%, 115% 175%, -20% 175%);
+  @media (prefers-reduced-motion: no-preference) {
+    animation: write-stroke cubic-bezier(0.35, 0.05, 0.65, 0.98) forwards;
   }
+}
+
+.signatureComplete {
+  opacity: 0;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: complete-signature 120ms 2860ms ease-out forwards;
+  }
+}
+
+@keyframes write-stroke {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes complete-signature {
+  to { opacity: 1; }
 }
 
 .nav {
@@ -181,7 +201,7 @@
   }
 
   .role { font-size: clamp(13px, 3.25cqw, 23px); }
-  .name { margin-top: 0.08em; font-size: 14cqw; }
+  .name { margin-top: -0.39em; font-size: 14cqw; }
   .statement { margin-top: 48cqw; max-width: 22ch; font-size: clamp(19px, 5cqw, 32px); }
   .experience { margin-top: 3cqw; font-size: clamp(15px, 4cqw, 21px); }
   .experience p:first-child { max-width: 34ch; margin-bottom: 0.4em; }

@@ -1,5 +1,8 @@
 import backdrop from '../../assets/hero/redesign/backdrop.webp'
 import blink from '../../assets/hero/redesign/blink.webp'
+import blinkFrame0 from '../../assets/hero/redesign/blink-frame-0.webp'
+import blinkFrame1 from '../../assets/hero/redesign/blink-frame-1.webp'
+import blinkFrame2 from '../../assets/hero/redesign/blink-frame-2.webp'
 import portrait from '../../assets/hero/redesign/portrait.webp'
 import styles from './Hero.module.scss'
 
@@ -26,7 +29,12 @@ export default function Hero() {
         <img className={styles.portrait} src={portrait} alt="" />
         <div className={styles.shadeBottom} />
         <div className={styles.shadeTop} />
-        <div className={styles.blink}><img src={blink} alt="" /></div>
+        <div className={styles.blink}>
+          <img className={styles.blinkFirst} src={blinkFrame0} alt="" />
+          <img className={styles.blinkSecond} src={blinkFrame1} alt="" />
+          <img className={styles.blinkThird} src={blinkFrame2} alt="" />
+          <img className={styles.blinkClosed} src={blink} alt="" />
+        </div>
       </div>
       <header className={styles.heading}>
         <h1 className={styles.role}>Senior Product Designer</h1>

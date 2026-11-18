@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState, type PointerEvent } from 'react'
 import backdrop from '../../assets/hero/redesign/backdrop.webp'
 import blink from '../../assets/hero/redesign/blink.webp'
 import blinkFrame0 from '../../assets/hero/redesign/blink-frame-0.webp'
@@ -21,62 +20,12 @@ const signatureStrokes = [
 ]
 
 export default function Hero() {
-  const artwork = useRef<HTMLDivElement>(null)
-  const [signatureFinished, setSignatureFinished] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const [noteSeen, setNoteSeen] = useState(false)
-
-  useEffect(() => {
-    const revealPyramids = () => {
-      const frame = artwork.current?.getBoundingClientRect()
-      if (!frame || window.scrollY < 16) return
-      const portraitTop = frame.top + frame.height * 0.1
-      const portraitBottom = frame.top + frame.height * 0.72
-      if (portraitBottom <= 0 || portraitTop >= window.innerHeight) return
-
-      setScrolled(true)
-      window.removeEventListener('scroll', revealPyramids)
-    }
-
-    window.addEventListener('scroll', revealPyramids, { passive: true })
-    return () => window.removeEventListener('scroll', revealPyramids)
-  }, [])
-
-  function revealNote(event: PointerEvent<HTMLElement>) {
-    if (noteSeen || event.pointerType !== 'mouse') return
-    const frame = artwork.current?.getBoundingClientRect()
-    if (!frame) return
-
-    const x = (event.clientX - frame.left) / frame.width
-    const y = (event.clientY - frame.top) / frame.height
-    const head = ((x - 0.54) / 0.14) ** 2 + ((y - 0.31) / 0.22) ** 2
-    const shoulders = ((x - 0.61) / 0.25) ** 2 + ((y - 0.59) / 0.19) ** 2
-    if (head < 1 || shoulders < 1) setNoteSeen(true)
-  }
-
   return (
-    <section className={styles.hero} aria-label="Introduction" onPointerMove={revealNote}>
-      <div ref={artwork} className={styles.artwork} aria-hidden="true">
+    <section className={styles.hero} aria-label="Introduction">
+      <div className={styles.artwork} aria-hidden="true">
         <img className={styles.backdrop} src={backdrop} alt="" fetchPriority="high" />
         <div className={styles.shadeRight} />
         <div className={styles.shadeLeft} />
-        <svg className={styles.sketches} viewBox="0 0 1920 1446" preserveAspectRatio="none" focusable="false">
-          <g className={styles.pyramids} data-revealed={signatureFinished && scrolled}>
-            <g className={styles.nearPyramid} transform="translate(28 -9)">
-              <path pathLength={1} d="M1385 730 Q1430 669 1471 603 Q1516 647 1557 702 L1507 748 Q1451 743 1385 730 M1471 603 Q1485 672 1507 748" />
-              <path pathLength={1} d="M1512 691 l13 -8 m-10 19 l14 -9 m-11 20 l14 -9" />
-            </g>
-            <g>
-              <path pathLength={1} d="M1592 653 Q1627 598 1665 548 Q1703 588 1738 635 L1697 664 Q1645 662 1592 653 M1665 548 Q1682 605 1697 664" />
-              <path pathLength={1} d="M1702 625 l11 -6 m-10 16 l12 -8" />
-            </g>
-          </g>
-          <g className={styles.physicsNote} data-revealed={signatureFinished && noteSeen}>
-            <path pathLength={1} d="M497 665 Q515 648 529 623 Q518 656 506 686 M521 639 C548 601 564 628 544 644 Q533 650 523 644" />
-            <path pathLength={1} d="M559 614 l24 -7 M568 599 l6 22" />
-            <path pathLength={1} d="M492 716 C539 716 583 702 606 668 M586 674 Q597 672 606 668 L604 688" />
-          </g>
-        </svg>
         <img className={styles.portrait} src={portrait} alt="" />
         <div className={styles.shadeBottom} />
         <div className={styles.shadeTop} />
@@ -104,7 +53,7 @@ export default function Hero() {
                   />
                 ))}
               </g>
-              <rect onAnimationEnd={() => setSignatureFinished(true)} className={styles.signatureComplete} x="-0.06" y="-0.6" width="1.12" height="1.8" fill="white" />
+              <rect className={styles.signatureComplete} x="-0.06" y="-0.6" width="1.12" height="1.8" fill="white" />
             </mask>
           </defs>
         </svg>

@@ -189,52 +189,6 @@
   &:hover { color: var(--gold-soft); }
 }
 
-.sketches {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  fill: none;
-  stroke: #f4efe5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-
-  path {
-    vector-effect: non-scaling-stroke;
-    stroke-width: 1.35;
-    stroke-dasharray: 1;
-    stroke-dashoffset: 1;
-  }
-}
-
-.pyramids[data-revealed='true'] {
-  animation: slide-sketch 600ms ease-out both;
-
-  path { animation: draw-sketch 600ms ease-out forwards; }
-}
-
-.physicsNote[data-revealed='true'] path {
-  animation: draw-sketch 325ms ease-out forwards;
-}
-
-@keyframes slide-sketch {
-  from { transform: translateX(-16px); }
-}
-
-@keyframes draw-sketch {
-  to { stroke-dashoffset: 0; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .pyramids[data-revealed],
-  .pyramids[data-revealed] path,
-  .physicsNote[data-revealed] path {
-    animation: none;
-    stroke-dashoffset: 0;
-  }
-}
-
 @media (max-width: 760px) {
   .hero {
     aspect-ratio: auto;
@@ -272,8 +226,6 @@
   .intro { margin-top: 48cqw; }
   .statement { max-width: 25ch; font-size: clamp(19px, 5cqw, 32px); }
   .experience, .workLink { font-size: clamp(15px, 4cqw, 21px); }
-  .physicsNote, .nearPyramid { display: none; }
-  .pyramids { translate: -135px -24px; }
 
   .nav {
     order: 1;

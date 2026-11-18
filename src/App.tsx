@@ -42,12 +42,7 @@ export default function App() {
       return
     }
     if (window.location.hash !== '#cases') return
-    // The About timeline resizes itself after mounting, so scroll again once
-    // the layout has settled.
-    const toCases = () => document.getElementById('cases')?.scrollIntoView({ block: 'start' })
-    toCases()
-    const timer = window.setTimeout(toCases, 400)
-    return () => window.clearTimeout(timer)
+    document.getElementById('cases')?.scrollIntoView({ block: 'start' })
   }, [openId])
 
   const openCase = (id: CaseId) => {
@@ -88,8 +83,8 @@ export default function App() {
   return (
     <main>
       <Hero />
-      <About />
       <CaseStudies preview={preview} onPreview={setPreview} onOpen={openCase} />
+      <About />
     </main>
   )
 }

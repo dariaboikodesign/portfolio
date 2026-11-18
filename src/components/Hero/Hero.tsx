@@ -67,12 +67,6 @@ export default function Hero() {
       <div className={styles.intro}>
         <p className={styles.statement}>I make AI tools and complex workflows easier to use</p>
         <p className={styles.experience}>6+ years in design, including 4.5 years in enterprise EdTech.</p>
-        <a className={styles.workLink} href="#cases">
-          View selected work
-          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-            <path d="M3 3l10 10m0-7v7H6" />
-          </svg>
-        </a>
       </div>
     </section>
   )

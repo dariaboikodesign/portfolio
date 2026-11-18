@@ -157,7 +157,7 @@
   line-height: 1.4;
 }
 
-.experience, .workLink {
+.experience {
   font: 400 clamp(13px, 1.25cqw, 24px) / 1.4 'Hero Jost', var(--sans);
   letter-spacing: 0.02em;
 }
@@ -166,27 +166,6 @@
   margin: 0.6em 0 0;
   color: var(--text);
   opacity: 0.85;
-}
-
-.workLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35em;
-  margin-top: 0.6em;
-  color: var(--gold);
-  text-underline-offset: 0.22em;
-
-  svg {
-    width: 0.8em;
-    height: 0.8em;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.4;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  &:hover { color: var(--gold-soft); }
 }
 
 @media (max-width: 760px) {
@@ -225,7 +204,7 @@
   .name { margin-top: -0.39em; font-size: 14cqw; }
   .intro { margin-top: 48cqw; }
   .statement { max-width: 25ch; font-size: clamp(19px, 5cqw, 32px); }
-  .experience, .workLink { font-size: clamp(15px, 4cqw, 21px); }
+  .experience { font-size: clamp(15px, 4cqw, 21px); }
 
   .nav {
     order: 1;

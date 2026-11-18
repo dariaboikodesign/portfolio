@@ -3,7 +3,7 @@ import Hero from './components/Hero/Hero'
 import About from './components/About/About'
 import CaseStudies from './components/CaseStudies/CaseStudies'
 import Lightbox from './components/Lightbox/Lightbox'
-import { CasePage } from './components/CaseStudies/CaseBrowser'
+import { CasePage } from './components/CaseStudies/CaseLaptop'
 import caseStyles from './components/CaseStudies/CaseStudies.module.scss'
 import type { CaseId } from './data/cases'
 
@@ -18,7 +18,7 @@ export default function App() {
   const [openId, setOpenId] = useState<CaseId | null>(() =>
     typeof window === 'undefined' ? null : caseFromHash(),
   )
-  const [preview, setPreview] = useState<CaseId>(openId ?? 'edu')
+  const [preview, setPreview] = useState<CaseId | 'medical'>(openId ?? 'edu')
 
   // Browser back/forward and manual hash edits.
   useEffect(() => {
@@ -85,7 +85,6 @@ export default function App() {
       <Hero />
       <CaseStudies preview={preview} onPreview={setPreview} onOpen={openCase} />
       <About />
-      <Lightbox />
     </main>
   )
 }

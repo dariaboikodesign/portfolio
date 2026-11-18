@@ -1,11 +1,11 @@
-import { type CaseId } from '../../data/cases'
+import { type CaseId, type MenuId } from '../../data/cases'
 import FadeIn from '../FadeIn'
-import CaseBrowser from './CaseBrowser'
+import CaseLaptop from './CaseLaptop'
 import styles from './CaseStudies.module.scss'
 
 type Props = {
-  preview: CaseId
-  onPreview: (id: CaseId) => void
+  preview: MenuId
+  onPreview: (id: MenuId) => void
   onOpen: (id: CaseId) => void
 }
 
@@ -18,7 +18,7 @@ export default function CaseStudies({ preview, onPreview, onOpen }: Props) {
           past <em>2&nbsp;years</em>
         </span>
       </FadeIn>
-      <CaseBrowser active={preview} onSelect={onPreview} onView={onOpen} />
+      <CaseLaptop active={preview} onSelect={onPreview} onView={onOpen} />
     </section>
   )
 }

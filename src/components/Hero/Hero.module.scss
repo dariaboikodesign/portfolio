@@ -21,7 +21,8 @@
   }
 }
 
-.backdrop { left: 5.573%; top: 3.043%; width: 94.427%; }
+.backdrop,
+.portrait { left: 5.521%; top: 3.043%; width: 94.479%; }
 .shadeRight,
 .shadeLeft,
 .shadeBottom,
@@ -45,7 +46,6 @@
   height: 68.828%;
   mask-image: url('../../assets/hero/redesign/shade-left.webp');
 }
-.portrait { left: 5.521%; top: 3.043%; width: 94.479%; }
 .shadeBottom {
   inset: 10.589% 0 0;
   mask-image: url('../../assets/hero/redesign/shade-bottom.webp');
@@ -130,7 +130,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 0.625cqw;
-  font: 500 1.4583cqw / 1.286 'Hero Jost', var(--sans);
+  font: 500 clamp(12px, 1.4583cqw, 28px) / 1.286 'Hero Jost', var(--sans);
   letter-spacing: 0.02em;
 
   a {
@@ -145,26 +145,94 @@
   }
 }
 
-.statement {
+.intro {
   position: absolute;
   top: 63.14%;
   left: 6.25%;
-  width: 28.6%;
+  width: 30%;
+}
+
+.statement {
+  max-width: 27ch;
   line-height: 1.4;
 }
 
-.experience {
-  position: absolute;
-  top: 71.99%;
-  left: 28.33%;
-  width: 25%;
-  color: var(--text);
-  opacity: 0.8;
-  font: 300 1.25cqw / 1.333 'Hero Jost', var(--sans);
+.experience, .workLink {
+  font: 400 clamp(13px, 1.25cqw, 24px) / 1.4 'Hero Jost', var(--sans);
   letter-spacing: 0.02em;
+}
 
-  p { margin: 0; }
-  p:first-child { max-width: 22cqw; margin-bottom: 0.4167cqw; }
+.experience {
+  margin: 0.6em 0 0;
+  color: var(--text);
+  opacity: 0.85;
+}
+
+.workLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  margin-top: 0.6em;
+  color: var(--gold);
+  text-underline-offset: 0.22em;
+
+  svg {
+    width: 0.8em;
+    height: 0.8em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  &:hover { color: var(--gold-soft); }
+}
+
+.sketches {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  fill: none;
+  stroke: #f4efe5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  path {
+    vector-effect: non-scaling-stroke;
+    stroke-width: 1.35;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+}
+
+.pyramids[data-revealed='true'] {
+  animation: slide-sketch 600ms ease-out both;
+
+  path { animation: draw-sketch 600ms ease-out forwards; }
+}
+
+.physicsNote[data-revealed='true'] path {
+  animation: draw-sketch 325ms ease-out forwards;
+}
+
+@keyframes slide-sketch {
+  from { transform: translateX(-16px); }
+}
+
+@keyframes draw-sketch {
+  to { stroke-dashoffset: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pyramids[data-revealed],
+  .pyramids[data-revealed] path,
+  .physicsNote[data-revealed] path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
 }
 
 @media (max-width: 760px) {
@@ -193,8 +261,7 @@
 
   .heading,
   .nav,
-  .statement,
-  .experience {
+  .intro {
     position: relative;
     inset: auto;
     width: auto;
@@ -202,9 +269,11 @@
 
   .role { font-size: clamp(13px, 3.25cqw, 23px); }
   .name { margin-top: -0.39em; font-size: 14cqw; }
-  .statement { margin-top: 48cqw; max-width: 22ch; font-size: clamp(19px, 5cqw, 32px); }
-  .experience { margin-top: 3cqw; font-size: clamp(15px, 4cqw, 21px); }
-  .experience p:first-child { max-width: 34ch; margin-bottom: 0.4em; }
+  .intro { margin-top: 48cqw; }
+  .statement { max-width: 25ch; font-size: clamp(19px, 5cqw, 32px); }
+  .experience, .workLink { font-size: clamp(15px, 4cqw, 21px); }
+  .physicsNote, .nearPyramid { display: none; }
+  .pyramids { translate: -135px -24px; }
 
   .nav {
     order: 1;

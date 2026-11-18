@@ -206,7 +206,7 @@
   position: absolute;
   inset: 0;
   mask-image:
-    linear-gradient(#000 calc(var(--hero-lid-edge) - 1%), transparent var(--hero-lid-edge)),
+    linear-gradient(#000 calc(var(--hero-lid-edge, 28%) - 1%), transparent var(--hero-lid-edge, 28%)),
     radial-gradient(ellipse 2.85% 2.2% at 48.65% 33.15%, #000 58%, transparent),
     radial-gradient(ellipse 2.85% 2.2% at 56.35% 32.38%, #000 58%, transparent);
   mask-composite: intersect, add;

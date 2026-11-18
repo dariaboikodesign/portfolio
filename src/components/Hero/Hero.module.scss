@@ -1,635 +1,175 @@
-@use '../../styles/fluid' as *;
-
 .hero {
-  --hero-panel-radius: 120px;
-  --hero-panel-shadow: 0 40px 72px 8px #1f1816, 0 96px 200px 48px #1f1816;
-  --hero-panel-pt: 64px;
-  --hero-panel-pb: 64px;
-  --hero-photo-mt: 64px;
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--grid-gutter);
-  padding: 0 var(--grid-margin) 64px;
+  isolation: isolate;
+  container-type: inline-size;
+  aspect-ratio: 1920 / 1446;
   background: var(--bg-hero);
-  overflow-x: clip;
+  overflow: hidden;
 }
 
-.topWrap {
-  position: relative;
-  grid-column: 1 / -1;
-  margin: 0 calc(-1 * var(--grid-margin));
-  width: calc(100% + 2 * var(--grid-margin));
-  z-index: 2;
-}
+.artwork {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
 
-.topPanel {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--grid-gutter);
-  align-content: start;
-  padding: var(--hero-panel-pt) var(--grid-margin) var(--hero-panel-pb);
-  background: #3b302c;
-  border-radius: 0 0 0 var(--hero-panel-radius);
-  // Drop shadow under the text panel, falling onto the hero background.
-  box-shadow: var(--hero-panel-shadow);
-}
-
-.topContent {
-  display: contents;
-}
-
-
-.nav {
-  grid-column: 11 / 13;
-  grid-row: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 12px;
-  z-index: 2;
-}
-
-.navLink {
-  font-weight: 500;
-  font-size: 1.125rem;
-  line-height: 1.33;
-  letter-spacing: 0.02em;
-  color: var(--gold-soft);
-  text-decoration: none;
-  white-space: nowrap;
-  border-bottom: 1px solid transparent;
-  transition:
-    border-color 0.2s ease,
-    opacity 0.2s ease;
-
-  &:hover {
-    border-bottom-color: var(--gold-soft);
-    opacity: 0.85;
+  img {
+    position: absolute;
+    max-width: none;
+    height: auto;
   }
 }
 
-.titleBlock {
-  position: relative;
-  grid-column: 1 / 11;
-  grid-row: 1;
-  z-index: 2;
-  min-height: calc(80px + clamp(11rem, 14.5vw, 13.1rem));
+.backdrop { left: 5.573%; top: 3.043%; width: 94.427%; }
+.shadeRight { left: 44.011%; top: 0; width: 55.989%; }
+.shadeLeft { left: 0; top: 0; width: 62.004%; }
+.portrait { left: 5.521%; top: 3.043%; width: 94.479%; }
+.shadeBottom { left: 0; top: 10.589%; width: 100%; }
+.shadeTop { left: 0; top: 0; width: 100%; }
+
+.heading {
+  position: absolute;
+  left: 6.25%;
+  top: 13.69%;
 }
 
-.senior {
+.role,
+.statement {
   margin: 0;
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  line-height: 1.22;
+  font: 400 2.0833cqw / 1.2 var(--serif);
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  background: linear-gradient(180deg, var(--gold) 0%, var(--gold-deep) 100%);
-  -webkit-background-clip: text;
+  background: linear-gradient(var(--gold), #b4a768);
   background-clip: text;
   color: transparent;
 }
 
 .name {
-  position: relative;
-  z-index: 2;
-  margin: 14px 0 0;
-  font-family: var(--serif);
-  font-size: clamp(1.75rem, 3.33vw, 3rem);
-  line-height: 1.17;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: var(--text);
-  opacity: 0.6;
-}
-
-.script {
-  position: absolute;
-  left: clamp(8rem, 23.2vw, 20.875rem);
-  top: 78px;
-  margin: 0;
+  width: max-content;
+  margin: -0.12em 0 0;
   color: var(--gold);
+  font: 400 10.9cqw / 0.95 var(--script);
   letter-spacing: 0.03em;
-  pointer-events: none;
-  white-space: nowrap;
-  z-index: 1;
+  transform: rotate(-8.54deg);
+  transform-origin: left center;
+
+  span { font-size: 1.367em; }
 }
 
-.scriptD {
-  font-family: var(--script);
-  font-weight: 300;
-  font-synthesis: none;
-  font-size: clamp(8.2rem, 13.8vw, 12.45rem);
-  line-height: 1.05;
-}
-
-.scriptRest {
-  font-family: var(--script);
-  font-weight: 300;
-  font-synthesis: none;
-  font-size: clamp(6rem, 10.1vw, 9.1rem);
-  line-height: 1.17;
-}
-
-.leads {
+.nav {
+  position: absolute;
+  top: 14.87%;
+  right: 5.9%;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  grid-column: 3 / 7;
-  grid-row: 2;
-  align-self: start;
-  max-width: 472px;
-  margin-top: 8px;
-  font-size: 1.125rem;
-  line-height: 1.33;
+  align-items: flex-start;
+  gap: 0.625cqw;
+  font: 500 1.4583cqw / 1.286 var(--sans);
   letter-spacing: 0.02em;
+
+  a {
+    color: var(--gold);
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+  }
+}
+
+.statement {
+  position: absolute;
+  top: 63.14%;
+  left: 6.25%;
+  width: 28.6%;
+  line-height: 1.4;
+}
+
+.experience {
+  position: absolute;
+  top: 71.99%;
+  left: 28.33%;
+  width: 25%;
   color: var(--text);
   opacity: 0.8;
-  z-index: 2;
+  font: 300 1.25cqw / 1.333 var(--sans);
+  letter-spacing: 0.02em;
 
-  p {
-    margin: 0;
+  p { margin: 0; }
+  p:first-child { max-width: 20.73cqw; margin-bottom: 0.4167cqw; }
+}
+
+@media (max-width: 760px) {
+  .hero {
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 132cqw;
+    padding: 8cqw 6.25cqw 9cqw;
+    background: #211d1c;
+  }
+
+  .artwork {
+    inset: 0 auto auto 50%;
+    width: 150%;
+    aspect-ratio: 1920 / 1446;
+    transform: translateX(-52%);
+
+    &::after {
+      position: absolute;
+      inset: 65% 0 0;
+      background: linear-gradient(transparent, #211d1c);
+      content: '';
+    }
+  }
+
+  .heading,
+  .nav,
+  .statement,
+  .experience {
+    position: relative;
+    inset: auto;
+    width: auto;
+  }
+
+  .role { font-size: clamp(13px, 3.25cqw, 23px); }
+  .name { font-size: 14cqw; }
+  .statement { margin-top: 48cqw; max-width: 22ch; font-size: clamp(19px, 5cqw, 32px); }
+  .experience { margin-top: 3cqw; font-size: clamp(15px, 4cqw, 21px); }
+  .experience p:first-child { max-width: 34ch; margin-bottom: 0.4em; }
+
+  .nav {
+    order: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.75em 1.5em;
+    margin-top: 5cqw;
+    font-size: clamp(15px, 4cqw, 21px);
   }
 }
 
-.photos {
-  position: relative;
-  display: grid;
-  grid-column: 1 / 9;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  --photos-gap: var(--grid-gutter);
-  gap: var(--photos-gap);
-  width: 100%;
-  margin-top: var(--hero-photo-mt);
-  margin-bottom: clamp(28px, 6vw, 52px);
-  z-index: 3;
-}
-
-.photo {
-  position: relative;
-  z-index: 3;
-  margin: 0;
-  aspect-ratio: 277 / 276;
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  background: #2a2422;
+.blink {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  mask-image:
+    radial-gradient(ellipse 2.85% 2.2% at 48.65% 33.15%, #000 58%, transparent),
+    radial-gradient(ellipse 2.85% 2.2% at 56.35% 32.38%, #000 58%, transparent);
 
   img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
-// The arrow runs over the Moscow and Dubai photos but always under the portrait.
-.photo:nth-child(1),
-.photo:nth-child(3) {
-  z-index: 1;
-}
-
-.photo:nth-child(2) {
-  z-index: 4;
-}
-
-.photoPortrait img {
-  object-position: center 12%;
-}
-
-// The arrow "draws itself" like a pencil stroke: a 1s reveal along the
-// line, starting 1.5s after load (left → right; top → bottom on mobile,
-// where the same reveal runs along the rotated arrow).
-@keyframes arrowDraw {
-  from {
-    clip-path: inset(-10% 100% -10% -10%);
-  }
-  to {
-    clip-path: inset(-10% -10% -10% -10%);
-  }
-}
-
-.arrows,
-.arrowsMobile {
-  animation: arrowDraw 1s cubic-bezier(0.45, 0.05, 0.4, 1) 1.5s both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .arrows,
-  .arrowsMobile {
-    animation: none;
-  }
-}
-
-.arrows {
-  position: absolute;
-  left: 28.16%;
-  top: 63.7%;
-  z-index: 2;
-  width: 43.69%;
-  height: auto;
-  pointer-events: none;
-}
-
-
-.arrowsMobile {
-  display: none;
-  position: absolute;
-  pointer-events: none;
-}
-
-@media (min-width: 1025px) {
-  .hero {
-    --hero-photo-mt: 72px;
-  }
-
-  .nav {
-    align-items: flex-start;
-  }
-
-  .titleBlock {
-    // Figma 1440: summary starts 287px below the title top
-    min-height: 19.93vw;
-  }
-
-  .senior {
-    font-size: 5vw;
-    line-height: 1.22;
-    letter-spacing: 0.03em;
-  }
-
-  .name {
-    font-size: 3.333vw;
-    line-height: 1.17;
-    letter-spacing: 0.03em;
-  }
-
-  .script {
-    left: 23.19vw;
-    top: 5.42vw;
-  }
-
-  .scriptD {
-    font-size: 13.83vw;
-    line-height: 1.05;
-  }
-
-  .scriptRest {
-    font-size: 10.12vw;
-    line-height: 1.17;
-  }
-
-  .leads {
-    grid-column: 1 / 9;
-    max-width: none;
-    margin: 0 0 0 22.71vw;
-
-    p {
-      max-width: 472px;
-    }
-  }
-
-  .photos {
-    --photos-gap: 22px;
-    grid-column: 1 / -1;
-    grid-template-columns: repeat(3, minmax(0, 277px));
-    width: 60.76vw;
-    max-width: 878px;
-    margin-bottom: 0;
-  }
-}
-
-@media (min-width: 1441px) {
-  .hero {
-    --hero-panel-radius: #{fluid(120, 160)};
-    --hero-panel-pt: #{fluid(64, 106)};
-    --hero-panel-pb: #{fluid(64, 74)};
-    --hero-photo-mt: #{fluid(72, 58)};
-    padding-bottom: fluid(64, 190);
-  }
-
-  .nav {
-    gap: 12px;
-    margin-top: fluid(0, 12);
-    padding-right: fluid(0, 33);
-  }
-
-  .navLink {
-    font-size: fluid(18, 28);
-    line-height: fluid(24, 36);
-  }
-
-  .titleBlock {
-    min-height: fluid(287, 356);
-  }
-
-  .senior {
-    font-size: fluid(72, 110.66);
-    line-height: fluid(88, 121.73);
-  }
-
-  .name {
-    font-size: fluid(48, 56);
-    line-height: fluid(56, 58.1);
-  }
-
-  .script {
-    left: fluid(334, 296);
-    top: fluid(78, 80);
-  }
-
-  .scriptD {
-    font-size: fluid(199.21, 285.95);
-  }
-
-  .scriptRest {
-    font-size: fluid(145.77, 209.23);
-  }
-
-  .leads {
-    margin-left: fluid(327, 297);
-    font-size: fluid(18, 24);
-    line-height: fluid(24, 32);
-
-    p:first-child {
-      max-width: fluid(472, 398);
-    }
-  }
-
-  .photos {
-    --photos-gap: #{fluid(22, 23)};
-    width: fluid(875, 878);
-  }
-}
-
-@media (max-width: 1024px) {
-  .hero {
-    --hero-panel-pb: 48px;
-    --hero-photo-mt: 32px;
-  }
-
-  // Figma 1024/768: name sits under the title, "Designer" overlaps it from below.
-  .titleBlock {
-    grid-column: 1 / 10;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-  }
-
-  .name {
-    order: 1;
-  }
-
-  .script {
-    order: 2;
-    position: relative;
-    left: 0;
-    top: 0;
-    display: block;
-    width: 100%;
-    height: auto;
-    margin: -64px 0 0;
-    text-align: right;
-  }
-
-  .scriptD {
-    font-size: clamp(6.5rem, 17vw, 10.9rem);
-    line-height: 1.05;
-  }
-
-  .scriptRest {
-    font-size: clamp(4.75rem, 12.5vw, 7.98rem);
-    line-height: 1.17;
-  }
-
-  .leads {
-    grid-column: 1 / 10;
-    justify-self: end;
-    max-width: 472px;
+    left: 0.3%;
+    top: -0.85%;
     width: 100%;
   }
 
-  .nav {
-    grid-column: 10 / 13;
-    align-items: flex-end;
-    text-align: right;
+  @media (prefers-reduced-motion: no-preference) {
+    animation: blink 13.2s linear infinite;
   }
-
-  .navLink {
-    font-size: 1rem;
-    line-height: 1.25;
-  }
-
-  .photos {
-    grid-column: 1 / -1;
-  }
-
 }
 
-@media (max-width: 768px) {
-  .hero {
-    --hero-panel-shadow: 0 28px 56px 6px #1f1816, 0 64px 140px 32px #1f1816;
-    --grid-margin: 40px;
-    --hero-panel-radius: 80px;
-    --hero-panel-pb: 32px;
-    --hero-photo-mt: 40px;
-  }
-
-  .titleBlock {
-    grid-column: 1 / 10;
-  }
-
-  .senior {
-    font-size: 2.5rem;
-    line-height: 1.2;
-    letter-spacing: 0.03em;
-  }
-
-  .name {
-    margin-top: 14px;
-    font-size: 1.75rem;
-    line-height: 1.14;
-    letter-spacing: 0.03em;
-  }
-
-  .script {
-    margin-top: -48px;
-  }
-
-  .scriptD {
-    font-size: clamp(5.5rem, 17.2vw, 8.24rem);
-    line-height: 1.05;
-  }
-
-  .scriptRest {
-    font-size: clamp(4rem, 12.6vw, 6.03rem);
-    line-height: 1.17;
-  }
-
-  .leads {
-    grid-column: 1 / 10;
-    justify-self: end;
-    max-width: 292px;
-    margin-top: 12px;
-  }
-
-  .nav {
-    grid-column: 10 / 13;
-  }
-
-}
-
-@media (max-width: 480px) {
-  .hero {
-    --hero-panel-shadow: 0 16px 32px 4px #1f1816, 0 40px 88px 16px #1f1816;
-    --grid-margin: 16px;
-    --hero-panel-radius: 32px;
-    --hero-panel-pt: 24px;
-    --hero-panel-pb: 16px;
-    --hero-photo-mt: 20px;
-    padding-bottom: 24px;
-  }
-
-  .topPanel {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .topContent {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    width: 100%;
-  }
-
-  .titleBlock {
-    grid-column: auto;
-    grid-row: auto;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .senior {
-    font-size: 2rem;
-    line-height: 1.375;
-    letter-spacing: 0.02em;
-  }
-
-  .name {
-    margin: 0 0 -4px;
-    font-size: 1.75rem;
-    line-height: 1.14;
-    letter-spacing: 0.02em;
-  }
-
-  .script {
-    position: relative;
-    top: 0;
-    align-self: flex-end;
-    width: min(100%, 220px);
-    margin: 0;
-    text-align: right;
-    white-space: normal;
-  }
-
-  .scriptD {
-    font-size: 4.375rem;
-    line-height: 1.55;
-  }
-
-  .scriptRest {
-    font-size: 4rem;
-    line-height: 1.55;
-  }
-
-  .leads {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 126px;
-    gap: 8px;
-    align-items: start;
-    grid-column: auto;
-    grid-row: auto;
-    justify-self: stretch;
-    max-width: none;
-    margin-top: 0;
-    font-size: 0.875rem;
-    line-height: 1.57;
-    letter-spacing: 0.02em;
-  }
-
-  .nav {
-    grid-column: auto;
-    grid-row: auto;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    width: 100%;
-  }
-
-  .navLink {
-    font-size: 1rem;
-    line-height: 1.375;
-    text-align: left;
-  }
-
-
-  .photos {
-    grid-column: 1 / -1;
-    display: block;
-    height: 409px;
-    max-width: none;
-    padding-inline: 32px;
-    margin-bottom: 0;
-  }
-
-
-  .photo {
-    position: absolute;
-    width: 133px;
-    aspect-ratio: 133 / 132.5;
-    border-radius: 2px;
-  }
-
-  .photo:nth-child(1) {
-    left: 16px;
-    top: 0;
-  }
-
-  .photo:nth-child(2) {
-    left: calc(50% - 66.5px);
-    top: 138px;
-  }
-
-  .photo:nth-child(3) {
-    right: 16px;
-    top: 277px;
-    left: auto;
-  }
-
-  .photoPortrait img {
-    object-position: 42% 8%;
-    transform: scale(1.15);
-    transform-origin: center top;
-  }
-
-  .arrows {
-    display: none;
-  }
-
-  .arrowsMobile {
-    display: block;
-    z-index: 2;
-    // Figma box (203.7×200.3 at -70.5, 122) is the rotated bounds; the
-    // unrotated 199×86.7 vector sits centred inside it.
-    left: calc(50% - 134.6px);
-    top: 178.8px;
-    width: 199px;
-    height: auto;
-    transform: rotate(43.76deg);
-    transform-origin: center center;
-  }
+@keyframes blink {
+  0%, 34.4%, 36%, 86.7%, 88.3%, 100% { opacity: 0; }
+  34.85%, 35.45%, 87.15%, 87.75% { opacity: 1; }
 }

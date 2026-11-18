@@ -1,10 +1,6 @@
 import backdrop from '../../assets/hero/redesign/backdrop.webp'
 import blink from '../../assets/hero/redesign/blink.webp'
 import portrait from '../../assets/hero/redesign/portrait.webp'
-import shadeRight from '../../assets/hero/redesign/shade-right.webp'
-import shadeLeft from '../../assets/hero/redesign/shade-left.webp'
-import shadeBottom from '../../assets/hero/redesign/shade-bottom.webp'
-import shadeTop from '../../assets/hero/redesign/shade-top.webp'
 import styles from './Hero.module.scss'
 
 export default function Hero() {
@@ -12,11 +8,11 @@ export default function Hero() {
     <section className={styles.hero} aria-label="Introduction">
       <div className={styles.artwork} aria-hidden="true">
         <img className={styles.backdrop} src={backdrop} alt="" fetchPriority="high" />
-        <img className={styles.shadeRight} src={shadeRight} alt="" />
-        <img className={styles.shadeLeft} src={shadeLeft} alt="" />
+        <div className={styles.shadeRight} />
+        <div className={styles.shadeLeft} />
         <img className={styles.portrait} src={portrait} alt="" />
-        <img className={styles.shadeBottom} src={shadeBottom} alt="" />
-        <img className={styles.shadeTop} src={shadeTop} alt="" />
+        <div className={styles.shadeBottom} />
+        <div className={styles.shadeTop} />
         <div className={styles.blink}><img src={blink} alt="" /></div>
       </div>
       <header className={styles.heading}>

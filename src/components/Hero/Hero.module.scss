@@ -3,7 +3,8 @@
   isolation: isolate;
   container-type: inline-size;
   aspect-ratio: 1920 / 1446;
-  background: var(--bg-hero);
+  --shade-color: #1f1c1b;
+  background: var(--shade-color);
   overflow: hidden;
 }
 
@@ -21,11 +22,38 @@
 }
 
 .backdrop { left: 5.573%; top: 3.043%; width: 94.427%; }
-.shadeRight { left: 44.011%; top: 0; width: 55.989%; }
-.shadeLeft { left: 0; top: 0; width: 62.004%; }
+.shadeRight,
+.shadeLeft,
+.shadeBottom,
+.shadeTop {
+  position: absolute;
+  background: var(--shade-color);
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+
+.shadeRight {
+  left: 44.011%;
+  top: 0;
+  width: 55.989%;
+  height: 77.006%;
+  mask-image: url('../../assets/hero/redesign/shade-right.webp');
+}
+.shadeLeft {
+  inset: 0 auto auto 0;
+  width: 62.004%;
+  height: 68.828%;
+  mask-image: url('../../assets/hero/redesign/shade-left.webp');
+}
 .portrait { left: 5.521%; top: 3.043%; width: 94.479%; }
-.shadeBottom { left: 0; top: 10.589%; width: 100%; }
-.shadeTop { left: 0; top: 0; width: 100%; }
+.shadeBottom {
+  inset: 10.589% 0 0;
+  mask-image: url('../../assets/hero/redesign/shade-bottom.webp');
+}
+.shadeTop {
+  inset: 0;
+  mask-image: url('../../assets/hero/redesign/shade-top.webp');
+}
 
 .heading {
   position: absolute;
@@ -36,7 +64,7 @@
 .role,
 .statement {
   margin: 0;
-  font: 400 2.0833cqw / 1.2 var(--serif);
+  font: 400 2.0833cqw / 1.2 'Hero Prata', var(--serif);
   letter-spacing: 0.03em;
   text-transform: uppercase;
   background: linear-gradient(var(--gold), #b4a768);
@@ -46,14 +74,32 @@
 
 .name {
   width: max-content;
-  margin: -0.12em 0 0;
+  margin: 0.28em 0 0;
   color: var(--gold);
-  font: 400 10.9cqw / 0.95 var(--script);
+  font: 400 10.9cqw / 0.95 'Hero Signature', var(--script);
   letter-spacing: 0.03em;
   transform: rotate(-8.54deg);
   transform-origin: left center;
 
   span { font-size: 1.367em; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: write-signature 2.15s 220ms cubic-bezier(0.42, 0, 0.26, 1) both;
+  }
+}
+
+@keyframes write-signature {
+  0% {
+    clip-path: polygon(-20% -75%, -19% -75%, -26% 175%, -20% 175%);
+  }
+
+  55% {
+    clip-path: polygon(-20% -75%, 57% -75%, 49% 175%, -20% 175%);
+  }
+
+  100% {
+    clip-path: polygon(-20% -75%, 128% -75%, 115% 175%, -20% 175%);
+  }
 }
 
 .nav {
@@ -64,7 +110,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 0.625cqw;
-  font: 500 1.4583cqw / 1.286 var(--sans);
+  font: 500 1.4583cqw / 1.286 'Hero Jost', var(--sans);
   letter-spacing: 0.02em;
 
   a {
@@ -94,11 +140,11 @@
   width: 25%;
   color: var(--text);
   opacity: 0.8;
-  font: 300 1.25cqw / 1.333 var(--sans);
+  font: 300 1.25cqw / 1.333 'Hero Jost', var(--sans);
   letter-spacing: 0.02em;
 
   p { margin: 0; }
-  p:first-child { max-width: 20.73cqw; margin-bottom: 0.4167cqw; }
+  p:first-child { max-width: 22cqw; margin-bottom: 0.4167cqw; }
 }
 
 @media (max-width: 760px) {
@@ -108,7 +154,7 @@
     flex-direction: column;
     min-height: 132cqw;
     padding: 8cqw 6.25cqw 9cqw;
-    background: #211d1c;
+    background: var(--shade-color);
   }
 
   .artwork {
@@ -120,7 +166,7 @@
     &::after {
       position: absolute;
       inset: 65% 0 0;
-      background: linear-gradient(transparent, #211d1c);
+      background: linear-gradient(transparent, var(--shade-color));
       content: '';
     }
   }
@@ -135,7 +181,7 @@
   }
 
   .role { font-size: clamp(13px, 3.25cqw, 23px); }
-  .name { font-size: 14cqw; }
+  .name { margin-top: 0.08em; font-size: 14cqw; }
   .statement { margin-top: 48cqw; max-width: 22ch; font-size: clamp(19px, 5cqw, 32px); }
   .experience { margin-top: 3cqw; font-size: clamp(15px, 4cqw, 21px); }
   .experience p:first-child { max-width: 34ch; margin-bottom: 0.4em; }
@@ -172,4 +218,23 @@
 @keyframes blink {
   0%, 34.4%, 36%, 86.7%, 88.3%, 100% { opacity: 0; }
   34.85%, 35.45%, 87.15%, 87.75% { opacity: 1; }
+}
+
+@font-face {
+  font-family: 'Hero Signature';
+  src: url('../../assets/hero/redesign/signature.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Hero Prata';
+  src: url('../../assets/hero/redesign/heading.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Hero Jost';
+  src: url('../../assets/hero/redesign/body.woff2') format('woff2');
+  font-weight: 300 500;
+  font-display: swap;
 }

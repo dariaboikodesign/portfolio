@@ -2,15 +2,30 @@
   position: relative;
   isolation: isolate;
   container-type: inline-size;
-  aspect-ratio: 1920 / 1446;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100svh;
+  padding: clamp(20px, 12svh, 9cqw) 6.25% clamp(20px, 6svh, 72px);
   --shade-color: #1f1c1b;
   background: var(--shade-color);
   overflow: hidden;
+
+  &::after {
+    position: absolute;
+    z-index: -1;
+    inset: auto 0 0;
+    height: min(22svh, 18cqw);
+    background: linear-gradient(transparent, var(--shade-color));
+    content: '';
+    pointer-events: none;
+  }
 }
 
 .artwork {
   position: absolute;
-  inset: 0;
+  inset: min(0px, calc((100svh - 62cqw) * 0.3)) 0 auto;
+  aspect-ratio: 1920 / 1446;
   z-index: -1;
   pointer-events: none;
 
@@ -56,15 +71,13 @@
 }
 
 .heading {
-  position: absolute;
-  left: 6.25%;
-  top: 13.69%;
+  grid-area: 1 / 1;
 }
 
 .role,
 .statement {
   margin: 0;
-  font: 400 2.0833cqw / 1.2 'Hero Prata', var(--serif);
+  font: 400 clamp(14px, min(2.0833cqw, 5.2svh), 44px) / 1.2 'Hero Prata', var(--serif);
   letter-spacing: 0.03em;
   text-transform: uppercase;
   background: linear-gradient(var(--gold), #b4a768);
@@ -77,7 +90,7 @@
   margin: -0.19em 0 0;
   padding-top: 0.47em;
   color: var(--gold);
-  font: 400 10.9cqw / 0.95 'Hero Signature', var(--script);
+  font: 400 min(10.9cqw, 24svh) / 0.95 'Hero Signature', var(--script);
   letter-spacing: 0.03em;
   transform: rotate(-8.54deg);
   transform-origin: left calc(50% + 0.235em);
@@ -124,9 +137,9 @@
 }
 
 .nav {
-  position: absolute;
-  top: 14.87%;
-  right: 5.9%;
+  grid-area: 1 / 2;
+  align-self: start;
+  margin-top: 0.55em;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -147,10 +160,9 @@
 }
 
 .intro {
-  position: absolute;
-  top: 63.14%;
-  left: 6.25%;
-  width: 30%;
+  grid-area: 3 / 1 / 4 / -1;
+  width: min(100%, max(15rem, 34cqw));
+  margin-top: clamp(16px, 4svh, 48px);
 }
 
 .statement {
@@ -161,9 +173,6 @@
 .experience {
   font: 400 clamp(13px, 1.25cqw, 24px) / 1.4 'Hero Jost', var(--sans);
   letter-spacing: 0.02em;
-}
-
-.experience {
   margin: 0.6em 0 0;
   color: var(--text);
   opacity: 0.85;
@@ -171,11 +180,10 @@
 
 @media (max-width: 760px) {
   .hero {
-    aspect-ratio: auto;
     display: flex;
     flex-direction: column;
-    min-height: 132cqw;
-    padding: 8cqw 6.25cqw 9cqw;
+    min-height: 100svh;
+    padding: clamp(14px, 5svh, 8vw) 6.25% clamp(16px, 5svh, 9vw);
     background: var(--shade-color);
   }
 
@@ -196,14 +204,12 @@
   .heading,
   .nav,
   .intro {
-    position: relative;
-    inset: auto;
     width: auto;
   }
 
   .role { font-size: clamp(13px, 3.25cqw, 23px); }
   .name { margin-top: -0.39em; font-size: 14cqw; }
-  .intro { margin-top: 48cqw; }
+  .intro { margin-top: clamp(12px, calc(100svh - 310px), 48cqw); }
   .statement { max-width: 25ch; font-size: clamp(19px, 5cqw, 32px); }
   .experience { font-size: clamp(15px, 4cqw, 21px); }
 
@@ -212,7 +218,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 0.75em 1.5em;
-    margin-top: 5cqw;
+    align-self: stretch;
+    margin-top: clamp(12px, 4svh, 5cqw);
     font-size: clamp(15px, 4cqw, 21px);
   }
 }

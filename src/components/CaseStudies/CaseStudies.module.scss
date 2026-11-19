@@ -6,7 +6,14 @@
   padding: 64px 0 var(--gallery-bottom-space);
   overflow-x: hidden;
   background:
-    linear-gradient(180deg, var(--bg-cream), var(--bg-hero))
+    linear-gradient(
+      180deg,
+      var(--bg-cream) 0%,
+      color-mix(in srgb, var(--bg-cream) 88%, var(--bg-hero)) 21%,
+      color-mix(in srgb, var(--bg-cream) 55%, var(--bg-hero)) 46%,
+      color-mix(in srgb, var(--bg-cream) 15%, var(--bg-hero)) 72%,
+      var(--bg-hero) 96%
+    )
       bottom / 100% var(--gallery-bottom-space) no-repeat,
     var(--bg-cream);
   border-radius: 80px 80px 0 0;

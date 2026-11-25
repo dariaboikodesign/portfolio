@@ -1,72 +1,223 @@
-@use '../../styles/fluid' as *;
-
 .gallery {
-  box-sizing: border-box;
-  --gallery-bottom-space: #{fluid(128, 232)};
-  padding: 64px 0 var(--gallery-bottom-space);
-  overflow-x: hidden;
+  --bottom-fade: clamp(88px, 11vw, 196px);
+  --card-width: min(36vw, 62svh, 630px);
+  --orbit-radius: 115vw;
+  --step: 21deg;
+  --turn-duration: 940ms;
+  --turn-ease: cubic-bezier(.42, 0, .18, 1);
+  padding: clamp(52px, 6.1vw, 105px) 0 calc(var(--bottom-fade) + 32px);
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: clamp(32px, 4.2vw, 80px) clamp(32px, 4.2vw, 80px) 0 0;
   background:
-    linear-gradient(
-      180deg,
+    linear-gradient(180deg,
       var(--bg-cream) 0%,
       color-mix(in srgb, var(--bg-cream) 88%, var(--bg-hero)) 21%,
       color-mix(in srgb, var(--bg-cream) 55%, var(--bg-hero)) 46%,
       color-mix(in srgb, var(--bg-cream) 15%, var(--bg-hero)) 72%,
       var(--bg-hero) 96%
-    )
-      bottom / 100% var(--gallery-bottom-space) no-repeat,
+    ) bottom / 100% var(--bottom-fade) no-repeat,
     var(--bg-cream);
-  border-radius: 80px 80px 0 0;
-  scroll-margin-top: 0;
+  color: var(--ink);
+}
+
+.stage {
+  touch-action: pan-y pinch-zoom;
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--card-width);
+  justify-content: center;
+  align-items: start;
+}
+
+.arc {
+  position: absolute;
+  top: calc(var(--card-width) * .794 + 12px);
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  fill: none;
+  stroke: #766a48;
+  stroke-width: 1.45px;
+  stroke-linecap: butt;
+  mask-image: linear-gradient(to right,
+    black calc(50% - var(--card-width) / 2 - 34px),
+    transparent calc(50% - var(--card-width) / 2 - 3px),
+    transparent calc(50% + var(--card-width) / 2 + 3px),
+    black calc(50% + var(--card-width) / 2 + 34px));
+}
+
+.ticks {
+  transform-box: view-box;
+  transform-origin: 800px 1418px;
+  transform: rotate(calc(var(--rotation-steps) * var(--step)));
+}
+
+.ticks, .card, .cardFace {
+  transition: transform var(--turn-duration) var(--turn-ease);
+}
+
+.card {
+  --media-center: calc(var(--card-width) * .397);
+  grid-area: 1 / 1;
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  transform-origin: 50% calc(var(--media-center) + var(--orbit-radius));
+  transform: rotate(calc(var(--slot) * var(--step)));
+  pointer-events: none;
+
+  &[data-offset='0'] { z-index: 2; }
+}
+
+.cardFace {
+  pointer-events: none;
+  transform-origin: center var(--media-center);
+  transform: scale(.79);
+}
+
+.card[data-offset='0'] .cardFace { transform: scale(1); }
+
+.media {
+  position: relative;
+  pointer-events: auto;
+  width: 100%;
+  aspect-ratio: 1.26;
+  border-radius: clamp(14px, 1.7vw, 28px);
+  overflow: hidden;
+  background: var(--bg-cream);
+  transform-origin: center bottom;
+  transition: transform 320ms ease, box-shadow 320ms ease;
+
+  img, video {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 52%;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .media:hover, .card[data-offset='0']:has(.caption:hover) .media {
+    transform: scale(1.1);
+    box-shadow: 0 12px 36px -12px rgb(59 44 23 / 18%);
+  }
+}
+
+.caption {
+  padding: 16px clamp(4px, .7vw, 12px) 0;
+  opacity: 0;
+  transition: opacity 200ms ease;
+
+  h3 {
+    font: 400 18px/20px 'Hero Prata', var(--serif);
+    text-wrap: balance;
+  }
+
+  p {
+    margin-top: 9px;
+    font: 300 18px/26px 'Futura PT', 'Futura PT Book', 'Hero Jost', var(--sans);
+    color: var(--ink-soft);
+  }
+
+  strong { font-weight: 600; }
+}
+
+.card[data-case='edu'] h3 { text-transform: uppercase; }
+
+.card[data-offset='0'] .caption {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 370ms ease 440ms;
 }
 
 .highlights {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: min(100%, 49.625rem);
-  margin: 0 auto 32px;
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: 3.5rem;
-  line-height: 1.2857;
-  letter-spacing: 0.03em;
+  margin: clamp(42px, 4.8vw, 82px) auto 0;
+  font: 400 clamp(30px, 3.35vw, 62px)/1.18 'Hero Prata', var(--serif);
   text-transform: uppercase;
   text-align: center;
-  color: var(--ink);
+  letter-spacing: .015em;
+}
 
-  span {
-    display: block;
-  }
+.highlightsRow {
+  display: flex;
+  align-items: baseline;
+  gap: .32em;
 
   em {
-    font-family: var(--script);
-    font-style: normal;
-    font-size: 8.75rem;
-    line-height: 1;
-    letter-spacing: 0.03em;
+    font: 400 2em/.63 'Hero Signature', var(--script);
     text-transform: none;
     color: var(--ink-soft);
   }
 }
 
-.highlightsRow {
+.controls {
+  position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 22px;
-  margin-top: -32px;
+  width: max-content;
+  margin: clamp(24px, 2.4vw, 40px) auto 0;
+  gap: 2px;
+
+  button {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+
+  button:is(:hover, :focus-visible) { background: rgb(73 56 25 / 8%); }
+  button:focus-visible { outline: 1px solid currentColor; }
+
+  svg {
+    width: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
 }
 
-@media (min-width: 1441px) {
-  .highlights {
-    margin-bottom: fluid(104, 32);
-  }
+@media (max-width: 1099px) {
+  .gallery { --card-width: 43vw; --orbit-radius: 127vw; }
+}
 
-  .highlightsRow {
-    gap: fluid(16, 22);
-    margin-top: fluid(-40, -32);
+@media (max-width: 700px) {
+  .gallery {
+    --card-width: min(73vw, 390px);
+    --orbit-radius: max(154vw, 602px);
+    --step: 25deg;
+    padding-top: 40px;
   }
+  .highlights { font-size: clamp(25px, 7vw, 32px); }
+  .caption { padding-inline: 2px; }
+  .arc {
+    width: 180%;
+    left: -40%;
+    mask-image: linear-gradient(to right,
+      black calc(50% - var(--card-width) / 2 - 10px),
+      transparent calc(50% - var(--card-width) / 2),
+      transparent calc(50% + var(--card-width) / 2),
+      black calc(50% + var(--card-width) / 2 + 10px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticks, .card, .cardFace, .media, .caption, .card[data-offset='0'] .caption { transition: none; }
 }
 
 .detail {
@@ -104,117 +255,10 @@
   background: var(--bg-page);
 }
 
-@media (max-width: 1440px) {
-  .highlights {
-    font-size: 3rem;
-    line-height: 1.1667;
-    margin-bottom: 104px;
-
-    em {
-      font-size: 7.5rem;
-      line-height: 1.1667;
-    }
-  }
-
-  .highlightsRow {
-    gap: 16px;
-    margin-top: -40px;
-  }
-}
-
 @media (max-width: 1024px) {
-  .back {
-    padding: 16px 48px;
-    font-size: 1rem;
-    letter-spacing: 0.08em;
-  }
-
-  .gallery {
-    --gallery-bottom-space: 87px;
-  }
-
-  .highlights {
-    font-size: 2.5rem;
-    line-height: 1.2;
-    margin-bottom: 16px;
-
-    em {
-      font-size: 7.5rem;
-      line-height: 1.1667;
-    }
-  }
-
-  .highlightsRow {
-    gap: 8px;
-    margin-top: -40px;
-  }
-}
-
-@media (max-width: 768px) {
-  .gallery {
-    --gallery-bottom-space: 60px;
-  }
-
-  .highlights {
-    width: min(100%, 23.25rem);
-    font-size: 1.75rem;
-    line-height: 1.1429;
-    margin-bottom: 42px;
-
-    em {
-      font-size: 5rem;
-      line-height: 1.1;
-    }
-  }
-
-  .highlightsRow {
-    gap: 16px;
-    margin-top: -24px;
-  }
+  .back { padding: 16px 48px; font-size: 1rem; }
 }
 
 @media (max-width: 420px) {
-  .back {
-    padding: 16px;
-    font-size: 1rem;
-  }
-
-  .gallery {
-    --gallery-bottom-space: 80px;
-    padding-top: 40px;
-    border-radius: 40px 40px 0 0;
-  }
-
-  // Figma 360: "Highlights of / the past" wraps naturally, "2 years" trails the last line.
-  .highlights {
-    display: block;
-    width: 100%;
-    max-width: 360px;
-    margin: 0 0 96px;
-    padding-inline: 16px;
-    text-align: left;
-    font-size: 1.75rem;
-    line-height: 1.1429;
-
-    span {
-      display: inline;
-    }
-
-    em {
-      display: inline-block;
-      margin-left: 0.15em;
-      font-size: 4rem;
-      line-height: 2rem;
-      transform: translateY(8px);
-    }
-  }
-
-  .highlightsRow {
-    margin: 0;
-    white-space: nowrap;
-
-    &::before {
-      content: ' ';
-    }
-  }
+  .back { padding: 16px; }
 }

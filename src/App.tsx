@@ -18,14 +18,12 @@ export default function App() {
   const [openId, setOpenId] = useState<CaseId | null>(() =>
     typeof window === 'undefined' ? null : caseFromHash(),
   )
-  const [preview, setPreview] = useState<CaseId | 'medical'>(openId ?? 'edu')
 
   // Browser back/forward and manual hash edits.
   useEffect(() => {
     const sync = () => {
       const id = caseFromHash()
       setOpenId(id)
-      if (id) setPreview(id)
     }
     window.addEventListener('popstate', sync)
     window.addEventListener('hashchange', sync)
@@ -44,12 +42,6 @@ export default function App() {
     if (window.location.hash !== '#cases') return
     document.getElementById('cases')?.scrollIntoView({ block: 'start' })
   }, [openId])
-
-  const openCase = (id: CaseId) => {
-    setPreview(id)
-    setOpenId(id)
-    window.history.pushState({ case: id }, '', `#${id}`)
-  }
 
   const closeCase = () => {
     setOpenId(null)
@@ -83,7 +75,7 @@ export default function App() {
   return (
     <main>
       <Hero />
-      <CaseStudies preview={preview} onPreview={setPreview} onOpen={openCase} />
+      <CaseStudies />
       <About />
     </main>
   )

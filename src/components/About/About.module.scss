@@ -1,6 +1,7 @@
 @use '../../styles/fluid' as *;
 
 .about {
+  overflow-x: clip;
   --about-script-size: clamp(5rem, 7.29vw, 8.75rem);
   position: relative;
   display: grid;

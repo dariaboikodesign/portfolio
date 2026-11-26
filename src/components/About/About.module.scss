@@ -538,127 +538,6 @@
   }
 }
 
-@media (max-width: 480px) {
-  .about {
-    --grid-margin: 16px;
-    --about-script-size: 3.5rem;
-    padding: 31px 16px 48px;
-    row-gap: 0;
-  }
-
-  .title {
-    grid-column: 1 / -1;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-  }
-
-  .titleMain {
-    display: block;
-    font-size: 1.75rem;
-    line-height: 1.14;
-    letter-spacing: 0.03em;
-  }
-
-  .titleLine {
-    display: inline;
-  }
-
-  .titleLine:first-child::after {
-    content: ' ';
-  }
-
-  .script {
-    display: block;
-    margin: 0;
-    font-size: 3.5rem;
-    line-height: 1;
-    text-align: left;
-    white-space: nowrap;
-    max-width: 100%;
-  }
-
-  .physics {
-    grid-column: 1 / -1;
-    justify-self: end;
-    max-width: 193px;
-    margin: 24px 0 0;
-    font-size: 0.875rem;
-    line-height: 1.29;
-  }
-
-  .profileGrid {
-    flex-direction: column;
-    gap: 24px;
-    margin-top: 0;
-  }
-
-  .col,
-  .colWide {
-    flex-basis: auto;
-    width: 100%;
-    gap: 8px;
-
-    img {
-      max-width: none;
-    }
-
-    p {
-      font-size: 0.875rem;
-      line-height: 1.29;
-    }
-  }
-
-  .col img {
-    aspect-ratio: auto;
-    height: 167px;
-  }
-
-  .colWide {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 8px;
-
-    img {
-      flex: 0 0 126px;
-      width: 126px;
-      height: 108px;
-      aspect-ratio: auto;
-    }
-
-    p {
-      flex: 1;
-      min-width: 0;
-    }
-  }
-
-  .timelinePin {
-    margin-top: 64px;
-  }
-
-  .timeline {
-    gap: 24px;
-  }
-
-  .item {
-    flex-basis: 200px;
-  }
-
-  .role {
-    font-size: 1.125rem;
-    line-height: 1.33;
-  }
-
-  .dates {
-    font-size: 1.5rem;
-    line-height: 1.33;
-  }
-
-  .content {
-    margin-top: 80px;
-  }
-}
-
 // ---- Figma "Адаптивы второй блок": shared title/text rules and the
 // 1024 / 768 / 360 frames. Placed last so they override the older rules above.
 .title {
@@ -745,72 +624,146 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 700px) {
   .about {
-    --grid-margin: 16px;
-    --about-title-size: 28px;
-    --about-title-lh: 32px;
-    --about-script-size: 56px;
-    --about-text-size: 14px;
-    --about-text-lh: 18px;
+    --grid-margin: clamp(14px, 4.44vw, 28px);
+    --about-title-size: clamp(22px, 7.4vw, 48px);
+    --about-title-lh: 1.17;
+    --about-script-size: clamp(46px, 16.2vw, 100px);
+    --about-text-size: clamp(14px, 3.72vw, 20px);
+    --about-text-lh: 1.42;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    column-gap: clamp(8px, 2.5vw, 16px);
+    padding: clamp(31px, 8.6vw, 56px) var(--grid-margin) clamp(64px, 10vw, 88px);
   }
 
-  .title {
-    display: flex;
+  .title { grid-column: 1 / -1; }
+
+  .titleMain {
+    display: block;
+    font-family: 'Hero Prata', var(--serif);
   }
 
-  // Figma 360: "Design rooted in" fits on one line.
   .titleLine:first-child {
     display: inline;
+
+    &::after { content: ' '; }
   }
 
   .script {
-    width: 100%;
-    margin: -4px 0 0;
-    line-height: 56px;
-    text-align: center;
+    display: block;
+    margin: 0 0 clamp(20px, 5.5vw, 36px);
+    font-family: 'Hero Signature', var(--script);
+    font-weight: 400;
+    line-height: 1.03;
+    letter-spacing: 0;
   }
 
   .physics {
-    justify-self: end;
-    max-width: 193px;
-    margin: 32px 0 0;
+    grid-column: 1 / 4;
+    grid-row: 2;
+    margin: 0;
   }
 
-  .content {
-    margin-top: 20px;
-  }
+  .content { display: contents; }
 
   .profileGrid {
     display: flex;
+    grid-column: 1 / 4;
+    grid-row: 3;
     flex-direction: column;
-    gap: 24px;
+    align-items: stretch;
+    gap: clamp(24px, 6.667vw, 40px);
+    margin-top: clamp(22px, 6.667vw, 36px);
   }
 
-  .col {
-    gap: 8px;
-
-    img {
-      width: min(100%, 261px);
-      height: 167px;
-    }
-  }
-
+  .col,
   .colWide {
-    flex-direction: row;
-    gap: 16px;
+    flex: auto;
+    gap: clamp(10px, 3vw, 20px);
 
     img {
-      flex: 0 0 118px;
-      width: 118px;
-      height: 108px;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 384 / 280;
     }
   }
 
-  // Figma 360: the line runs ~58px under the last text block.
+  .colWide img { object-position: center; }
+
   .timelinePin {
-    margin-top: -9px;
+    grid-column: 4 / -1;
+    grid-row: 2 / 4;
+    height: auto;
+    margin: 0;
   }
+
+  .timelineSticky { position: static; }
+
+  .timelineWrap {
+    display: block;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .timeline {
+    --timeline-rule-space: clamp(10px, 2.8vw, 18px);
+    flex-direction: column;
+    align-items: stretch;
+    gap: clamp(30px, 11vw, 64px);
+    width: 100%;
+    padding: 0 var(--timeline-rule-space) clamp(24px, 7vw, 42px) 0;
+
+    &::after {
+      inset: 0 0 0 auto;
+      width: 1px;
+      height: auto;
+      background: linear-gradient(transparent, #b5a599 19%, #b5a599 80%, transparent);
+      opacity: 0.65;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  .item:nth-child(n) {
+    flex: none;
+    order: 0;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .event { display: block; }
+
+  .role {
+    font-family: 'Hero Prata', var(--serif);
+    font-size: clamp(12px, 3.6vw, 20px);
+    line-height: 1.14;
+    letter-spacing: 0.02em;
+    overflow-wrap: anywhere;
+  }
+
+  .dates {
+    margin-top: 5px;
+    color: var(--text);
+    font-family: 'Futura PT', 'Hero Jost', var(--sans);
+    font-size: clamp(13px, 3.6vw, 20px);
+    line-height: 1.3;
+    opacity: 0.8;
+  }
+
+  .timeline .marker {
+    inset: 0.52em calc(-1 * var(--timeline-rule-space)) auto auto;
+    width: calc(var(--timeline-rule-space) - 2px);
+    height: 1px;
+    background: linear-gradient(to right, transparent, #b5a599);
+    opacity: 0.8;
+    transform: none;
+    transition: none;
+  }
+
+  .timelineSpacer { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

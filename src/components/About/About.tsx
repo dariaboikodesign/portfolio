@@ -11,7 +11,8 @@ import { timeline } from '../../data/timeline'
 import FadeIn from '../FadeIn'
 import styles from './About.module.scss'
 
-const TIMELINE_MQ = '(max-width: 1279px)'
+const TIMELINE_MQ = '(700px < width < 1280px)'
+const MOBILE_TIMELINE_MQ = '(max-width: 700px)'
 
 type TimelineAxis = {
   start: number
@@ -124,6 +125,7 @@ function useTimelineReveal({
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const layoutMq = window.matchMedia(TIMELINE_MQ)
+    const mobileMq = window.matchMedia(MOBILE_TIMELINE_MQ)
 
     let frame = 0
     let active = true
@@ -211,7 +213,7 @@ function useTimelineReveal({
     }
 
     const tickDesktop = () => {
-      if (!active || layoutMq.matches) return
+      if (!active || layoutMq.matches || mobileMq.matches) return
       updateDesktopTarget()
       current += (target - current) * 0.08
       if (Math.abs(target - current) < 0.0008) {
@@ -242,7 +244,7 @@ function useTimelineReveal({
     if (layoutMq.matches) {
       updateHorizontalFromScroll()
       window.addEventListener('scroll', onScroll, { passive: true })
-    } else {
+    } else if (!mobileMq.matches) {
       frame = requestAnimationFrame(tickDesktop)
     }
 
@@ -259,18 +261,19 @@ function useTimelineReveal({
     if (endItemRef.current) observer.observe(endItemRef.current)
 
     const onLayoutChange = () => {
+      cancelAnimationFrame(frame)
       syncLayout()
       if (layoutMq.matches) {
         updateHorizontalFromScroll()
         window.addEventListener('scroll', onScroll, { passive: true })
-        cancelAnimationFrame(frame)
       } else {
         window.removeEventListener('scroll', onScroll)
-        frame = requestAnimationFrame(tickDesktop)
+        if (!mobileMq.matches) frame = requestAnimationFrame(tickDesktop)
       }
     }
 
     layoutMq.addEventListener('change', onLayoutChange)
+    mobileMq.addEventListener('change', onLayoutChange)
     window.addEventListener('resize', syncLayout)
 
     return () => {
@@ -278,6 +281,7 @@ function useTimelineReveal({
       cancelAnimationFrame(frame)
       observer.disconnect()
       layoutMq.removeEventListener('change', onLayoutChange)
+      mobileMq.removeEventListener('change', onLayoutChange)
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', syncLayout)
     }

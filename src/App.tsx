@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Hero from './components/Hero/Hero'
 import About from './components/About/About'
+import Footer from './components/Footer/Footer'
 import CaseStudies from './components/CaseStudies/CaseStudies'
 import Lightbox from './components/Lightbox/Lightbox'
 import { CasePage } from './components/CaseStudies/CaseLaptop'
@@ -90,6 +91,7 @@ export default function App() {
       <Hero />
       <CaseStudies initialCase={selectedCase} onOpenCase={openCase} />
       <About />
+      <Footer />
     </main>
   )
 }

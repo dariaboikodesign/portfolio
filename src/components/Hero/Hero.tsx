@@ -1,3 +1,4 @@
+import { linkedInUrl, resumeUrl } from '../../data/contact'
 import backdrop from '../../assets/hero/redesign/backdrop.webp'
 import blink from '../../assets/hero/redesign/blink.webp'
 import blinkFrame0 from '../../assets/hero/redesign/blink-frame-0.webp'
@@ -60,8 +61,8 @@ export default function Hero() {
         <p className={styles.name}><span>D</span>aria</p>
       </header>
       <nav className={styles.nav} aria-label="Portfolio">
-        <a href="https://www.linkedin.com/in/daria-boyko-08uxdesign" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href={`${import.meta.env.BASE_URL}Daria_Boyko_resume.pdf`} download>Download Resume</a>
+        <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href={resumeUrl} download>Download Resume</a>
         <a href="#cases">Cases</a>
       </nav>
       <div className={styles.intro}>

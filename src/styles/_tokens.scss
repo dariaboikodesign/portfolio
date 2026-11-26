@@ -15,6 +15,8 @@
   --serif: 'Prata', 'Times New Roman', serif;
   --script: 'Monsieur La Doulaise', cursive;
   --sans: 'Jost', 'Century Gothic', Futura, sans-serif;
+  --landing-gutter: clamp(8px, 0.833333vw, 16px);
+  --landing-backdrop: #2d2826;
   --grid-margin: clamp(20px, 4.1667vw, 80px);
   --grid-gutter: clamp(12px, 1.0417vw, 20px);
   --page-pad: var(--grid-margin);

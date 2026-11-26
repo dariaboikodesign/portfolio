@@ -73,7 +73,7 @@ export default function App() {
   }
 
   return (
-    <main>
+    <main className={caseStyles.landing}>
       <Hero />
       <CaseStudies />
       <About />

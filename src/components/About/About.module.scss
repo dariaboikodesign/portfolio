@@ -6,13 +6,12 @@
   position: relative;
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--grid-gutter);
+  column-gap: var(--landing-gutter);
   row-gap: 0;
   align-items: start;
   min-height: auto;
-  margin-top: -1px;
   padding: 70px var(--grid-margin) 80px;
-  background: linear-gradient(180deg, var(--bg-hero) 32px, var(--bg-page) 42%);
+  background: var(--landing-backdrop);
 }
 
 .title {
@@ -410,56 +409,52 @@
     --about-text-size: 16px;
     --about-text-lh: 22px;
     --grid-margin: 80px;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
     // The last flexible row absorbs the tall timeline column, so it doesn't
     // stretch the title / text rows.
     grid-template-rows: auto auto auto 1fr;
-    column-gap: 106px;
     padding: 70px 80px 96px;
   }
 
-  .title {
-    grid-column: 1;
-  }
+  .title { grid-column: 1 / 10; }
 
   .physics {
-    grid-column: 1;
-    max-width: 413px;
-    // Figma: the photo row always starts 176px below the top of this text.
-    min-height: 176px;
-    margin: 95px 0 0 22.57vw;
+    grid-column: 4 / 8;
+    max-width: 389px;
+    margin: clamp(48px, 3.28vw, 63px) 0 0;
   }
 
-  .content {
-    display: contents;
-  }
-
-  .profileGrid {
-    grid-column: 1;
-    grid-row: 3;
-    display: grid;
-    grid-template-columns: minmax(0, 304px) minmax(0, 305px);
-    justify-content: space-between;
-    column-gap: 24px;
-    width: 100%;
-    margin: 0;
-  }
+  .content,
+  .profileGrid { display: contents; }
 
   .col,
   .colWide {
+    grid-row: 3;
     gap: 32px;
+    margin-top: clamp(36px, 4.167vw, 80px);
+  }
+
+  .col {
+    grid-column: 1 / 5;
+    max-width: 425px;
+  }
+
+  .colWide {
+    grid-column: 6 / 10;
+    max-width: 493px;
   }
 
   .timelinePin {
-    grid-column: 2;
+    grid-column: 10 / -1;
     grid-row: 1 / -1;
     align-self: start;
-    margin-top: 41px;
+    min-width: 0;
+    margin-top: fluid(38, 8, 1280, 1920);
   }
 
   .timeline {
     gap: 141px;
-    width: 436px;
+    width: 100%;
 
     &::after {
       top: calc(var(--timeline-axis-start, 0px) - 0.2 * var(--timeline-axis-length, 0px));
@@ -467,9 +462,10 @@
     }
   }
 
-  .event {
-    gap: 0;
-  }
+  .event { gap: 0; }
+  .event > div { min-width: 0; }
+  .role { white-space: normal; }
+  .tick { flex-basis: 0; width: 0; }
 }
 
 @media (min-width: 1440px) {
@@ -485,48 +481,10 @@
     --about-script-size: #{fluid(120, 140, 1440, 1728)};
     --about-text-size: #{fluid(16, 24, 1440, 1728)};
     --about-text-lh: #{fluid(22, 32, 1440, 1728)};
-    column-gap: fluid(106, 92, 1440, 1728);
-    padding-right: fluid(80, 81, 1440, 1728);
-  }
-
-  .physics {
-    max-width: fluid(413, 377, 1440, 1728);
-    margin-top: fluid(95, 63, 1440, 1728);
-    margin-left: fluid(325, 397, 1440, 1728);
-  }
-
-  .profileGrid {
-    grid-template-columns:
-      minmax(0, fluid(304, 509, 1440, 1728))
-      minmax(0, fluid(305, 377, 1440, 1728));
-  }
-
-  .timelinePin {
-    margin-top: fluid(41, 6, 1440, 1728);
   }
 }
 
 @media (min-width: 1729px) {
-  .about {
-    column-gap: fluid(92, 84, 1728, 1920);
-    padding-right: fluid(81, 85, 1728, 1920);
-  }
-
-  .physics {
-    max-width: fluid(377, 389, 1728, 1920);
-    margin-left: fluid(397, 445, 1728, 1920);
-  }
-
-  .profileGrid {
-    grid-template-columns:
-      minmax(0, fluid(509, 425, 1728, 1920))
-      minmax(0, fluid(377, 493, 1728, 1920));
-  }
-
-  .timelinePin {
-    margin-top: fluid(6, 9, 1728, 1920);
-  }
-
   // Figma 1920: the current role is set a size up.
   .itemFeatured {
     .role {
@@ -721,6 +679,8 @@
 .physics,
 .col p,
 .colWide p {
+  font-family: 'Futura PT', 'Hero Jost', var(--sans);
+  font-weight: 300;
   font-size: var(--about-text-size);
   line-height: var(--about-text-lh);
   letter-spacing: 0.02em;
@@ -741,9 +701,9 @@
   }
 
   .physics {
-    grid-column: 1 / -1;
+    grid-column: 4 / -1;
     max-width: 413px;
-    margin: fluid(56, 70, 768, 1024) 0 0 calc(25vw - 35px);
+    margin: fluid(56, 70, 768, 1024) 0 0;
   }
 
   .content {
@@ -860,74 +820,5 @@
     opacity: 1;
     transform: none;
     transition: none;
-  }
-}
-
-// Desktop: the physics paragraph tops the second column, above the workspace
-// photo, instead of sitting alone in its own row. Both columns start right
-// under the title (staggered), so there is no empty band before the photos.
-@media (min-width: 1280px) {
-  .about {
-    --about-col1: 304px;
-    --about-col2: 305px;
-    --about-timeline-gap: 106px;
-    grid-template-columns: minmax(0, 1fr) minmax(0, var(--about-col2)) auto;
-    grid-template-rows: auto auto auto 1fr;
-    column-gap: 0;
-  }
-
-  .title {
-    grid-column: 1 / 3;
-  }
-
-  .profileGrid {
-    display: contents;
-  }
-
-  .physics,
-  .col {
-    grid-row: 2;
-    margin-top: #{fluid(56, 72, 1280, 1920)};
-  }
-
-  .physics {
-    grid-column: 2;
-    max-width: none;
-    min-height: 0;
-    margin-left: 0;
-  }
-
-  .col {
-    grid-column: 1;
-    grid-row: 2 / span 2;
-    max-width: var(--about-col1);
-    padding-right: 24px;
-  }
-
-  .colWide {
-    grid-column: 2;
-    grid-row: 3;
-    margin-top: 40px;
-  }
-
-  .timelinePin {
-    grid-column: 3;
-    margin-left: var(--about-timeline-gap);
-  }
-}
-
-@media (min-width: 1441px) {
-  .about {
-    --about-col1: #{fluid(304, 509, 1440, 1728)};
-    --about-col2: #{fluid(305, 377, 1440, 1728)};
-    --about-timeline-gap: #{fluid(106, 92, 1440, 1728)};
-  }
-}
-
-@media (min-width: 1729px) {
-  .about {
-    --about-col1: #{fluid(509, 425, 1728, 1920)};
-    --about-col2: #{fluid(377, 493, 1728, 1920)};
-    --about-timeline-gap: #{fluid(92, 84, 1728, 1920)};
   }
 }

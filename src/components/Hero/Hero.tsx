@@ -65,8 +65,11 @@ export default function Hero() {
         <a href="#cases">Cases</a>
       </nav>
       <div className={styles.intro}>
-        <p className={styles.statement}>I make AI tools and complex workflows easier to use</p>
-        <p className={styles.experience}>6+ years in design, including 4.5 years in enterprise EdTech.</p>
+        <p className={styles.statement}>
+          <span>I make AI tools and<br className={styles.desktopBreak} /> complex workflows</span>{' '}
+          <span>easier to use</span>
+        </p>
+        <p className={styles.experience}>6+ years of turning complex user flows into products that feel effortless to use</p>
       </div>
     </section>
   )

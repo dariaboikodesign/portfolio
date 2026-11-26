@@ -1,23 +1,16 @@
+.landing { background: var(--landing-backdrop); }
+
 .gallery {
-  --bottom-fade: clamp(88px, 11vw, 196px);
   --card-width: min(36vw, 62svh, 630px);
   --orbit-radius: 115vw;
   --step: 21deg;
   --turn-duration: 940ms;
   --turn-ease: cubic-bezier(.42, 0, .18, 1);
-  padding: clamp(52px, 6.1vw, 105px) 0 calc(var(--bottom-fade) + 32px);
+  padding: clamp(52px, 6.1vw, 105px) 0 clamp(52px, 8vw, 152px);
   overflow: hidden;
   isolation: isolate;
-  border-radius: clamp(32px, 4.2vw, 80px) clamp(32px, 4.2vw, 80px) 0 0;
-  background:
-    linear-gradient(180deg,
-      var(--bg-cream) 0%,
-      color-mix(in srgb, var(--bg-cream) 88%, var(--bg-hero)) 21%,
-      color-mix(in srgb, var(--bg-cream) 55%, var(--bg-hero)) 46%,
-      color-mix(in srgb, var(--bg-cream) 15%, var(--bg-hero)) 72%,
-      var(--bg-hero) 96%
-    ) bottom / 100% var(--bottom-fade) no-repeat,
-    var(--bg-cream);
+  border-radius: clamp(32px, 4.16667vw, 80px);
+  background: var(--bg-cream);
   color: var(--ink);
 }
 

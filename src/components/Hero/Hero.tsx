@@ -61,7 +61,7 @@ export default function Hero() {
       </header>
       <nav className={styles.nav} aria-label="Portfolio">
         <a href="https://www.linkedin.com/in/daria-boyko-08uxdesign" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="/Daria_Boyko_resume.pdf" download>Download Resume</a>
+        <a href={`${import.meta.env.BASE_URL}Daria_Boyko_resume.pdf`} download>Download Resume</a>
         <a href="#cases">Cases</a>
       </nav>
       <div className={styles.intro}>

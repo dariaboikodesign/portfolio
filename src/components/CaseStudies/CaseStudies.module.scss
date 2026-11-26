@@ -211,11 +211,12 @@
 
 @media (max-width: 700px) {
   .gallery {
-    --card-width: min(73vw, 390px);
-    --orbit-radius: max(154vw, 602px);
+    --card-width: min(69vw, 390px);
+    --orbit-radius: 119vw;
     --step: 25deg;
     padding-top: 40px;
   }
+  .cardFace { transform: scale(.66); }
   .highlights { font-size: clamp(25px, 7vw, 32px); }
   .caption { padding-inline: 2px; }
   .arc {

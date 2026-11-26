@@ -11,10 +11,11 @@ export default function useCarouselGestures(
     if (!element) return
 
     let start: { id: number; x: number; y: number } | null = null
+    let suppressClick = false
     const onPointerDown = (event: PointerEvent) => {
+      suppressClick = false
       if (!event.isPrimary || event.pointerType === 'mouse') return
       start = { id: event.pointerId, x: event.clientX, y: event.clientY }
-      element.setPointerCapture(event.pointerId)
       setTouching(true)
     }
     const onPointerEnd = (event: PointerEvent) => {
@@ -24,8 +25,14 @@ export default function useCarouselGestures(
       start = null
       setTouching(false)
       if (event.type === 'pointerup' && Math.abs(dx) >= 30 && Math.abs(dx) > Math.abs(dy) * 1.25) {
+        suppressClick = true
         move(dx < 0 ? 1 : -1)
       }
+    }
+    const onClickCapture = (event: MouseEvent) => {
+      if (!suppressClick || event.detail === 0) return
+      event.preventDefault()
+      event.stopPropagation()
     }
 
     // Ignore the momentum tail after one turn until the next wheel gesture.
@@ -55,12 +62,14 @@ export default function useCarouselGestures(
     element.addEventListener('pointerup', onPointerEnd)
     element.addEventListener('pointercancel', onPointerEnd)
     element.addEventListener('lostpointercapture', onPointerEnd)
+    element.addEventListener('click', onClickCapture, true)
     element.addEventListener('wheel', onWheel, { passive: false })
     return () => {
       element.removeEventListener('pointerdown', onPointerDown)
       element.removeEventListener('pointerup', onPointerEnd)
       element.removeEventListener('pointercancel', onPointerEnd)
       element.removeEventListener('lostpointercapture', onPointerEnd)
+      element.removeEventListener('click', onClickCapture, true)
       element.removeEventListener('wheel', onWheel)
     }
   }, [stage, move])

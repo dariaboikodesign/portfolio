@@ -72,6 +72,24 @@
 
 .card[data-offset='0'] .cardFace { transform: scale(1); }
 
+.caseLink {
+  position: absolute;
+  inset: 0 0 auto;
+  aspect-ratio: 1.26;
+  pointer-events: auto;
+  border-radius: clamp(14px, 1.7vw, 28px);
+
+  &:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 5px;
+  }
+}
+
+.card[data-offset='0'] .caseLink {
+  bottom: 0;
+  aspect-ratio: auto;
+}
+
 .media {
   position: relative;
   pointer-events: auto;
@@ -95,7 +113,9 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .media:hover, .card[data-offset='0']:has(.caption:hover) .media {
+  .media:hover,
+  .cardFace:has(.caseLink:hover) .media,
+  .card[data-offset='0']:has(.caption:hover) .media {
     transform: scale(1.1);
     box-shadow: 0 12px 36px -12px rgb(59 44 23 / 18%);
   }

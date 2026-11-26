@@ -18,12 +18,14 @@ export default function App() {
   const [openId, setOpenId] = useState<CaseId | null>(() =>
     typeof window === 'undefined' ? null : caseFromHash(),
   )
+  const [selectedCase, setSelectedCase] = useState(openId)
 
   // Browser back/forward and manual hash edits.
   useEffect(() => {
     const sync = () => {
       const id = caseFromHash()
       setOpenId(id)
+      if (id) setSelectedCase(id)
     }
     window.addEventListener('popstate', sync)
     window.addEventListener('hashchange', sync)
@@ -43,7 +45,18 @@ export default function App() {
     document.getElementById('cases')?.scrollIntoView({ block: 'start' })
   }, [openId])
 
+  const openCase = (id: CaseId) => {
+    window.history.replaceState(window.history.state, '', '#cases')
+    window.history.pushState({ fromCarousel: true }, '', `#${id}`)
+    setSelectedCase(id)
+    setOpenId(id)
+  }
+
   const closeCase = () => {
+    if (window.history.state?.fromCarousel) {
+      window.history.back()
+      return
+    }
     setOpenId(null)
     window.history.pushState(null, '', '#cases')
   }
@@ -75,7 +88,7 @@ export default function App() {
   return (
     <main className={caseStyles.landing}>
       <Hero />
-      <CaseStudies />
+      <CaseStudies initialCase={selectedCase} onOpenCase={openCase} />
       <About />
     </main>
   )

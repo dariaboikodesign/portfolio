@@ -69,7 +69,10 @@ export default function Hero() {
           <span>I make AI tools and<br className={styles.desktopBreak} /> complex workflows</span>{' '}
           <span>easier to use</span>
         </p>
-        <p className={styles.experience}>6+ years of turning complex user flows into products that feel effortless to use</p>
+        <div className={styles.experience}>
+          <p>6+ years of turning complex user flows into products that feel effortless to use</p>
+          <p>For the past 4+ years in&nbsp;enterprise EdTech</p>
+        </div>
       </div>
     </section>
   )

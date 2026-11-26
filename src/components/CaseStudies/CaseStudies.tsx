@@ -107,10 +107,13 @@ function CenterVideo({ item, running, settled, next }: {
   )
 }
 
-export default function CaseStudies() {
+export default function CaseStudies({ initialCase, onOpenCase }: {
+  initialCase?: CaseId | null
+  onOpenCase?: (id: CaseId) => void
+}) {
   const stage = useRef<HTMLDivElement>(null)
-  const [turn, setTurn] = useState(0)
-  const [settledTurn, setSettledTurn] = useState(0)
+  const [turn, setTurn] = useState(() => Math.max(0, highlights.findIndex(item => item.id === initialCase)))
+  const [settledTurn, setSettledTurn] = useState(turn)
   const [inView, setInView] = useState(false)
   const [tabVisible, setTabVisible] = useState(!document.hidden)
   const [reduced, setReduced] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches)
@@ -163,6 +166,18 @@ export default function CaseStudies() {
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
                 </figcaption>
+                {onOpenCase && (
+                  <a className={styles.caseLink}
+                    href={`#${item.id}`}
+                    aria-label={item.title}
+                    tabIndex={center ? 0 : -1}
+                    onClick={event => {
+                      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+                      event.preventDefault()
+                      onOpenCase(item.id)
+                    }}
+                  />
+                )}
               </div>
             </figure>
           )
